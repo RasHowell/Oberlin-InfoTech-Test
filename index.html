@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,125 +16,123 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* LANDING */
 #screen-landing{max-width:520px;margin:0 auto;padding:60px 24px;}
-.logo{font-family:‘Space Mono’,monospace;font-size:1.5rem;color:var(–accent);margin-bottom:6px;}
-.logo-sub{color:var(–muted);font-size:.85rem;margin-bottom:40px;}
+.logo{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--accent);margin-bottom:6px;}
+.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:40px;}
 .fg{margin-bottom:20px;}
-.fg label{display:block;font-size:.78rem;color:var(–muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px;}
-.fg input,.fg select{width:100%;background:var(–card);border:1.5px solid var(–border);border-radius:9px;padding:13px 15px;color:var(–text);font-size:.95rem;font-family:‘DM Sans’,sans-serif;transition:border-color .2s;}
-.fg input:focus,.fg select:focus{outline:none;border-color:var(–accent);}
+.fg label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px;}
+.fg input,.fg select{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:13px 15px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--accent);}
 .fg select option{background:#1c2333;}
-.err-msg{color:var(–wrong);font-size:.8rem;margin-top:5px;display:none;}
-.btn-start{width:100%;margin-top:6px;background:linear-gradient(135deg,var(–accent),var(–accent2));color:#fff;border:none;border-radius:10px;padding:15px;font-size:1rem;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;letter-spacing:.3px;transition:opacity .2s,transform .15s;}
+.err-msg{color:var(--wrong);font-size:.8rem;margin-top:5px;display:none;}
+.btn-start{width:100%;margin-top:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:15px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.3px;transition:opacity .2s,transform .15s;}
 .btn-start:hover{opacity:.9;transform:translateY(-1px);}
-.t-link{display:block;text-align:center;margin-top:22px;font-size:.82rem;color:var(–muted);cursor:pointer;text-decoration:underline;}
-.t-link:hover{color:var(–accent);}
+.t-link{display:block;text-align:center;margin-top:22px;font-size:.82rem;color:var(--muted);cursor:pointer;text-decoration:underline;}
+.t-link:hover{color:var(--accent);}
 
 /* TEST HEADER */
-.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(–border);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.t-header h1{font-family:‘Space Mono’,monospace;font-size:1.25rem;color:var(–accent);}
-.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(–muted);margin-top:5px;}
-.meta strong{color:var(–text);}
-.badge{background:var(–accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.t-header h1{font-family:'Space Mono',monospace;font-size:1.25rem;color:var(--accent);}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:5px;}
+.meta strong{color:var(--text);}
+.badge{background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
 
 /* PROGRESS BAR */
-.prog-bar-wrap{background:var(–surface);border-bottom:1px solid var(–border);padding:9px 36px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;}
-.prog-outer{flex:1;height:6px;background:var(–border);border-radius:4px;overflow:hidden;}
-.prog-inner{height:100%;width:0%;background:linear-gradient(90deg,var(–accent),var(–accent2));border-radius:4px;transition:width .4s;}
-.prog-label{font-size:.75rem;color:var(–muted);white-space:nowrap;}
+.prog-bar-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 36px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;}
+.prog-outer{flex:1;height:6px;background:var(--border);border-radius:4px;overflow:hidden;}
+.prog-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .4s;}
+.prog-label{font-size:.75rem;color:var(--muted);white-space:nowrap;}
 
 /* QUESTIONS */
 .q-wrap{max-width:780px;margin:0 auto;padding:32px 24px 0;}
-.sec-title{font-family:‘Space Mono’,monospace;font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(–accent);margin:34px 0 14px;padding-left:11px;border-left:3px solid var(–accent);}
-.qcard{background:var(–card);border:1px solid var(–border);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+.sec-title{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:34px 0 14px;padding-left:11px;border-left:3px solid var(--accent);}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
 .qcard:hover{border-color:#3a4a68;}
 .qhead{display:flex;gap:11px;align-items:flex-start;margin-bottom:15px;}
-.qnum{font-family:‘Space Mono’,monospace;font-size:.68rem;background:var(–accent);color:#fff;border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px;}
+.qnum{font-family:'Space Mono',monospace;font-size:.68rem;background:var(--accent);color:#fff;border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px;}
 .qtxt{font-size:.93rem;line-height:1.55;}
 .opts{display:flex;flex-direction:column;gap:8px;}
-.opt{display:flex;align-items:center;gap:10px;background:var(–surface);border:1.5px solid var(–border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.88rem;transition:all .18s;}
-.opt:hover{border-color:var(–accent);background:#1a2438;}
-.opt input{accent-color:var(–accent);width:16px;height:16px;flex-shrink:0;}
-.opt.correct{border-color:var(–correct)!important;background:rgba(56,217,169,.09)!important;}
-.opt.wrong{border-color:var(–wrong)!important;background:rgba(252,92,101,.09)!important;}
+.opt{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.88rem;transition:all .18s;}
+.opt:hover{border-color:var(--accent);background:#1a2438;}
+.opt input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;}
+.opt.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
+.opt.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
 .tf-row{display:flex;gap:10px;}
-.tf{flex:1;padding:10px 14px;border-radius:8px;background:var(–surface);border:1.5px solid var(–border);color:var(–text);font-size:.88rem;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all .18s;}
-.tf:hover{border-color:var(–accent);}
-.tf.sel{border-color:var(–accent);background:#1a2438;}
-.tf.correct{border-color:var(–correct)!important;background:rgba(56,217,169,.09)!important;}
-.tf.wrong{border-color:var(–wrong)!important;background:rgba(252,92,101,.09)!important;}
-.sa{width:100%;background:var(–surface);border:1.5px solid var(–border);border-radius:8px;padding:10px 14px;color:var(–text);font-size:.88rem;font-family:‘DM Sans’,sans-serif;resize:vertical;min-height:58px;transition:border-color .2s;}
-.sa:focus{outline:none;border-color:var(–accent);}
-.sa.correct{border-color:var(–correct)!important;}
-.sa.wrong{border-color:var(–wrong)!important;}
+.tf{flex:1;padding:10px 14px;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;}
+.tf:hover{border-color:var(--accent);}
+.tf.sel{border-color:var(--accent);background:#1a2438;}
+.tf.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
+.tf.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
+.sa{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;resize:vertical;min-height:58px;transition:border-color .2s;}
+.sa:focus{outline:none;border-color:var(--accent);}
+.sa.correct{border-color:var(--correct)!important;}
+.sa.wrong{border-color:var(--wrong)!important;}
 .fb{margin-top:9px;font-size:.8rem;border-radius:6px;padding:7px 12px;display:none;}
 .fb.show{display:block;}
-.fb.ok{background:rgba(56,217,169,.1);color:var(–correct);}
-.fb.bad{background:rgba(252,92,101,.1);color:var(–wrong);}
-.btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(–accent),var(–accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:opacity .2s,transform .15s;}
+.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}
+.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
+.btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s,transform .15s;}
 .btn-submit:hover{opacity:.9;transform:translateY(-1px);}
 .btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;}
 
 /* RESULTS */
 #screen-results{max-width:720px;margin:50px auto 0;padding:0 24px;}
-.res-card{background:var(–card);border:1px solid var(–border);border-radius:16px;padding:38px;text-align:center;}
-.res-card h2{font-family:‘Space Mono’,monospace;font-size:1.2rem;color:var(–accent2);margin-bottom:4px;}
-.res-student{color:var(–muted);font-size:.83rem;margin-bottom:4px;}
-.score-big{font-family:‘Space Mono’,monospace;font-size:3.6rem;font-weight:700;background:linear-gradient(135deg,var(–accent),var(–accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:14px 0;}
-.res-msg{color:var(–muted);font-size:.88rem;}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:38px;text-align:center;}
+.res-card h2{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--accent2);margin-bottom:4px;}
+.res-student{color:var(--muted);font-size:.83rem;margin-bottom:4px;}
+.score-big{font-family:'Space Mono',monospace;font-size:3.6rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:14px 0;}
+.res-msg{color:var(--muted);font-size:.88rem;}
 .res-grid{display:flex;justify-content:center;gap:30px;margin-top:22px;flex-wrap:wrap;}
-.rstat .v{font-family:‘Space Mono’,monospace;font-size:1.7rem;font-weight:700;}
-.rstat .l{font-size:.72rem;color:var(–muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-.v.c{color:var(–correct);}.v.w{color:var(–wrong);}
-.att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(–accent);}
-.btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(–accent);color:var(–accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
+.rstat .v{font-family:'Space Mono',monospace;font-size:1.7rem;font-weight:700;}
+.rstat .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.v.c{color:var(--correct);}.v.w{color:var(--wrong);}
+.att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(--accent);}
+.btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-retry:hover{background:rgba(79,142,247,.1);}
 
 /* TEACHER DASHBOARD */
 #screen-teacher{max-width:960px;margin:0 auto;padding:38px 24px;}
 .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
-.dash-head h2{font-family:‘Space Mono’,monospace;font-size:1.15rem;color:var(–accent);}
-.btn-back{background:transparent;border:1.5px solid var(–border);color:var(–muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
-.btn-back:hover{border-color:var(–accent);color:var(–accent);}
-.btn-clear{background:transparent;border:1.5px solid var(–wrong);color:var(–wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
+.dash-head h2{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-back:hover{border-color:var(--accent);color:var(--accent);}
+.btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-clear:hover{background:rgba(252,92,101,.08);}
 .chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
-.chip{background:var(–card);border:1px solid var(–border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
-.chip .cv{font-family:‘Space Mono’,monospace;font-size:1.5rem;font-weight:700;color:var(–accent);}
-.chip .cl{font-size:.7rem;color:var(–muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
+.chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
+.chip .cl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
-.filters input,.filters select{background:var(–card);border:1.5px solid var(–border);border-radius:8px;padding:8px 12px;color:var(–text);font-size:.83rem;font-family:‘DM Sans’,sans-serif;}
-.filters input:focus,.filters select:focus{outline:none;border-color:var(–accent);}
+.filters input,.filters select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;}
+.filters input:focus,.filters select:focus{outline:none;border-color:var(--accent);}
 table{width:100%;border-collapse:collapse;font-size:.83rem;}
-thead th{background:var(–surface);padding:10px 13px;text-align:left;color:var(–muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(–border);}
-tbody tr{border-bottom:1px solid var(–border);}
-tbody tr:hover{background:var(–surface);}
+thead th{background:var(--surface);padding:10px 13px;text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);}
+tbody tr{border-bottom:1px solid var(--border);}
+tbody tr:hover{background:var(--surface);}
 tbody td{padding:11px 13px;vertical-align:middle;}
 .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;}
-.pass{background:rgba(56,217,169,.12);color:var(–correct);}
+.pass{background:rgba(56,217,169,.12);color:var(--correct);}
 .avg{background:rgba(247,183,49,.12);color:#f7b731;}
-.fail{background:rgba(252,92,101,.12);color:var(–wrong);}
-.att{display:inline-block;background:rgba(79,142,247,.14);color:var(–accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:‘Space Mono’,monospace;}
-.no-data{text-align:center;padding:50px;color:var(–muted);}
+.fail{background:rgba(252,92,101,.12);color:var(--wrong);}
+.att{display:inline-block;background:rgba(79,142,247,.14);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:'Space Mono',monospace;}
+.no-data{text-align:center;padding:50px;color:var(--muted);}
 
 /* PASSWORD MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:999;display:none;}
 .modal-bg.open{display:flex;}
-.modal-box{background:var(–card);border:1px solid var(–border);border-radius:14px;padding:36px;width:320px;text-align:center;}
-.modal-box h3{font-family:‘Space Mono’,monospace;color:var(–accent);margin-bottom:5px;}
-.modal-box p{color:var(–muted);font-size:.8rem;margin-bottom:20px;}
-.modal-box input{width:100%;background:var(–surface);border:1.5px solid var(–border);border-radius:8px;padding:11px 14px;color:var(–text);font-size:.95rem;font-family:‘DM Sans’,sans-serif;text-align:center;letter-spacing:3px;margin-bottom:11px;}
-.modal-box input:focus{outline:none;border-color:var(–accent);}
-.btn-unlock{width:100%;background:var(–accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
-.pw-err{color:var(–wrong);font-size:.78rem;margin-top:7px;display:none;}
-.btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(–muted);font-size:.78rem;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px;width:320px;text-align:center;}
+.modal-box h3{font-family:'Space Mono',monospace;color:var(--accent);margin-bottom:5px;}
+.modal-box p{color:var(--muted);font-size:.8rem;margin-bottom:20px;}
+.modal-box input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;text-align:center;letter-spacing:3px;margin-bottom:11px;}
+.modal-box input:focus{outline:none;border-color:var(--accent);}
+.btn-unlock{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
+.btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 @media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}}
 </style>
-
 </head>
 <body>
 
 <!-- ═══════════════════ SCREEN: LANDING ═══════════════════ -->
-
 <div id="screen-landing" class="screen active">
   <div class="logo">Oberlin High School</div>
   <div class="logo-sub">Grade 10 IT &nbsp;·&nbsp; Six Weeks Test &nbsp;·&nbsp; 60 Questions &nbsp;·&nbsp; 60 Marks</div>
@@ -155,13 +152,11 @@ tbody td{padding:11px 13px;vertical-align:middle;}
     <div class="err-msg" id="err-class">Please select your class.</div>
   </div>
 
-<button class="btn-start" id="btn-start">Begin Test →</button>
-<span class="t-link" id="teacher-link">Teacher Results Dashboard</span>
-
+  <button class="btn-start" id="btn-start">Begin Test →</button>
+  <span class="t-link" id="teacher-link">Teacher Results Dashboard</span>
 </div>
 
 <!-- ═══════════════════ SCREEN: TEST ═══════════════════ -->
-
 <div id="screen-test" class="screen">
   <div class="t-header">
     <div>
@@ -176,529 +171,525 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   </div>
   <div class="q-wrap" id="q-wrap">
 
-```
-<div class="sec-title">Section A — Software &amp; Operating Systems (Q1–10)</div>
-
-<div class="qcard" data-q="1" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q1</span><span class="qtxt">Which of the following BEST describes system software?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q1" value="A"> Software written for a specific business task only</label>
-    <label class="opt"><input type="radio" name="q1" value="B"> Software that manages and supports the resources and operations of a computer system</label>
-    <label class="opt"><input type="radio" name="q1" value="C"> Software that allows data to be transferred between programs</label>
-    <label class="opt"><input type="radio" name="q1" value="D"> Software written by end-users using macros</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="2" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q2</span><span class="qtxt">Microsoft Office is an example of which type of software?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q2" value="A"> Specialised software</label>
-    <label class="opt"><input type="radio" name="q2" value="B"> Custom-written software</label>
-    <label class="opt"><input type="radio" name="q2" value="C"> Integrated software</label>
-    <label class="opt"><input type="radio" name="q2" value="D"> General-purpose software</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="3" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q3</span><span class="qtxt">The graphical user interface (GUI) is also known as WIMP — Windows, Icons, Menus and Pointing devices.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="4" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q4</span><span class="qtxt">A batch-processing system is one where:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q4" value="A"> Data is collected in a queue and processed without user interaction</label>
-    <label class="opt"><input type="radio" name="q4" value="B"> The CPU gives each user a small time slice in rotation</label>
-    <label class="opt"><input type="radio" name="q4" value="C"> Data is processed immediately as it arrives</label>
-    <label class="opt"><input type="radio" name="q4" value="D"> The system responds to events within a set time</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="5" data-type="short" data-answer="macros">
-  <div class="qhead"><span class="qnum">Q5</span><span class="qtxt">Short programs written to automate several steps in software (e.g. spreadsheets), often written by end-users, are called <strong>___________</strong>.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="6" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q6</span><span class="qtxt">Which type of software is written to meet the specific needs of a particular company and is therefore expensive and highly specialised?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q6" value="A"> General-purpose software</label>
-    <label class="opt"><input type="radio" name="q6" value="B"> Specialised software</label>
-    <label class="opt"><input type="radio" name="q6" value="C"> Integrated software</label>
-    <label class="opt"><input type="radio" name="q6" value="D"> Custom-written (tailor-made) software</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="7" data-type="tf" data-answer="False">
-  <div class="qhead"><span class="qnum">Q7</span><span class="qtxt">A command-driven interface uses a mouse to select options from pull-down menus.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="8" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q8</span><span class="qtxt">A time-sharing processing system works by:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q8" value="A"> Processing each user's job completely before starting the next</label>
-    <label class="opt"><input type="radio" name="q8" value="B"> Giving each terminal a small time slice of the CPU in rotation</label>
-    <label class="opt"><input type="radio" name="q8" value="C"> Responding to events within a predetermined time</label>
-    <label class="opt"><input type="radio" name="q8" value="D"> Running jobs from a batch queue overnight</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="9" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q9</span><span class="qtxt">Which of the following is a utility program function?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q9" value="A"> Running a word processor document</label>
-    <label class="opt"><input type="radio" name="q9" value="B"> Displaying a pull-down menu</label>
-    <label class="opt"><input type="radio" name="q9" value="C"> Disk defragmentation and virus protection</label>
-    <label class="opt"><input type="radio" name="q9" value="D"> Translating high-level code to machine code</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="10" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q10</span><span class="qtxt">An operating system manages computer resources, files, memory, tasks and maintains security.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="sec-title">Section B — Computer Hardware &amp; CPU (Q11–20)</div>
-
-<div class="qcard" data-q="11" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q11</span><span class="qtxt">Which two units make up the Central Processing Unit (CPU)?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q11" value="A"> RAM and ROM</label>
-    <label class="opt"><input type="radio" name="q11" value="B"> Control Unit (CU) and Arithmetic and Logic Unit (ALU)</label>
-    <label class="opt"><input type="radio" name="q11" value="C"> Program Counter and Instruction Register</label>
-    <label class="opt"><input type="radio" name="q11" value="D"> Hard disk and motherboard</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="12" data-type="tf" data-answer="False">
-  <div class="qhead"><span class="qnum">Q12</span><span class="qtxt">Supercomputers are mainly used in banks for bulk data processing such as bank transactions.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="13" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q13</span><span class="qtxt">The program counter (PC) in a CPU holds:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q13" value="A"> The result of arithmetic operations</label>
-    <label class="opt"><input type="radio" name="q13" value="B"> The instruction currently being executed</label>
-    <label class="opt"><input type="radio" name="q13" value="C"> The address of the next instruction to be processed</label>
-    <label class="opt"><input type="radio" name="q13" value="D"> Permanent startup instructions</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="14" data-type="short" data-answer="transistors">
-  <div class="qhead"><span class="qnum">Q14</span><span class="qtxt">Invented in 1947, <strong>___________</strong> formed the basis of second generation computers, making them smaller, faster and more reliable.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="15" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q15</span><span class="qtxt">Which generation of computers is characterised by Ultra Large Scale Integration (ULSI)?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q15" value="A"> Second generation</label>
-    <label class="opt"><input type="radio" name="q15" value="B"> Third generation</label>
-    <label class="opt"><input type="radio" name="q15" value="C"> Fifth generation</label>
-    <label class="opt"><input type="radio" name="q15" value="D"> Fourth generation</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="16" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q16</span><span class="qtxt">A register in the CPU is best described as:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q16" value="A"> A temporary storage location that holds a single instruction or data item</label>
-    <label class="opt"><input type="radio" name="q16" value="B"> A permanent memory chip on the motherboard</label>
-    <label class="opt"><input type="radio" name="q16" value="C"> A large cache memory bank</label>
-    <label class="opt"><input type="radio" name="q16" value="D"> The bus connecting the CPU to RAM</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="17" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q17</span><span class="qtxt">Fifth generation computers are expected to use artificial intelligence and accept spoken word instructions.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="18" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q18</span><span class="qtxt">What is the main electronic component of first generation computers?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q18" value="A"> Transistor</label>
-    <label class="opt"><input type="radio" name="q18" value="B"> Vacuum tube (valve)</label>
-    <label class="opt"><input type="radio" name="q18" value="C"> Integrated circuit</label>
-    <label class="opt"><input type="radio" name="q18" value="D"> Microprocessor chip</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="19" data-type="short" data-answer="embedded">
-  <div class="qhead"><span class="qnum">Q19</span><span class="qtxt">A special purpose computer used inside a device and dedicated to specific functions is called an <strong>___________</strong> computer.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="20" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q20</span><span class="qtxt">The Arithmetic and Logic Unit (ALU) is responsible for:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q20" value="A"> Directing and co-ordinating all activities within the CPU</label>
-    <label class="opt"><input type="radio" name="q20" value="B"> Storing startup instructions permanently</label>
-    <label class="opt"><input type="radio" name="q20" value="C"> Performing all arithmetic and logic functions</label>
-    <label class="opt"><input type="radio" name="q20" value="D"> Managing files and memory allocation</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="sec-title">Section C — Input Devices &amp; Data Capture (Q21–30)</div>
-
-<div class="qcard" data-q="21" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q21</span><span class="qtxt">Validation is best described as:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q21" value="A"> Checking data has been accurately copied or transcribed</label>
-    <label class="opt"><input type="radio" name="q21" value="B"> Checking data before processing to ensure it obeys the rules applied to it</label>
-    <label class="opt"><input type="radio" name="q21" value="C"> Checking that a field is not left empty</label>
-    <label class="opt"><input type="radio" name="q21" value="D"> Checking the number of characters entered</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="22" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q22</span><span class="qtxt">MICR (Magnetic Ink Character Recognition) is used mainly to read cheques whose data is encoded with magnetic ink.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="23" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q23</span><span class="qtxt">Which check ensures that an entered value is of a specific type (e.g. numeric)?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q23" value="A"> Data type check</label>
-    <label class="opt"><input type="radio" name="q23" value="B"> Range check</label>
-    <label class="opt"><input type="radio" name="q23" value="C"> Format check</label>
-    <label class="opt"><input type="radio" name="q23" value="D"> Presence check</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="24" data-type="short" data-answer="rfid">
-  <div class="qhead"><span class="qnum">Q24</span><span class="qtxt">What does RFID stand for? (abbreviation accepted)</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="25" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q25</span><span class="qtxt">A barcode contains information encoded as:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q25" value="A"> Magnetic pulses on a strip</label>
-    <label class="opt"><input type="radio" name="q25" value="B"> Reflected light patterns in a grid</label>
-    <label class="opt"><input type="radio" name="q25" value="C"> Vertical lines of differing thickness with numbers at the bottom</label>
-    <label class="opt"><input type="radio" name="q25" value="D"> Embedded chips that transmit radio waves</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="26" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q26</span><span class="qtxt">A turnaround document is one which:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q26" value="A"> Is used only as a source document for data capture</label>
-    <label class="opt"><input type="radio" name="q26" value="B"> Checks that data has been accurately transcribed</label>
-    <label class="opt"><input type="radio" name="q26" value="C"> Is produced to verify data before processing</label>
-    <label class="opt"><input type="radio" name="q26" value="D"> Is produced as output, has more data added, and is re-input for further processing</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="27" data-type="tf" data-answer="False">
-  <div class="qhead"><span class="qnum">Q27</span><span class="qtxt">OMR (Optical Mark Reader) is used mainly to read printed text and convert it into editable digital format.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="28" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q28</span><span class="qtxt">Which check attaches an extra digit to a string so any digit changed by mistake will be detected?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q28" value="A"> Range check</label>
-    <label class="opt"><input type="radio" name="q28" value="B"> Check digit</label>
-    <label class="opt"><input type="radio" name="q28" value="C"> Parity check</label>
-    <label class="opt"><input type="radio" name="q28" value="D"> Presence check</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="29" data-type="short" data-answer="biometrics">
-  <div class="qhead"><span class="qnum">Q29</span><span class="qtxt">The science of identifying individuals through body characteristics such as fingerprint, iris, retina and voice patterns is called <strong>___________</strong>.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="30" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q30</span><span class="qtxt">Pointing devices are used to:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q30" value="A"> Move a pointer or cursor on screen and enable selection of objects</label>
-    <label class="opt"><input type="radio" name="q30" value="B"> Convert analogue signals to digital</label>
-    <label class="opt"><input type="radio" name="q30" value="C"> Capture images and store them in memory</label>
-    <label class="opt"><input type="radio" name="q30" value="D"> Scan and read magnetic ink characters</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="sec-title">Section D — Output Devices (Q31–40)</div>
-
-<div class="qcard" data-q="31" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q31</span><span class="qtxt">Which of the following is a hard copy output device?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q31" value="A"> Monitor (VDU)</label>
-    <label class="opt"><input type="radio" name="q31" value="B"> Speaker</label>
-    <label class="opt"><input type="radio" name="q31" value="C"> Projector screen</label>
-    <label class="opt"><input type="radio" name="q31" value="D"> Laser printer</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="32" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q32</span><span class="qtxt">Soft copy output disappears when the computer is switched off.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="33" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q33</span><span class="qtxt">Impact printers include:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q33" value="A"> Thermal, laser and inkjet printers</label>
-    <label class="opt"><input type="radio" name="q33" value="B"> Dot matrix, daisy wheel and drum/chain/band printers</label>
-    <label class="opt"><input type="radio" name="q33" value="C"> Laser and LED printers only</label>
-    <label class="opt"><input type="radio" name="q33" value="D"> Inkjet and bubble-jet printers</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="34" data-type="short" data-answer="pixel">
-  <div class="qhead"><span class="qnum">Q34</span><span class="qtxt">The smallest unit on a screen that can be turned on, off or coloured in different shades is called a <strong>___________</strong>.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="35" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q35</span><span class="qtxt">A plotter is used in CAD to:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q35" value="A"> Print text documents at high speed</label>
-    <label class="opt"><input type="radio" name="q35" value="B"> Scan technical drawings into the computer</label>
-    <label class="opt"><input type="radio" name="q35" value="C"> Draw high quality graphics, charts and maps on large sheets of paper</label>
-    <label class="opt"><input type="radio" name="q35" value="D"> Store computer output on microfilm</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="36" data-type="tf" data-answer="False">
-  <div class="qhead"><span class="qnum">Q36</span><span class="qtxt">Modems are output-only devices used exclusively to send data over a telephone line.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="37" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q37</span><span class="qtxt">Computer Output on Microfilm/Microfiche (COM) is used to:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q37" value="A"> Store computer documents by vastly reducing them to fit on photographic prints</label>
-    <label class="opt"><input type="radio" name="q37" value="B"> Print high-resolution colour graphics on large paper</label>
-    <label class="opt"><input type="radio" name="q37" value="C"> Display output in real time on a monitor</label>
-    <label class="opt"><input type="radio" name="q37" value="D"> Convert analogue audio output to digital</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="38" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q38</span><span class="qtxt">A monitor's performance depends on which factors?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q38" value="A"> Processor speed and RAM size</label>
-    <label class="opt"><input type="radio" name="q38" value="B"> Graphics/video card, size, resolution, image aspect ratio and refresh rate</label>
-    <label class="opt"><input type="radio" name="q38" value="C"> Hard disk speed and network bandwidth</label>
-    <label class="opt"><input type="radio" name="q38" value="D"> Number of USB ports and power supply wattage</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="39" data-type="short" data-answer="inkjet">
-  <div class="qhead"><span class="qnum">Q39</span><span class="qtxt">A non-impact printer that sprays ink onto paper to form characters and images is called an <strong>___________</strong> printer.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="40" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q40</span><span class="qtxt">Output can be either human readable or machine readable.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="sec-title">Section E — Storage (Q41–50)</div>
-
-<div class="qcard" data-q="41" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q41</span><span class="qtxt">ROM chips differ from RAM chips because ROM:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q41" value="A"> Is volatile and loses data when power is removed</label>
-    <label class="opt"><input type="radio" name="q41" value="B"> Is non-volatile and can only be read, not written to</label>
-    <label class="opt"><input type="radio" name="q41" value="C"> Can be written to many times and stores temporary data</label>
-    <label class="opt"><input type="radio" name="q41" value="D"> Holds data currently being processed by the CPU</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="42" data-type="tf" data-answer="False">
-  <div class="qhead"><span class="qnum">Q42</span><span class="qtxt">Magnetic tapes provide direct access to data, making them fast for retrieving individual records.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="43" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q43</span><span class="qtxt">A floppy disk has a storage capacity of:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q43" value="A"> 4 GB</label>
-    <label class="opt"><input type="radio" name="q43" value="B"> 700 MB</label>
-    <label class="opt"><input type="radio" name="q43" value="C"> 1.44 MB</label>
-    <label class="opt"><input type="radio" name="q43" value="D"> 2 GB</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="44" data-type="short" data-answer="volatile">
-  <div class="qhead"><span class="qnum">Q44</span><span class="qtxt">RAM is described as <strong>___________</strong> because it loses its data when the power is switched off.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="45" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q45</span><span class="qtxt">Which of the following is the smallest unit of storage?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q45" value="A"> Byte</label>
-    <label class="opt"><input type="radio" name="q45" value="B"> Kilobyte</label>
-    <label class="opt"><input type="radio" name="q45" value="C"> Word</label>
-    <label class="opt"><input type="radio" name="q45" value="D"> Bit</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="46" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q46</span><span class="qtxt">RAID stands for:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q46" value="A"> Redundant Array of Independent Disk</label>
-    <label class="opt"><input type="radio" name="q46" value="B"> Rapid Access Integrated Drive</label>
-    <label class="opt"><input type="radio" name="q46" value="C"> Random Access Input Device</label>
-    <label class="opt"><input type="radio" name="q46" value="D"> Rewritable Array of Integrated Disks</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="47" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q47</span><span class="qtxt">Flash memory is non-volatile solid-state memory used in devices such as digital cameras, cell phones and USB drives.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="48" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q48</span><span class="qtxt">Optical disks include which of the following?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q48" value="A"> Floppy disk and magnetic tape</label>
-    <label class="opt"><input type="radio" name="q48" value="B"> Hard disk and SSD</label>
-    <label class="opt"><input type="radio" name="q48" value="C"> CD-ROM, CD-R, CD-RW and DVDs</label>
-    <label class="opt"><input type="radio" name="q48" value="D"> USB drives and flash cards</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="49" data-type="short" data-answer="formatting">
-  <div class="qhead"><span class="qnum">Q49</span><span class="qtxt">Writing electronic information on a disk so the computer can recognise it as a valid storage device is called <strong>___________</strong> a disk.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="50" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q50</span><span class="qtxt">Which of the following correctly defines one gigabyte (GB)?</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q50" value="A"> Approximately one thousand bytes</label>
-    <label class="opt"><input type="radio" name="q50" value="B"> Approximately one billion bytes</label>
-    <label class="opt"><input type="radio" name="q50" value="C"> Approximately one million bytes</label>
-    <label class="opt"><input type="radio" name="q50" value="D"> Exactly 1 024 bytes</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="sec-title">Section F — Data Representation &amp; Number Systems (Q51–55)</div>
-
-<div class="qcard" data-q="51" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q51</span><span class="qtxt">To find the two's complement of a binary number you must:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q51" value="A"> Flip all the bits (one's complement) then add 1</label>
-    <label class="opt"><input type="radio" name="q51" value="B"> Flip all the bits only</label>
-    <label class="opt"><input type="radio" name="q51" value="C"> Set the leftmost bit to 1 and keep the rest the same</label>
-    <label class="opt"><input type="radio" name="q51" value="D"> Divide by 2 and record the remainder</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="52" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q52</span><span class="qtxt">ASCII is a seven-bit code used to represent characters in computers.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="53" data-type="short" data-answer="8">
-  <div class="qhead"><span class="qnum">Q53</span><span class="qtxt">How many bits make up one byte? (Enter a number)</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="54" data-type="mcq" data-answer="D">
-  <div class="qhead"><span class="qnum">Q54</span><span class="qtxt">A parity bit is used to:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q54" value="A"> Compress data before transmission</label>
-    <label class="opt"><input type="radio" name="q54" value="B"> Encrypt data during transmission</label>
-    <label class="opt"><input type="radio" name="q54" value="C"> Speed up data transmission</label>
-    <label class="opt"><input type="radio" name="q54" value="D"> Detect errors in data transmitted between computers</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="55" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q55</span><span class="qtxt">In sign and magnitude representation, the MSB '1' represents:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q55" value="A"> A positive number</label>
-    <label class="opt"><input type="radio" name="q55" value="B"> A negative number</label>
-    <label class="opt"><input type="radio" name="q55" value="C"> Zero</label>
-    <label class="opt"><input type="radio" name="q55" value="D"> An overflow error</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="sec-title">Section G — Networks &amp; the Internet (Q56–60)</div>
-
-<div class="qcard" data-q="56" data-type="mcq" data-answer="C">
-  <div class="qhead"><span class="qnum">Q56</span><span class="qtxt">A LAN (Local Area Network) is best described as:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q56" value="A"> A network connecting computers across different countries via satellite links</label>
-    <label class="opt"><input type="radio" name="q56" value="B"> A network that only connects to the Internet through an ISP</label>
-    <label class="opt"><input type="radio" name="q56" value="C"> Microcomputers connected within a small geographical area to share information and peripherals</label>
-    <label class="opt"><input type="radio" name="q56" value="D"> A network that converts analogue signals to digital for transmission</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="57" data-type="tf" data-answer="True">
-  <div class="qhead"><span class="qnum">Q57</span><span class="qtxt">VoIP (Voice over Internet Protocol) uses the Internet rather than traditional telephone lines to transmit voice calls.</span></div>
-  <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="58" data-type="mcq" data-answer="A">
-  <div class="qhead"><span class="qnum">Q58</span><span class="qtxt">The protocol used over the Internet allowing different operating systems to communicate is:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q58" value="A"> TCP/IP</label>
-    <label class="opt"><input type="radio" name="q58" value="B"> HTTP</label>
-    <label class="opt"><input type="radio" name="q58" value="C"> FTP</label>
-    <label class="opt"><input type="radio" name="q58" value="D"> PPP</label>
-  </div><div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="59" data-type="short" data-answer="wiki">
-  <div class="qhead"><span class="qnum">Q59</span><span class="qtxt">A website where users can add, remove and edit every page collaboratively without HTML knowledge is called a <strong>___________</strong>.</span></div>
-  <textarea class="sa" placeholder="Type your answer…"></textarea>
-  <div class="fb"></div>
-</div>
-
-<div class="qcard" data-q="60" data-type="mcq" data-answer="B">
-  <div class="qhead"><span class="qnum">Q60</span><span class="qtxt">HTTP stands for:</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="q60" value="A"> Hypertext Transfer Pathway</label>
-    <label class="opt"><input type="radio" name="q60" value="B"> HyperText Transfer Protocol</label>
-    <label class="opt"><input type="radio" name="q60" value="C"> Hybrid Terminal Transfer Process</label>
-    <label class="opt"><input type="radio" name="q60" value="D"> High-speed Text Transfer Protocol</label>
-  </div><div class="fb"></div>
-</div>
-
-<button class="btn-submit" id="btn-submit">Submit Test</button>
-```
-
+    <div class="sec-title">Section A — Software &amp; Operating Systems (Q1–10)</div>
+
+    <div class="qcard" data-q="1" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q1</span><span class="qtxt">Which of the following BEST describes system software?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="A"> Software written for a specific business task only</label>
+        <label class="opt"><input type="radio" name="q1" value="B"> Software that manages and supports the resources and operations of a computer system</label>
+        <label class="opt"><input type="radio" name="q1" value="C"> Software that allows data to be transferred between programs</label>
+        <label class="opt"><input type="radio" name="q1" value="D"> Software written by end-users using macros</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="2" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q2</span><span class="qtxt">Microsoft Office is an example of which type of software?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="A"> Specialised software</label>
+        <label class="opt"><input type="radio" name="q2" value="B"> Custom-written software</label>
+        <label class="opt"><input type="radio" name="q2" value="C"> Integrated software</label>
+        <label class="opt"><input type="radio" name="q2" value="D"> General-purpose software</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="3" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q3</span><span class="qtxt">The graphical user interface (GUI) is also known as WIMP — Windows, Icons, Menus and Pointing devices.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="4" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q4</span><span class="qtxt">A batch-processing system is one where:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="A"> Data is collected in a queue and processed without user interaction</label>
+        <label class="opt"><input type="radio" name="q4" value="B"> The CPU gives each user a small time slice in rotation</label>
+        <label class="opt"><input type="radio" name="q4" value="C"> Data is processed immediately as it arrives</label>
+        <label class="opt"><input type="radio" name="q4" value="D"> The system responds to events within a set time</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="5" data-type="short" data-answer="macros">
+      <div class="qhead"><span class="qnum">Q5</span><span class="qtxt">Short programs written to automate several steps in software (e.g. spreadsheets), often written by end-users, are called <strong>___________</strong>.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="6" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q6</span><span class="qtxt">Which type of software is written to meet the specific needs of a particular company and is therefore expensive and highly specialised?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="A"> General-purpose software</label>
+        <label class="opt"><input type="radio" name="q6" value="B"> Specialised software</label>
+        <label class="opt"><input type="radio" name="q6" value="C"> Integrated software</label>
+        <label class="opt"><input type="radio" name="q6" value="D"> Custom-written (tailor-made) software</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="7" data-type="tf" data-answer="False">
+      <div class="qhead"><span class="qnum">Q7</span><span class="qtxt">A command-driven interface uses a mouse to select options from pull-down menus.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="8" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q8</span><span class="qtxt">A time-sharing processing system works by:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="A"> Processing each user's job completely before starting the next</label>
+        <label class="opt"><input type="radio" name="q8" value="B"> Giving each terminal a small time slice of the CPU in rotation</label>
+        <label class="opt"><input type="radio" name="q8" value="C"> Responding to events within a predetermined time</label>
+        <label class="opt"><input type="radio" name="q8" value="D"> Running jobs from a batch queue overnight</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="9" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q9</span><span class="qtxt">Which of the following is a utility program function?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="A"> Running a word processor document</label>
+        <label class="opt"><input type="radio" name="q9" value="B"> Displaying a pull-down menu</label>
+        <label class="opt"><input type="radio" name="q9" value="C"> Disk defragmentation and virus protection</label>
+        <label class="opt"><input type="radio" name="q9" value="D"> Translating high-level code to machine code</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="10" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q10</span><span class="qtxt">An operating system manages computer resources, files, memory, tasks and maintains security.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section B — Computer Hardware &amp; CPU (Q11–20)</div>
+
+    <div class="qcard" data-q="11" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q11</span><span class="qtxt">Which two units make up the Central Processing Unit (CPU)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q11" value="A"> RAM and ROM</label>
+        <label class="opt"><input type="radio" name="q11" value="B"> Control Unit (CU) and Arithmetic and Logic Unit (ALU)</label>
+        <label class="opt"><input type="radio" name="q11" value="C"> Program Counter and Instruction Register</label>
+        <label class="opt"><input type="radio" name="q11" value="D"> Hard disk and motherboard</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="12" data-type="tf" data-answer="False">
+      <div class="qhead"><span class="qnum">Q12</span><span class="qtxt">Supercomputers are mainly used in banks for bulk data processing such as bank transactions.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="13" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q13</span><span class="qtxt">The program counter (PC) in a CPU holds:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q13" value="A"> The result of arithmetic operations</label>
+        <label class="opt"><input type="radio" name="q13" value="B"> The instruction currently being executed</label>
+        <label class="opt"><input type="radio" name="q13" value="C"> The address of the next instruction to be processed</label>
+        <label class="opt"><input type="radio" name="q13" value="D"> Permanent startup instructions</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="14" data-type="short" data-answer="transistors">
+      <div class="qhead"><span class="qnum">Q14</span><span class="qtxt">Invented in 1947, <strong>___________</strong> formed the basis of second generation computers, making them smaller, faster and more reliable.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="15" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q15</span><span class="qtxt">Which generation of computers is characterised by Ultra Large Scale Integration (ULSI)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q15" value="A"> Second generation</label>
+        <label class="opt"><input type="radio" name="q15" value="B"> Third generation</label>
+        <label class="opt"><input type="radio" name="q15" value="C"> Fifth generation</label>
+        <label class="opt"><input type="radio" name="q15" value="D"> Fourth generation</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="16" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q16</span><span class="qtxt">A register in the CPU is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q16" value="A"> A temporary storage location that holds a single instruction or data item</label>
+        <label class="opt"><input type="radio" name="q16" value="B"> A permanent memory chip on the motherboard</label>
+        <label class="opt"><input type="radio" name="q16" value="C"> A large cache memory bank</label>
+        <label class="opt"><input type="radio" name="q16" value="D"> The bus connecting the CPU to RAM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="17" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q17</span><span class="qtxt">Fifth generation computers are expected to use artificial intelligence and accept spoken word instructions.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="18" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q18</span><span class="qtxt">What is the main electronic component of first generation computers?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q18" value="A"> Transistor</label>
+        <label class="opt"><input type="radio" name="q18" value="B"> Vacuum tube (valve)</label>
+        <label class="opt"><input type="radio" name="q18" value="C"> Integrated circuit</label>
+        <label class="opt"><input type="radio" name="q18" value="D"> Microprocessor chip</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="19" data-type="short" data-answer="embedded">
+      <div class="qhead"><span class="qnum">Q19</span><span class="qtxt">A special purpose computer used inside a device and dedicated to specific functions is called an <strong>___________</strong> computer.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="20" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q20</span><span class="qtxt">The Arithmetic and Logic Unit (ALU) is responsible for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q20" value="A"> Directing and co-ordinating all activities within the CPU</label>
+        <label class="opt"><input type="radio" name="q20" value="B"> Storing startup instructions permanently</label>
+        <label class="opt"><input type="radio" name="q20" value="C"> Performing all arithmetic and logic functions</label>
+        <label class="opt"><input type="radio" name="q20" value="D"> Managing files and memory allocation</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section C — Input Devices &amp; Data Capture (Q21–30)</div>
+
+    <div class="qcard" data-q="21" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q21</span><span class="qtxt">Validation is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q21" value="A"> Checking data has been accurately copied or transcribed</label>
+        <label class="opt"><input type="radio" name="q21" value="B"> Checking data before processing to ensure it obeys the rules applied to it</label>
+        <label class="opt"><input type="radio" name="q21" value="C"> Checking that a field is not left empty</label>
+        <label class="opt"><input type="radio" name="q21" value="D"> Checking the number of characters entered</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="22" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q22</span><span class="qtxt">MICR (Magnetic Ink Character Recognition) is used mainly to read cheques whose data is encoded with magnetic ink.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="23" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q23</span><span class="qtxt">Which check ensures that an entered value is of a specific type (e.g. numeric)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q23" value="A"> Data type check</label>
+        <label class="opt"><input type="radio" name="q23" value="B"> Range check</label>
+        <label class="opt"><input type="radio" name="q23" value="C"> Format check</label>
+        <label class="opt"><input type="radio" name="q23" value="D"> Presence check</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="24" data-type="short" data-answer="rfid">
+      <div class="qhead"><span class="qnum">Q24</span><span class="qtxt">What does RFID stand for? (abbreviation accepted)</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="25" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q25</span><span class="qtxt">A barcode contains information encoded as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q25" value="A"> Magnetic pulses on a strip</label>
+        <label class="opt"><input type="radio" name="q25" value="B"> Reflected light patterns in a grid</label>
+        <label class="opt"><input type="radio" name="q25" value="C"> Vertical lines of differing thickness with numbers at the bottom</label>
+        <label class="opt"><input type="radio" name="q25" value="D"> Embedded chips that transmit radio waves</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="26" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q26</span><span class="qtxt">A turnaround document is one which:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q26" value="A"> Is used only as a source document for data capture</label>
+        <label class="opt"><input type="radio" name="q26" value="B"> Checks that data has been accurately transcribed</label>
+        <label class="opt"><input type="radio" name="q26" value="C"> Is produced to verify data before processing</label>
+        <label class="opt"><input type="radio" name="q26" value="D"> Is produced as output, has more data added, and is re-input for further processing</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="27" data-type="tf" data-answer="False">
+      <div class="qhead"><span class="qnum">Q27</span><span class="qtxt">OMR (Optical Mark Reader) is used mainly to read printed text and convert it into editable digital format.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="28" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q28</span><span class="qtxt">Which check attaches an extra digit to a string so any digit changed by mistake will be detected?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q28" value="A"> Range check</label>
+        <label class="opt"><input type="radio" name="q28" value="B"> Check digit</label>
+        <label class="opt"><input type="radio" name="q28" value="C"> Parity check</label>
+        <label class="opt"><input type="radio" name="q28" value="D"> Presence check</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="29" data-type="short" data-answer="biometrics">
+      <div class="qhead"><span class="qnum">Q29</span><span class="qtxt">The science of identifying individuals through body characteristics such as fingerprint, iris, retina and voice patterns is called <strong>___________</strong>.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="30" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q30</span><span class="qtxt">Pointing devices are used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q30" value="A"> Move a pointer or cursor on screen and enable selection of objects</label>
+        <label class="opt"><input type="radio" name="q30" value="B"> Convert analogue signals to digital</label>
+        <label class="opt"><input type="radio" name="q30" value="C"> Capture images and store them in memory</label>
+        <label class="opt"><input type="radio" name="q30" value="D"> Scan and read magnetic ink characters</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section D — Output Devices (Q31–40)</div>
+
+    <div class="qcard" data-q="31" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q31</span><span class="qtxt">Which of the following is a hard copy output device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q31" value="A"> Monitor (VDU)</label>
+        <label class="opt"><input type="radio" name="q31" value="B"> Speaker</label>
+        <label class="opt"><input type="radio" name="q31" value="C"> Projector screen</label>
+        <label class="opt"><input type="radio" name="q31" value="D"> Laser printer</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="32" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q32</span><span class="qtxt">Soft copy output disappears when the computer is switched off.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="33" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q33</span><span class="qtxt">Impact printers include:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q33" value="A"> Thermal, laser and inkjet printers</label>
+        <label class="opt"><input type="radio" name="q33" value="B"> Dot matrix, daisy wheel and drum/chain/band printers</label>
+        <label class="opt"><input type="radio" name="q33" value="C"> Laser and LED printers only</label>
+        <label class="opt"><input type="radio" name="q33" value="D"> Inkjet and bubble-jet printers</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="34" data-type="short" data-answer="pixel">
+      <div class="qhead"><span class="qnum">Q34</span><span class="qtxt">The smallest unit on a screen that can be turned on, off or coloured in different shades is called a <strong>___________</strong>.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="35" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q35</span><span class="qtxt">A plotter is used in CAD to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q35" value="A"> Print text documents at high speed</label>
+        <label class="opt"><input type="radio" name="q35" value="B"> Scan technical drawings into the computer</label>
+        <label class="opt"><input type="radio" name="q35" value="C"> Draw high quality graphics, charts and maps on large sheets of paper</label>
+        <label class="opt"><input type="radio" name="q35" value="D"> Store computer output on microfilm</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="36" data-type="tf" data-answer="False">
+      <div class="qhead"><span class="qnum">Q36</span><span class="qtxt">Modems are output-only devices used exclusively to send data over a telephone line.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="37" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q37</span><span class="qtxt">Computer Output on Microfilm/Microfiche (COM) is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q37" value="A"> Store computer documents by vastly reducing them to fit on photographic prints</label>
+        <label class="opt"><input type="radio" name="q37" value="B"> Print high-resolution colour graphics on large paper</label>
+        <label class="opt"><input type="radio" name="q37" value="C"> Display output in real time on a monitor</label>
+        <label class="opt"><input type="radio" name="q37" value="D"> Convert analogue audio output to digital</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="38" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q38</span><span class="qtxt">A monitor's performance depends on which factors?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q38" value="A"> Processor speed and RAM size</label>
+        <label class="opt"><input type="radio" name="q38" value="B"> Graphics/video card, size, resolution, image aspect ratio and refresh rate</label>
+        <label class="opt"><input type="radio" name="q38" value="C"> Hard disk speed and network bandwidth</label>
+        <label class="opt"><input type="radio" name="q38" value="D"> Number of USB ports and power supply wattage</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="39" data-type="short" data-answer="inkjet">
+      <div class="qhead"><span class="qnum">Q39</span><span class="qtxt">A non-impact printer that sprays ink onto paper to form characters and images is called an <strong>___________</strong> printer.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="40" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q40</span><span class="qtxt">Output can be either human readable or machine readable.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section E — Storage (Q41–50)</div>
+
+    <div class="qcard" data-q="41" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q41</span><span class="qtxt">ROM chips differ from RAM chips because ROM:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q41" value="A"> Is volatile and loses data when power is removed</label>
+        <label class="opt"><input type="radio" name="q41" value="B"> Is non-volatile and can only be read, not written to</label>
+        <label class="opt"><input type="radio" name="q41" value="C"> Can be written to many times and stores temporary data</label>
+        <label class="opt"><input type="radio" name="q41" value="D"> Holds data currently being processed by the CPU</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="42" data-type="tf" data-answer="False">
+      <div class="qhead"><span class="qnum">Q42</span><span class="qtxt">Magnetic tapes provide direct access to data, making them fast for retrieving individual records.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="43" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q43</span><span class="qtxt">A floppy disk has a storage capacity of:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q43" value="A"> 4 GB</label>
+        <label class="opt"><input type="radio" name="q43" value="B"> 700 MB</label>
+        <label class="opt"><input type="radio" name="q43" value="C"> 1.44 MB</label>
+        <label class="opt"><input type="radio" name="q43" value="D"> 2 GB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="44" data-type="short" data-answer="volatile">
+      <div class="qhead"><span class="qnum">Q44</span><span class="qtxt">RAM is described as <strong>___________</strong> because it loses its data when the power is switched off.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="45" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q45</span><span class="qtxt">Which of the following is the smallest unit of storage?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q45" value="A"> Byte</label>
+        <label class="opt"><input type="radio" name="q45" value="B"> Kilobyte</label>
+        <label class="opt"><input type="radio" name="q45" value="C"> Word</label>
+        <label class="opt"><input type="radio" name="q45" value="D"> Bit</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="46" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q46</span><span class="qtxt">RAID stands for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q46" value="A"> Redundant Array of Independent Disk</label>
+        <label class="opt"><input type="radio" name="q46" value="B"> Rapid Access Integrated Drive</label>
+        <label class="opt"><input type="radio" name="q46" value="C"> Random Access Input Device</label>
+        <label class="opt"><input type="radio" name="q46" value="D"> Rewritable Array of Integrated Disks</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="47" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q47</span><span class="qtxt">Flash memory is non-volatile solid-state memory used in devices such as digital cameras, cell phones and USB drives.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="48" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q48</span><span class="qtxt">Optical disks include which of the following?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q48" value="A"> Floppy disk and magnetic tape</label>
+        <label class="opt"><input type="radio" name="q48" value="B"> Hard disk and SSD</label>
+        <label class="opt"><input type="radio" name="q48" value="C"> CD-ROM, CD-R, CD-RW and DVDs</label>
+        <label class="opt"><input type="radio" name="q48" value="D"> USB drives and flash cards</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="49" data-type="short" data-answer="formatting">
+      <div class="qhead"><span class="qnum">Q49</span><span class="qtxt">Writing electronic information on a disk so the computer can recognise it as a valid storage device is called <strong>___________</strong> a disk.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="50" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q50</span><span class="qtxt">Which of the following correctly defines one gigabyte (GB)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q50" value="A"> Approximately one thousand bytes</label>
+        <label class="opt"><input type="radio" name="q50" value="B"> Approximately one billion bytes</label>
+        <label class="opt"><input type="radio" name="q50" value="C"> Approximately one million bytes</label>
+        <label class="opt"><input type="radio" name="q50" value="D"> Exactly 1 024 bytes</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section F — Data Representation &amp; Number Systems (Q51–55)</div>
+
+    <div class="qcard" data-q="51" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q51</span><span class="qtxt">To find the two's complement of a binary number you must:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q51" value="A"> Flip all the bits (one's complement) then add 1</label>
+        <label class="opt"><input type="radio" name="q51" value="B"> Flip all the bits only</label>
+        <label class="opt"><input type="radio" name="q51" value="C"> Set the leftmost bit to 1 and keep the rest the same</label>
+        <label class="opt"><input type="radio" name="q51" value="D"> Divide by 2 and record the remainder</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="52" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q52</span><span class="qtxt">ASCII is a seven-bit code used to represent characters in computers.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="53" data-type="short" data-answer="8">
+      <div class="qhead"><span class="qnum">Q53</span><span class="qtxt">How many bits make up one byte? (Enter a number)</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="54" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q54</span><span class="qtxt">A parity bit is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q54" value="A"> Compress data before transmission</label>
+        <label class="opt"><input type="radio" name="q54" value="B"> Encrypt data during transmission</label>
+        <label class="opt"><input type="radio" name="q54" value="C"> Speed up data transmission</label>
+        <label class="opt"><input type="radio" name="q54" value="D"> Detect errors in data transmitted between computers</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="55" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q55</span><span class="qtxt">In sign and magnitude representation, the MSB '1' represents:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q55" value="A"> A positive number</label>
+        <label class="opt"><input type="radio" name="q55" value="B"> A negative number</label>
+        <label class="opt"><input type="radio" name="q55" value="C"> Zero</label>
+        <label class="opt"><input type="radio" name="q55" value="D"> An overflow error</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section G — Networks &amp; the Internet (Q56–60)</div>
+
+    <div class="qcard" data-q="56" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q56</span><span class="qtxt">A LAN (Local Area Network) is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q56" value="A"> A network connecting computers across different countries via satellite links</label>
+        <label class="opt"><input type="radio" name="q56" value="B"> A network that only connects to the Internet through an ISP</label>
+        <label class="opt"><input type="radio" name="q56" value="C"> Microcomputers connected within a small geographical area to share information and peripherals</label>
+        <label class="opt"><input type="radio" name="q56" value="D"> A network that converts analogue signals to digital for transmission</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="57" data-type="tf" data-answer="True">
+      <div class="qhead"><span class="qnum">Q57</span><span class="qtxt">VoIP (Voice over Internet Protocol) uses the Internet rather than traditional telephone lines to transmit voice calls.</span></div>
+      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="58" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q58</span><span class="qtxt">The protocol used over the Internet allowing different operating systems to communicate is:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q58" value="A"> TCP/IP</label>
+        <label class="opt"><input type="radio" name="q58" value="B"> HTTP</label>
+        <label class="opt"><input type="radio" name="q58" value="C"> FTP</label>
+        <label class="opt"><input type="radio" name="q58" value="D"> PPP</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="59" data-type="short" data-answer="wiki">
+      <div class="qhead"><span class="qnum">Q59</span><span class="qtxt">A website where users can add, remove and edit every page collaboratively without HTML knowledge is called a <strong>___________</strong>.</span></div>
+      <textarea class="sa" placeholder="Type your answer…"></textarea>
+      <div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="60" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q60</span><span class="qtxt">HTTP stands for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q60" value="A"> Hypertext Transfer Pathway</label>
+        <label class="opt"><input type="radio" name="q60" value="B"> HyperText Transfer Protocol</label>
+        <label class="opt"><input type="radio" name="q60" value="C"> Hybrid Terminal Transfer Process</label>
+        <label class="opt"><input type="radio" name="q60" value="D"> High-speed Text Transfer Protocol</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <button class="btn-submit" id="btn-submit">Submit Test</button>
   </div><!-- /q-wrap -->
 </div><!-- /screen-test -->
 
 <!-- ═══════════════════ SCREEN: RESULTS ═══════════════════ -->
-
 <div id="screen-results" class="screen">
   <div id="res-inner" style="max-width:720px;margin:50px auto 0;padding:0 24px;">
     <div class="res-card">
@@ -718,7 +709,6 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 </div>
 
 <!-- ═══════════════════ SCREEN: TEACHER ═══════════════════ -->
-
 <div id="screen-teacher" class="screen">
   <div class="dash-head">
     <h2>📊 Teacher Results Dashboard</h2>
@@ -729,13 +719,13 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   </div>
   <div class="chips" id="dash-chips"></div>
   <div class="filters">
-    <input type="text" id="f-name" placeholder="🔍 Search name…" oninput="renderTable()">
-    <select id="f-class" onchange="renderTable()">
+    <input type="text" id="f-name" placeholder="🔍 Search name…" oninput="renderDash()">
+    <select id="f-class" onchange="renderDash()">
       <option value="">All Classes</option>
       <option>10O</option><option>10B</option><option>10E</option>
       <option>10R</option><option>10L</option><option>10I</option><option>10N</option>
     </select>
-    <select id="f-sort" onchange="renderTable()">
+    <select id="f-sort" onchange="renderDash()">
       <option value="newest">Newest first</option>
       <option value="oldest">Oldest first</option>
       <option value="hi">Highest score</option>
@@ -752,7 +742,6 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 </div>
 
 <!-- ═══════════════════ PASSWORD MODAL ═══════════════════ -->
-
 <div class="modal-bg" id="pw-modal">
   <div class="modal-box">
     <h3>Teacher Access</h3>
@@ -795,7 +784,7 @@ function show(id) {
 function goToLanding() { show('landing'); }
 
 // ── START ──
-document.getElementById('btn-start').addEventListener('click', function() {
+document.getElementById('btn-start').addEventListener('click', async function() {
   const name = document.getElementById('inp-name').value.trim();
   const cls  = document.getElementById('inp-class').value;
   let ok = true;
@@ -803,14 +792,21 @@ document.getElementById('btn-start').addEventListener('click', function() {
   document.getElementById('err-class').style.display = cls  ? 'none' : 'block'; if (!cls)  ok = false;
   if (!ok) return;
 
-  // Check attempt limit (max 2)
-  const all = loadData();
-  const prevAttempts = all.filter(r => r.name.toLowerCase() === name.toLowerCase() && r.cls === cls).length;
+  // Show loading state
+  const btn = document.getElementById('btn-start');
+  btn.textContent = 'Checking... please wait';
+  btn.disabled = true;
+
+  // Check attempt limit (max 2) from Google Sheets
+  const prevAttempts = await getPrevAttempts(name, cls);
+
   if (prevAttempts >= 2) {
     const errEl = document.getElementById('err-name');
     errEl.style.color = 'var(--wrong)';
     errEl.textContent = '\u26d4 ' + name + ' has already used both attempts. No further attempts are allowed.';
     errEl.style.display = 'block';
+    btn.textContent = 'Begin Test \u2192';
+    btn.disabled = false;
     return;
   }
 
@@ -824,6 +820,8 @@ document.getElementById('btn-start').addEventListener('click', function() {
 
   student = {name, cls};
   document.getElementById('hdr-name').innerHTML = '<strong>' + name + '</strong> &nbsp;\u00b7&nbsp; Class <strong>' + cls + '</strong>';
+  btn.textContent = 'Begin Test \u2192';
+  btn.disabled = false;
   show('test');
   answered = new Set();
   updateProg();
@@ -858,7 +856,7 @@ document.querySelectorAll('.sa').forEach(inp => {
 });
 
 // ── SUBMIT ──
-document.getElementById('btn-submit').addEventListener('click', function() {
+document.getElementById('btn-submit').addEventListener('click', async function() {
   let correct = 0;
   document.querySelectorAll('.qcard').forEach(card => {
     const qn   = parseInt(card.dataset.q);
@@ -900,13 +898,12 @@ document.getElementById('btn-submit').addEventListener('click', function() {
     card.querySelectorAll('input,button,.sa').forEach(el => el.disabled = true);
   });
 
-  // Save to storage
-  const all = loadData();
-  const prev = all.filter(r => r.name === student.name && r.cls === student.cls).length;
-  const attemptNo = prev + 1;
+  // Save to Google Sheets
+  const prevAttempts2 = await getPrevAttempts(student.name, student.cls);
+  const attemptNo = prevAttempts2 + 1;
   const pct = Math.round((correct / TOTAL) * 100);
-  all.push({ name: student.name, cls: student.cls, correct, total: TOTAL, pct, attempt: attemptNo, ts: new Date().toISOString() });
-  saveData(all);
+  const record = { name: student.name, cls: student.cls, correct, total: TOTAL, pct, attempt: attemptNo, ts: new Date().toISOString() };
+  await saveData(record);
 
   // Show results screen
   document.getElementById('res-student').textContent = student.name + '  ·  Class ' + student.cls;
@@ -953,8 +950,9 @@ function checkPw() {
   }
 }
 
-function renderDash() {
-  const all = loadData();
+async function renderDash() {
+  document.getElementById('dash-chips').innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:10px;">⏳ Loading results from server...</div>';
+  const all = await loadData();
   const avg = all.length ? Math.round(all.reduce((s,r) => s+r.pct, 0) / all.length) : 0;
   const best = all.length ? Math.max(...all.map(r=>r.pct)) : 0;
   const passes = all.filter(r=>r.pct>=50).length;
@@ -966,8 +964,8 @@ function renderDash() {
 
 function chip(v,l){ return '<div class="chip"><div class="cv">'+v+'</div><div class="cl">'+l+'</div></div>'; }
 
-function renderTable() {
-  const all = loadData();
+function renderTable(all) {
+  all = all || [];
   const search = (document.getElementById('f-name').value||'').toLowerCase();
   const cls    = document.getElementById('f-class').value||'';
   const sort   = document.getElementById('f-sort').value||'newest';
@@ -993,14 +991,45 @@ function renderTable() {
   }).join('');
 }
 
-function clearAll() {
-  if (confirm('Delete ALL student results? This cannot be undone.')) { localStorage.removeItem('it_gr10_results'); renderDash(); }
+async function clearAll() {
+  if (confirm('Delete ALL student results from Google Sheets? This cannot be undone.')) {
+    try {
+      await fetch(GAS_URL + '?action=clear');
+      renderDash();
+    } catch(e) { alert('Could not clear results. Try again.'); }
+  }
 }
 
-// ── STORAGE ──
-function loadData() { try { return JSON.parse(localStorage.getItem('it_gr10_results')||'[]'); } catch(e) { return []; } }
-function saveData(arr) { localStorage.setItem('it_gr10_results', JSON.stringify(arr)); }
-</script>
+// ── GOOGLE SHEETS BACKEND ──
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz74Qn-HvP4KY4OueggZgxetkZakiwViJ-kOg9kRICxxq6ESZEJAMRYU-XBkN3D_iJK1w/exec';
 
+async function saveData(record) {
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    });
+  } catch(e) { console.error('Save error', e); }
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(GAS_URL + '?action=get');
+    const rows = await res.json();
+    return rows.slice(1).map(r => ({
+      name: r[0], cls: r[1], correct: Number(r[2]),
+      total: Number(r[3]), pct: Number(r[4]),
+      attempt: Number(r[5]), ts: r[6]
+    }));
+  } catch(e) { console.error('Load error', e); return []; }
+}
+
+async function getPrevAttempts(name, cls) {
+  const all = await loadData();
+  return all.filter(r => r.name.toLowerCase() === name.toLowerCase() && r.cls === cls).length;
+}
+</script>
 </body>
 </html>
