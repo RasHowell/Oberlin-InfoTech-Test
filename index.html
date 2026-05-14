@@ -136,6 +136,7 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 <div id="screen-landing" class="screen active">
   <div class="logo">Oberlin High School</div>
   <div class="logo-sub">Grade 10 IT &nbsp;·&nbsp; Six Weeks Test &nbsp;·&nbsp; 60 Questions &nbsp;·&nbsp; 60 Marks</div>
+  <div id="sync-notice" style="display:none;background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);border-radius:8px;padding:10px 14px;font-size:.82rem;color:#38d9a9;margin-bottom:20px;"></div>
 
   <div class="fg">
     <label>Full Name</label>
@@ -755,6 +756,23 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 
 <script>
 const TOTAL = 60;
+
+// ── AUTO-SYNC ON PAGE LOAD ──
+window.addEventListener('load', async () => {
+  const local = JSON.parse(localStorage.getItem('it_gr10_results') || '[]');
+  if (local.length > 0) {
+    const notice = document.getElementById('sync-notice');
+    if (notice) {
+      notice.style.display = 'block';
+      notice.textContent = '⏳ Syncing ' + local.length + ' saved result(s) to server...';
+    }
+    await syncLocalToSheets();
+    if (notice) {
+      notice.textContent = '✅ Local results synced successfully!';
+      setTimeout(() => { notice.style.display = 'none'; }, 4000);
+    }
+  }
+});
 const PW = 'ras4real'; // change this to your preferred password
 
 const SHORT_KEYS = {
@@ -998,6 +1016,49 @@ async function clearAll() {
       renderDash();
     } catch(e) { alert('Could not clear results. Try again.'); }
   }
+}
+
+// ── SYNC OLD LOCAL RESULTS TO GOOGLE SHEETS ──
+async function syncLocalToSheets() {
+  const localKey = 'it_gr10_results';
+  const syncedKey = 'it_gr10_synced';
+
+  let local = [];
+  try { local = JSON.parse(localStorage.getItem(localKey) || '[]'); } catch(e) { return; }
+
+  if (!local.length) return; // nothing to sync
+
+  const alreadySynced = JSON.parse(localStorage.getItem(syncedKey) || '[]');
+
+  // Filter only records not yet synced
+  const toSync = local.filter(r => {
+    const id = r.name + '|' + r.cls + '|' + r.ts;
+    return !alreadySynced.includes(id);
+  });
+
+  if (!toSync.length) return; // all already synced
+
+  console.log('Syncing ' + toSync.length + ' local result(s) to Google Sheets...');
+
+  const newlySynced = [...alreadySynced];
+
+  for (const r of toSync) {
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(r)
+      });
+      newlySynced.push(r.name + '|' + r.cls + '|' + r.ts);
+      console.log('Synced: ' + r.name + ' attempt #' + r.attempt);
+    } catch(e) {
+      console.warn('Failed to sync record for ' + r.name, e);
+    }
+  }
+
+  localStorage.setItem(syncedKey, JSON.stringify(newlySynced));
+  console.log('Sync complete!');
 }
 
 // ── GOOGLE SHEETS BACKEND ──
