@@ -1,0 +1,1071 @@
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 9 IT Test — Computer Hardware &amp; Storage</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--surface:#161b27;--card:#1c2333;--border:#2a3347;--accent:#4f8ef7;--accent2:#38d9a9;--text:#e8eaf0;--muted:#7a8399;--correct:#38d9a9;--wrong:#fc5c65;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px;}
+.screen{display:none!important;}
+.screen.active{display:block!important;}
+#screen-landing{max-width:520px;margin:0 auto;padding:60px 24px;}
+.logo{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--accent);margin-bottom:6px;}
+.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:40px;}
+.fg{margin-bottom:20px;}
+.fg label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px;}
+.fg input,.fg select{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:13px 15px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--accent);}
+.fg select option{background:#1c2333;}
+.err-msg{color:var(--wrong);font-size:.8rem;margin-top:5px;display:none;}
+.btn-start{width:100%;margin-top:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:15px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.3px;transition:opacity .2s,transform .15s;}
+.btn-start:hover{opacity:.9;transform:translateY(-1px);}
+.t-link{display:block;text-align:center;margin-top:22px;font-size:.82rem;color:var(--muted);cursor:pointer;text-decoration:underline;}
+.t-link:hover{color:var(--accent);}
+.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.t-header h1{font-family:'Space Mono',monospace;font-size:1.25rem;color:var(--accent);}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:5px;}
+.meta strong{color:var(--text);}
+.badge{background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.prog-bar-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 36px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;}
+.prog-outer{flex:1;height:6px;background:var(--border);border-radius:4px;overflow:hidden;}
+.prog-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .4s;}
+.prog-label{font-size:.75rem;color:var(--muted);white-space:nowrap;}
+.q-wrap{max-width:780px;margin:0 auto;padding:32px 24px 0;}
+.sec-title{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:34px 0 14px;padding-left:11px;border-left:3px solid var(--accent);}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+.qcard:hover{border-color:#3a4a68;}
+.qhead{display:flex;gap:11px;align-items:flex-start;margin-bottom:15px;}
+.qnum{font-family:'Space Mono',monospace;font-size:.68rem;background:var(--accent);color:#fff;border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px;}
+.qtxt{font-size:.93rem;line-height:1.55;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.88rem;transition:all .18s;}
+.opt:hover{border-color:var(--accent);background:#1a2438;}
+.opt input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;}
+.opt.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
+.opt.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
+.fb{margin-top:9px;font-size:.8rem;border-radius:6px;padding:7px 12px;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}
+.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
+.btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s,transform .15s;}
+.btn-submit:hover{opacity:.9;transform:translateY(-1px);}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+#screen-results{max-width:720px;margin:50px auto 0;padding:0 24px;}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:38px;text-align:center;}
+.res-card h2{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--accent2);margin-bottom:4px;}
+.res-student{color:var(--muted);font-size:.83rem;margin-bottom:4px;}
+.score-big{font-family:'Space Mono',monospace;font-size:3.6rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:14px 0;}
+.res-msg{color:var(--muted);font-size:.88rem;}
+.res-grid{display:flex;justify-content:center;gap:30px;margin-top:22px;flex-wrap:wrap;}
+.rstat .v{font-family:'Space Mono',monospace;font-size:1.7rem;font-weight:700;}
+.rstat .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.v.c{color:var(--correct);}.v.w{color:var(--wrong);}
+.att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(--accent);}
+.btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-retry:hover{background:rgba(79,142,247,.1);}
+#screen-teacher{max-width:960px;margin:0 auto;padding:38px 24px;}
+.dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
+.dash-head h2{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-back:hover{border-color:var(--accent);color:var(--accent);}
+.btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-clear:hover{background:rgba(252,92,101,.08);}
+.chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
+.chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
+.chip .cl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.filters input,.filters select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;}
+.filters input:focus,.filters select:focus{outline:none;border-color:var(--accent);}
+table{width:100%;border-collapse:collapse;font-size:.83rem;}
+thead th{background:var(--surface);padding:10px 13px;text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);}
+tbody tr{border-bottom:1px solid var(--border);}
+tbody tr:hover{background:var(--surface);}
+tbody td{padding:11px 13px;vertical-align:middle;}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;}
+.pass{background:rgba(56,217,169,.12);color:var(--correct);}
+.avg{background:rgba(247,183,49,.12);color:#f7b731;}
+.fail{background:rgba(252,92,101,.12);color:var(--wrong);}
+.att{display:inline-block;background:rgba(79,142,247,.14);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:'Space Mono',monospace;}
+.no-data{text-align:center;padding:50px;color:var(--muted);}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);align-items:center;justify-content:center;z-index:999;display:none;}
+.modal-bg.open{display:flex;}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px;width:320px;text-align:center;}
+.modal-box h3{font-family:'Space Mono',monospace;color:var(--accent);margin-bottom:5px;}
+.modal-box p{color:var(--muted);font-size:.8rem;margin-bottom:20px;}
+.modal-box input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;text-align:center;letter-spacing:3px;margin-bottom:11px;}
+.modal-box input:focus{outline:none;border-color:var(--accent);}
+.btn-unlock{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
+.btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="screen-landing" class="screen active">
+  <div class="logo">Oberlin High School</div>
+  <div class="logo-sub">Grade 9 IT &nbsp;&middot;&nbsp; Computer Hardware &amp; Storage &nbsp;&middot;&nbsp; 60 Questions &nbsp;&middot;&nbsp; 60 Marks</div>
+  <div id="sync-notice" style="display:none;background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);border-radius:8px;padding:10px 14px;font-size:.82rem;color:#38d9a9;margin-bottom:20px;"></div>
+  <div class="fg">
+    <label>Full Name</label>
+    <input type="text" id="inp-name" placeholder="e.g. John Smith">
+    <div class="err-msg" id="err-name">Please enter your full name.</div>
+  </div>
+  <div class="fg">
+    <label>Class</label>
+    <select id="inp-class">
+      <option value="">— Select your class —</option>
+      <option>9O</option><option>9B</option><option>9E</option>
+      <option>9R</option><option>9L</option><option>9I</option>
+      <option>9N</option><option>9H</option>
+    </select>
+    <div class="err-msg" id="err-class">Please select your class.</div>
+  </div>
+  <button class="btn-start" id="btn-start">Begin Test &rarr;</button>
+  <span class="t-link" id="teacher-link">Teacher Results Dashboard</span>
+</div>
+
+<!-- TEST -->
+<div id="screen-test" class="screen">
+  <div class="t-header">
+    <div>
+      <h1>Oberlin High School &mdash; Grade 9 IT: Computer Hardware &amp; Storage</h1>
+      <div class="meta"><span id="hdr-name"></span><span><strong>60 Questions</strong> &nbsp;|&nbsp; <strong>60 Marks</strong></span></div>
+    </div>
+    <span class="badge">Online Test</span>
+  </div>
+  <div class="prog-bar-wrap">
+    <div class="prog-outer"><div class="prog-inner" id="prog-inner"></div></div>
+    <div class="prog-label" id="prog-label">0 / 60 answered</div>
+  </div>
+  <div class="q-wrap" id="q-wrap">
+
+    <div class="sec-title">Section A &mdash; The CPU &amp; Its Components (Q1&ndash;15)</div>
+
+    <div class="qcard" data-q="1" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q1</span><span class="qtxt">The part of the CPU that performs arithmetic calculations and logic operations is the:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="A"> Control Unit (CU)</label>
+        <label class="opt"><input type="radio" name="q1" value="B"> Random Access Memory (RAM)</label>
+        <label class="opt"><input type="radio" name="q1" value="C"> Arithmetic and Logic Unit (ALU)</label>
+        <label class="opt"><input type="radio" name="q1" value="D"> Read Only Memory (ROM)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="2" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q2</span><span class="qtxt">The Control Unit (CU) is responsible for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="A"> Performing all mathematical calculations</label>
+        <label class="opt"><input type="radio" name="q2" value="B"> Directing and co-ordinating all activities within the CPU</label>
+        <label class="opt"><input type="radio" name="q2" value="C"> Storing permanent startup instructions</label>
+        <label class="opt"><input type="radio" name="q2" value="D"> Holding data currently being processed</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="3" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q3</span><span class="qtxt">Which two units make up the Central Processing Unit (CPU)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="A"> Control Unit (CU) and Arithmetic and Logic Unit (ALU)</label>
+        <label class="opt"><input type="radio" name="q3" value="B"> RAM and ROM</label>
+        <label class="opt"><input type="radio" name="q3" value="C"> Hard disk and motherboard</label>
+        <label class="opt"><input type="radio" name="q3" value="D"> Program Counter and Cache Memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="4" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q4</span><span class="qtxt">The Program Counter (PC) in a CPU holds:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="A"> The result of the most recent arithmetic operation</label>
+        <label class="opt"><input type="radio" name="q4" value="B"> The instruction currently being decoded</label>
+        <label class="opt"><input type="radio" name="q4" value="C"> The memory address of the next instruction to be executed</label>
+        <label class="opt"><input type="radio" name="q4" value="D"> Permanent BIOS startup data</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="5" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q5</span><span class="qtxt">Which of the following is a logic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="A"> Addition</label>
+        <label class="opt"><input type="radio" name="q5" value="B"> Subtraction</label>
+        <label class="opt"><input type="radio" name="q5" value="C"> Multiplication</label>
+        <label class="opt"><input type="radio" name="q5" value="D"> AND</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="6" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q6</span><span class="qtxt">Which of the following is NOT a logic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="A"> AND</label>
+        <label class="opt"><input type="radio" name="q6" value="B"> ADD</label>
+        <label class="opt"><input type="radio" name="q6" value="C"> OR</label>
+        <label class="opt"><input type="radio" name="q6" value="D"> NOT</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="7" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q7</span><span class="qtxt">A register inside the CPU is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="A"> A small, temporary storage location that holds a single instruction or data item</label>
+        <label class="opt"><input type="radio" name="q7" value="B"> A large bank of permanent memory on the motherboard</label>
+        <label class="opt"><input type="radio" name="q7" value="C"> The bus connecting the CPU to RAM</label>
+        <label class="opt"><input type="radio" name="q7" value="D"> A type of secondary storage device</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="8" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q8</span><span class="qtxt">The Instruction Register (IR) in a CPU is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="A"> Store the address of the next instruction</label>
+        <label class="opt"><input type="radio" name="q8" value="B"> Hold the result of calculations temporarily</label>
+        <label class="opt"><input type="radio" name="q8" value="C"> Hold the instruction currently being decoded and executed</label>
+        <label class="opt"><input type="radio" name="q8" value="D"> Store permanent startup code</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="9" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q9</span><span class="qtxt">The fetch-decode-execute cycle describes:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="A"> How data is written to and read from secondary storage</label>
+        <label class="opt"><input type="radio" name="q9" value="B"> The steps the Control Unit carries out when processing each instruction</label>
+        <label class="opt"><input type="radio" name="q9" value="C"> How RAM communicates with ROM</label>
+        <label class="opt"><input type="radio" name="q9" value="D"> The process of formatting a hard disk</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="10" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q10</span><span class="qtxt">Cache memory is used in a computer system to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="A"> Store programs permanently when the power is off</label>
+        <label class="opt"><input type="radio" name="q10" value="B"> Back up important data files automatically</label>
+        <label class="opt"><input type="radio" name="q10" value="C"> Replace secondary storage when it is full</label>
+        <label class="opt"><input type="radio" name="q10" value="D"> Speed up the CPU by storing frequently used instructions close to the processor</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="11" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q11</span><span class="qtxt">Which of the following is an arithmetic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q11" value="A"> Division</label>
+        <label class="opt"><input type="radio" name="q11" value="B"> AND</label>
+        <label class="opt"><input type="radio" name="q11" value="C"> OR</label>
+        <label class="opt"><input type="radio" name="q11" value="D"> NOT</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="12" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q12</span><span class="qtxt">The accumulator register in the ALU is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q12" value="A"> Count the number of instructions executed</label>
+        <label class="opt"><input type="radio" name="q12" value="B"> Store the address of the next instruction</label>
+        <label class="opt"><input type="radio" name="q12" value="C"> Temporarily hold the results of calculations</label>
+        <label class="opt"><input type="radio" name="q12" value="D"> Hold the BIOS startup program</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="13" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q13</span><span class="qtxt">Word size in a CPU refers to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q13" value="A"> The number of words per second a printer can output</label>
+        <label class="opt"><input type="radio" name="q13" value="B"> The number of bits the CPU can process in a single operation</label>
+        <label class="opt"><input type="radio" name="q13" value="C"> The maximum number of characters in a file name</label>
+        <label class="opt"><input type="radio" name="q13" value="D"> The speed of the system clock in MHz</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="14" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q14</span><span class="qtxt">Clock speed of a CPU is measured in:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q14" value="A"> Megabytes (MB)</label>
+        <label class="opt"><input type="radio" name="q14" value="B"> Gigabytes (GB)</label>
+        <label class="opt"><input type="radio" name="q14" value="C"> Kilobits (Kb)</label>
+        <label class="opt"><input type="radio" name="q14" value="D"> Gigahertz (GHz) or Megahertz (MHz)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="15" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q15</span><span class="qtxt">Which factor does NOT directly affect CPU performance?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q15" value="A"> The brand of the computer monitor</label>
+        <label class="opt"><input type="radio" name="q15" value="B"> Clock speed</label>
+        <label class="opt"><input type="radio" name="q15" value="C"> Word size</label>
+        <label class="opt"><input type="radio" name="q15" value="D"> Cache memory size</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section B &mdash; Memory: RAM &amp; ROM (Q16&ndash;25)</div>
+
+    <div class="qcard" data-q="16" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q16</span><span class="qtxt">RAM is described as volatile because:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q16" value="A"> It can only be read and never written to</label>
+        <label class="opt"><input type="radio" name="q16" value="B"> It loses all its data when the power is switched off</label>
+        <label class="opt"><input type="radio" name="q16" value="C"> It stores data permanently on magnetic platters</label>
+        <label class="opt"><input type="radio" name="q16" value="D"> It is used only during the boot-up process</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="17" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q17</span><span class="qtxt">ROM is mainly used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q17" value="A"> Store temporary data while the CPU processes it</label>
+        <label class="opt"><input type="radio" name="q17" value="B"> Perform arithmetic calculations for the ALU</label>
+        <label class="opt"><input type="radio" name="q17" value="C"> Store the startup (BIOS) instructions that run when the computer is switched on</label>
+        <label class="opt"><input type="radio" name="q17" value="D"> Save user files and documents permanently</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="18" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q18</span><span class="qtxt">Which of the following correctly describes a difference between RAM and ROM?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q18" value="A"> RAM is volatile and temporary; ROM is non-volatile and permanent</label>
+        <label class="opt"><input type="radio" name="q18" value="B"> RAM stores the BIOS; ROM stores user programs</label>
+        <label class="opt"><input type="radio" name="q18" value="C"> RAM is read-only; ROM can be read and written freely</label>
+        <label class="opt"><input type="radio" name="q18" value="D"> RAM is a type of secondary storage; ROM is main memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="19" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q19</span><span class="qtxt">Main memory (RAM) is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q19" value="A"> Store data permanently for long-term use</label>
+        <label class="opt"><input type="radio" name="q19" value="B"> Perform logic operations on data</label>
+        <label class="opt"><input type="radio" name="q19" value="C"> Control peripheral devices attached to the computer</label>
+        <label class="opt"><input type="radio" name="q19" value="D"> Hold programs and data currently being used by the CPU</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="20" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q20</span><span class="qtxt">ROM is described as non-volatile because:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q20" value="A"> It can be written to by the user at any time</label>
+        <label class="opt"><input type="radio" name="q20" value="B"> It retains its data even when the power is switched off</label>
+        <label class="opt"><input type="radio" name="q20" value="C"> It is stored on a spinning magnetic hard disk</label>
+        <label class="opt"><input type="radio" name="q20" value="D"> It holds the results of CPU calculations temporarily</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="21" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q21</span><span class="qtxt">Increasing the amount of RAM in a computer will most likely:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q21" value="A"> Increase the permanent storage capacity of the computer</label>
+        <label class="opt"><input type="radio" name="q21" value="B"> Make the monitor display at higher resolution</label>
+        <label class="opt"><input type="radio" name="q21" value="C"> Allow more programs to run simultaneously and improve overall speed</label>
+        <label class="opt"><input type="radio" name="q21" value="D"> Replace the need for a hard disk entirely</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="22" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q22</span><span class="qtxt">Which type of memory is used by the CPU to run the operating system and applications?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q22" value="A"> RAM (Random Access Memory)</label>
+        <label class="opt"><input type="radio" name="q22" value="B"> ROM (Read Only Memory)</label>
+        <label class="opt"><input type="radio" name="q22" value="C"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q22" value="D"> CD-ROM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="23" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q23</span><span class="qtxt">PROM stands for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q23" value="A"> Programmable Random Output Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="B"> Portable Read Only Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="C"> Primary Random Optical Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="D"> Programmable Read Only Memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="24" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q24</span><span class="qtxt">Which type of ROM can be erased using ultraviolet light and then reprogrammed?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q24" value="A"> PROM</label>
+        <label class="opt"><input type="radio" name="q24" value="B"> EPROM</label>
+        <label class="opt"><input type="radio" name="q24" value="C"> DRAM</label>
+        <label class="opt"><input type="radio" name="q24" value="D"> SRAM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="25" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q25</span><span class="qtxt">Virtual memory is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q25" value="A"> A special type of ROM used for network storage</label>
+        <label class="opt"><input type="radio" name="q25" value="B"> Extra RAM chips added to expand the motherboard</label>
+        <label class="opt"><input type="radio" name="q25" value="C"> An area of the hard disk used to extend RAM when physical RAM is full</label>
+        <label class="opt"><input type="radio" name="q25" value="D"> Cache memory built directly into the CPU chip</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section C &mdash; Data Representation &amp; Storage Units (Q26&ndash;35)</div>
+
+    <div class="qcard" data-q="26" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q26</span><span class="qtxt">One byte consists of:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q26" value="A"> 2 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="B"> 4 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="C"> 8 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="D"> 16 bits</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="27" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q27</span><span class="qtxt">Which of the following storage units is the largest?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q27" value="A"> Kilobyte (KB)</label>
+        <label class="opt"><input type="radio" name="q27" value="B"> Megabyte (MB)</label>
+        <label class="opt"><input type="radio" name="q27" value="C"> Gigabyte (GB)</label>
+        <label class="opt"><input type="radio" name="q27" value="D"> Byte (B)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="28" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q28</span><span class="qtxt">How many bytes are in 1 kilobyte (KB)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q28" value="A"> 1 024</label>
+        <label class="opt"><input type="radio" name="q28" value="B"> 1 000</label>
+        <label class="opt"><input type="radio" name="q28" value="C"> 2 048</label>
+        <label class="opt"><input type="radio" name="q28" value="D"> 512</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="29" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q29</span><span class="qtxt">2 KB is equal to how many bytes?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q29" value="A"> 1 024 bytes</label>
+        <label class="opt"><input type="radio" name="q29" value="B"> 2 048 bytes</label>
+        <label class="opt"><input type="radio" name="q29" value="C"> 4 096 bytes</label>
+        <label class="opt"><input type="radio" name="q29" value="D"> 2 000 bytes</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="30" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q30</span><span class="qtxt">1 GB is equal to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q30" value="A"> 1 024 bytes</label>
+        <label class="opt"><input type="radio" name="q30" value="B"> 1 024 KB</label>
+        <label class="opt"><input type="radio" name="q30" value="C"> 1 024 GB</label>
+        <label class="opt"><input type="radio" name="q30" value="D"> 1 024 MB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="31" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q31</span><span class="qtxt">5 MB is equal to how many KB?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q31" value="A"> 5 000 KB</label>
+        <label class="opt"><input type="radio" name="q31" value="B"> 5 120 KB</label>
+        <label class="opt"><input type="radio" name="q31" value="C"> 512 KB</label>
+        <label class="opt"><input type="radio" name="q31" value="D"> 2 560 KB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="32" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q32</span><span class="qtxt">A bit is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q32" value="A"> The smallest unit of data in a computer, represented as 0 or 1</label>
+        <label class="opt"><input type="radio" name="q32" value="B"> A group of 8 bytes</label>
+        <label class="opt"><input type="radio" name="q32" value="C"> The same unit of measurement as a byte</label>
+        <label class="opt"><input type="radio" name="q32" value="D"> A unit equal to 1 024 bytes</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="33" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q33</span><span class="qtxt">3 TB is equal to how many GB?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q33" value="A"> 300 GB</label>
+        <label class="opt"><input type="radio" name="q33" value="B"> 1 024 GB</label>
+        <label class="opt"><input type="radio" name="q33" value="C"> 3 072 GB</label>
+        <label class="opt"><input type="radio" name="q33" value="D"> 3 000 GB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="34" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q34</span><span class="qtxt">Word size refers to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q34" value="A"> The number of characters stored in RAM at once</label>
+        <label class="opt"><input type="radio" name="q34" value="B"> The speed of data transfer between CPU and storage</label>
+        <label class="opt"><input type="radio" name="q34" value="C"> The amount of RAM installed in a computer</label>
+        <label class="opt"><input type="radio" name="q34" value="D"> The number of bits the CPU can process in a single operation</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="35" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q35</span><span class="qtxt">Which unit of storage is the largest?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q35" value="A"> Gigabyte (GB)</label>
+        <label class="opt"><input type="radio" name="q35" value="B"> Terabyte (TB)</label>
+        <label class="opt"><input type="radio" name="q35" value="C"> Megabyte (MB)</label>
+        <label class="opt"><input type="radio" name="q35" value="D"> Kilobyte (KB)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section D &mdash; Secondary Storage Devices (Q36&ndash;50)</div>
+
+    <div class="qcard" data-q="36" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q36</span><span class="qtxt">Which device is used for permanent (secondary) storage of data?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q36" value="A"> RAM</label>
+        <label class="opt"><input type="radio" name="q36" value="B"> Main memory</label>
+        <label class="opt"><input type="radio" name="q36" value="C"> Hard disk drive (HDD)</label>
+        <label class="opt"><input type="radio" name="q36" value="D"> CPU registers</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="37" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q37</span><span class="qtxt">Which storage device uses sequential access to retrieve data?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q37" value="A"> Hard disk drive</label>
+        <label class="opt"><input type="radio" name="q37" value="B"> USB flash drive</label>
+        <label class="opt"><input type="radio" name="q37" value="C"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q37" value="D"> CD-ROM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="38" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q38</span><span class="qtxt">Which of the following is an example of optical storage?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q38" value="A"> Hard disk drive</label>
+        <label class="opt"><input type="radio" name="q38" value="B"> USB flash drive</label>
+        <label class="opt"><input type="radio" name="q38" value="C"> CD-ROM</label>
+        <label class="opt"><input type="radio" name="q38" value="D"> Magnetic tape</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="39" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q39</span><span class="qtxt">Direct access (random access) storage means:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q39" value="A"> Data must be read from the beginning of the medium each time</label>
+        <label class="opt"><input type="radio" name="q39" value="B"> Any location on the storage medium can be accessed directly without reading preceding data</label>
+        <label class="opt"><input type="radio" name="q39" value="C"> Data is stored only on optical disks</label>
+        <label class="opt"><input type="radio" name="q39" value="D"> Data can only be accessed when the device is online</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="40" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q40</span><span class="qtxt">A USB flash drive is an example of which type of storage?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q40" value="A"> Optical storage</label>
+        <label class="opt"><input type="radio" name="q40" value="B"> Magnetic storage</label>
+        <label class="opt"><input type="radio" name="q40" value="C"> Sequential access storage</label>
+        <label class="opt"><input type="radio" name="q40" value="D"> Flash (solid-state) storage</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="41" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q41</span><span class="qtxt">A standard floppy disk has a storage capacity of approximately:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q41" value="A"> 1.44 MB</label>
+        <label class="opt"><input type="radio" name="q41" value="B"> 700 MB</label>
+        <label class="opt"><input type="radio" name="q41" value="C"> 4 GB</label>
+        <label class="opt"><input type="radio" name="q41" value="D"> 1 GB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="42" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q42</span><span class="qtxt">A standard CD can typically store approximately:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q42" value="A"> 1.44 MB</label>
+        <label class="opt"><input type="radio" name="q42" value="B"> 700 MB</label>
+        <label class="opt"><input type="radio" name="q42" value="C"> 4.7 GB</label>
+        <label class="opt"><input type="radio" name="q42" value="D"> 25 GB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="43" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q43</span><span class="qtxt">A single-layer DVD can typically store approximately:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q43" value="A"> 700 MB</label>
+        <label class="opt"><input type="radio" name="q43" value="B"> 1.44 MB</label>
+        <label class="opt"><input type="radio" name="q43" value="C"> 4.7 GB</label>
+        <label class="opt"><input type="radio" name="q43" value="D"> 50 GB</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="44" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q44</span><span class="qtxt">Which of the following best describes an SSD (Solid State Drive)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q44" value="A"> A storage device that uses spinning magnetic platters to store data</label>
+        <label class="opt"><input type="radio" name="q44" value="B"> A storage device that uses laser light to read optical disks</label>
+        <label class="opt"><input type="radio" name="q44" value="C"> A sequential access storage device using magnetic tape</label>
+        <label class="opt"><input type="radio" name="q44" value="D"> A storage device with no moving parts that uses flash memory chips</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="45" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q45</span><span class="qtxt">Which storage device would be MOST suitable for backing up large amounts of data in a school?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q45" value="A"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q45" value="B"> Floppy disk</label>
+        <label class="opt"><input type="radio" name="q45" value="C"> CD-R</label>
+        <label class="opt"><input type="radio" name="q45" value="D"> USB flash drive (4 GB)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="46" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q46</span><span class="qtxt">Which storage device is MOST suitable for fast daily access to student records?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q46" value="A"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q46" value="B"> Hard disk drive (HDD) or SSD</label>
+        <label class="opt"><input type="radio" name="q46" value="C"> Floppy disk</label>
+        <label class="opt"><input type="radio" name="q46" value="D"> CD-ROM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="47" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q47</span><span class="qtxt">Which storage device is MOST suitable for portable file transfer between computers?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q47" value="A"> Hard disk drive</label>
+        <label class="opt"><input type="radio" name="q47" value="B"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q47" value="C"> USB flash drive</label>
+        <label class="opt"><input type="radio" name="q47" value="D"> CD-ROM (read-only)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="48" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q48</span><span class="qtxt">Formatting a disk means:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q48" value="A"> Backing up data on the disk to another location</label>
+        <label class="opt"><input type="radio" name="q48" value="B"> Compressing files to save space on the disk</label>
+        <label class="opt"><input type="radio" name="q48" value="C"> Encrypting the disk for security purposes</label>
+        <label class="opt"><input type="radio" name="q48" value="D"> Writing electronic information on the disk so the computer can recognise it as a valid storage device</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="49" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q49</span><span class="qtxt">RAID (Redundant Array of Independent Disks) is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q49" value="A"> Improve data storage reliability and performance by using multiple disks together</label>
+        <label class="opt"><input type="radio" name="q49" value="B"> Replace RAM in a computer system</label>
+        <label class="opt"><input type="radio" name="q49" value="C"> Connect peripheral devices to the CPU</label>
+        <label class="opt"><input type="radio" name="q49" value="D"> Compress optical disks for archiving purposes</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="50" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q50</span><span class="qtxt">Flash memory (as used in USB drives and digital cameras) is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q50" value="A"> Volatile magnetic storage that loses data when power is removed</label>
+        <label class="opt"><input type="radio" name="q50" value="B"> Optical storage that uses laser light to read data</label>
+        <label class="opt"><input type="radio" name="q50" value="C"> Non-volatile solid-state memory that retains data without power</label>
+        <label class="opt"><input type="radio" name="q50" value="D"> Sequential access storage that must be read from the start</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section E &mdash; Input &amp; Output Devices (Q51&ndash;60)</div>
+
+    <div class="qcard" data-q="51" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q51</span><span class="qtxt">Which of the following is an input device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q51" value="A"> Printer</label>
+        <label class="opt"><input type="radio" name="q51" value="B"> Scanner</label>
+        <label class="opt"><input type="radio" name="q51" value="C"> Monitor</label>
+        <label class="opt"><input type="radio" name="q51" value="D"> Speaker</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="52" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q52</span><span class="qtxt">Which of the following is an output device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q52" value="A"> Keyboard</label>
+        <label class="opt"><input type="radio" name="q52" value="B"> Mouse</label>
+        <label class="opt"><input type="radio" name="q52" value="C"> Microphone</label>
+        <label class="opt"><input type="radio" name="q52" value="D"> Monitor (VDU)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="53" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q53</span><span class="qtxt">A device that is used for BOTH input and output is:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q53" value="A"> A touchscreen</label>
+        <label class="opt"><input type="radio" name="q53" value="B"> A laser printer</label>
+        <label class="opt"><input type="radio" name="q53" value="C"> A barcode reader</label>
+        <label class="opt"><input type="radio" name="q53" value="D"> A speaker</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="54" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q54</span><span class="qtxt">A hard copy output is one that:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q54" value="A"> Is displayed on a monitor and disappears when power is removed</label>
+        <label class="opt"><input type="radio" name="q54" value="B"> Is sent as a digital file via email</label>
+        <label class="opt"><input type="radio" name="q54" value="C"> Is printed on paper and has a physical form</label>
+        <label class="opt"><input type="radio" name="q54" value="D"> Is stored permanently on a CD-ROM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="55" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q55</span><span class="qtxt">Which printer type physically strikes a ribbon against paper to form characters?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q55" value="A"> Laser printer</label>
+        <label class="opt"><input type="radio" name="q55" value="B"> Dot matrix printer</label>
+        <label class="opt"><input type="radio" name="q55" value="C"> Inkjet printer</label>
+        <label class="opt"><input type="radio" name="q55" value="D"> Thermal printer</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="56" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q56</span><span class="qtxt">A laser printer produces output by:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q56" value="A"> Spraying tiny ink droplets directly onto paper</label>
+        <label class="opt"><input type="radio" name="q56" value="B"> Striking a ribbon to imprint characters onto the page</label>
+        <label class="opt"><input type="radio" name="q56" value="C"> Burning dots onto heat-sensitive paper</label>
+        <label class="opt"><input type="radio" name="q56" value="D"> Using a laser beam to attract toner onto paper, then fusing it with heat</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="57" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q57</span><span class="qtxt">Which input device is most commonly used to read price information at supermarket checkouts?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q57" value="A"> Barcode reader (scanner)</label>
+        <label class="opt"><input type="radio" name="q57" value="B"> OMR (Optical Mark Reader)</label>
+        <label class="opt"><input type="radio" name="q57" value="C"> MICR reader</label>
+        <label class="opt"><input type="radio" name="q57" value="D"> Joystick</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="58" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q58</span><span class="qtxt">MICR (Magnetic Ink Character Recognition) is used mainly for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q58" value="A"> Reading multiple-choice answer sheets</label>
+        <label class="opt"><input type="radio" name="q58" value="B"> Identifying individuals by fingerprint scanning</label>
+        <label class="opt"><input type="radio" name="q58" value="C"> Reading bank cheques encoded with magnetic ink</label>
+        <label class="opt"><input type="radio" name="q58" value="D"> Scanning items at supermarket checkouts</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="59" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q59</span><span class="qtxt">Which output device is used in CAD to draw large, high-quality diagrams and maps on wide paper?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q59" value="A"> Dot matrix printer</label>
+        <label class="opt"><input type="radio" name="q59" value="B"> Plotter</label>
+        <label class="opt"><input type="radio" name="q59" value="C"> Laser printer</label>
+        <label class="opt"><input type="radio" name="q59" value="D"> Monitor</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="60" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q60</span><span class="qtxt">Which of the following BEST describes secondary storage?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q60" value="A"> Memory that is volatile and loses data when power is removed</label>
+        <label class="opt"><input type="radio" name="q60" value="B"> The memory used by the CPU to run programs currently open</label>
+        <label class="opt"><input type="radio" name="q60" value="C"> Read-only memory that holds startup instructions permanently</label>
+        <label class="opt"><input type="radio" name="q60" value="D"> Permanent storage outside the CPU that retains data without power</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <button class="btn-submit" id="btn-submit">Submit Test</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="screen-results" class="screen">
+  <div id="res-inner" style="max-width:720px;margin:50px auto 0;padding:0 24px;">
+    <div class="res-card">
+      <h2>Test Complete!</h2>
+      <div class="res-student" id="res-student"></div>
+      <div class="score-big" id="res-pct">&mdash;</div>
+      <div class="res-msg" id="res-msg"></div>
+      <div class="res-grid">
+        <div class="rstat"><div class="v c" id="res-correct">&mdash;</div><div class="l">Correct</div></div>
+        <div class="rstat"><div class="v w" id="res-wrong">&mdash;</div><div class="l">Incorrect</div></div>
+        <div class="rstat"><div class="v" style="color:var(--accent)">60</div><div class="l">Total</div></div>
+      </div>
+      <div class="att-note" id="att-note" style="display:none;"></div>
+      <div id="retry-wrap"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHER DASHBOARD -->
+<div id="screen-teacher" class="screen">
+  <div class="dash-head">
+    <h2>&#128202; Teacher Results Dashboard</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-clear" onclick="clearAll()">&#128465; Clear All Results</button>
+      <button class="btn-back" onclick="goToLanding()">&larr; Back</button>
+    </div>
+  </div>
+  <div class="chips" id="dash-chips"></div>
+  <div class="filters">
+    <input type="text" id="f-name" placeholder="&#128269; Search name&hellip;" oninput="renderDash()">
+    <select id="f-class" onchange="renderDash()">
+      <option value="">All Classes</option>
+      <option>9O</option><option>9B</option><option>9E</option>
+      <option>9R</option><option>9L</option><option>9I</option>
+      <option>9N</option><option>9H</option>
+    </select>
+    <select id="f-sort" onchange="renderDash()">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="hi">Highest score</option>
+      <option value="lo">Lowest score</option>
+      <option value="name">Name A&ndash;Z</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Name</th><th>Class</th><th>Score</th><th>%</th><th>Attempt</th><th>Date &amp; Time</th><th>Result</th></tr>
+    </thead>
+    <tbody id="dash-tbody"></tbody>
+  </table>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="modal-bg" id="pw-modal">
+  <div class="modal-box">
+    <h3>Teacher Access</h3>
+    <p>Enter the teacher password to view student results.</p>
+    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="pw-err" id="pw-err">Incorrect password. Try again.</div>
+    <button class="btn-unlock" onclick="checkPw()">Unlock Dashboard</button>
+    <button class="btn-cancel" onclick="closePw()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const TOTAL = 60;
+
+window.addEventListener('load', async () => {
+  const local = JSON.parse(localStorage.getItem('it_gr9_results') || '[]');
+  if (local.length > 0) {
+    const notice = document.getElementById('sync-notice');
+    if (notice) {
+      notice.style.display = 'block';
+      notice.textContent = 'Syncing ' + local.length + ' saved result(s) to server...';
+    }
+    await syncLocalToSheets();
+    if (notice) {
+      notice.textContent = 'Local results synced successfully!';
+      setTimeout(() => { notice.style.display = 'none'; }, 4000);
+    }
+  }
+});
+
+const PW = 'ras4real';
+let student = {name:'', cls:''};
+let answered = new Set();
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goToLanding() { show('landing'); }
+
+document.getElementById('btn-start').addEventListener('click', async function() {
+  const name = document.getElementById('inp-name').value.trim();
+  const cls  = document.getElementById('inp-class').value;
+  let ok = true;
+  document.getElementById('err-name').style.display = name ? 'none' : 'block'; if (!name) ok = false;
+  document.getElementById('err-class').style.display = cls  ? 'none' : 'block'; if (!cls)  ok = false;
+  if (!ok) return;
+
+  const btn = document.getElementById('btn-start');
+  btn.textContent = 'Checking... please wait';
+  btn.disabled = true;
+
+  const prevAttempts = await getPrevAttempts(name, cls);
+
+  if (prevAttempts >= 2) {
+    const errEl = document.getElementById('err-name');
+    errEl.style.color = 'var(--wrong)';
+    errEl.textContent = '\u26d4 ' + name + ' has already used both attempts. No further attempts are allowed.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Begin Test \u2192';
+    btn.disabled = false;
+    return;
+  }
+
+  if (prevAttempts === 1) {
+    const errEl = document.getElementById('err-name');
+    errEl.style.color = '#f7b731';
+    errEl.textContent = '\u26a0\ufe0f This is your FINAL attempt. You cannot retake the test after submitting.';
+    errEl.style.display = 'block';
+  }
+
+  student = {name, cls};
+  document.getElementById('hdr-name').innerHTML = '<strong>' + name + '</strong> &nbsp;\u00b7&nbsp; Class <strong>' + cls + '</strong>';
+  btn.textContent = 'Begin Test \u2192';
+  btn.disabled = false;
+  show('test');
+  answered = new Set();
+  updateProg();
+});
+
+function updateProg() {
+  const pct = (answered.size / TOTAL) * 100;
+  document.getElementById('prog-inner').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = answered.size + ' / ' + TOTAL + ' answered';
+}
+
+document.querySelectorAll('.opt input[type=radio]').forEach(r => {
+  r.addEventListener('change', () => { answered.add(r.closest('.qcard').dataset.q); updateProg(); });
+});
+
+document.getElementById('btn-submit').addEventListener('click', async function() {
+  let correct = 0;
+  document.querySelectorAll('.qcard').forEach(card => {
+    const type = card.dataset.type;
+    const ans  = card.dataset.answer;
+    const fb   = card.querySelector('.fb');
+    let ok = false;
+
+    if (type === 'mcq') {
+      const sel = card.querySelector('input[type=radio]:checked');
+      const chosen = sel ? sel.value : null;
+      card.querySelectorAll('.opt').forEach(lbl => {
+        const v = lbl.querySelector('input').value;
+        if (v === ans) lbl.classList.add('correct');
+        else if (v === chosen && chosen !== ans) lbl.classList.add('wrong');
+      });
+      ok = chosen === ans;
+    }
+
+    if (ok) { correct++; fb.textContent = '\u2713 Correct!'; fb.className = 'fb show ok'; }
+    else { fb.textContent = '\u2717 Incorrect \u2014 correct answer highlighted in green.'; fb.className = 'fb show bad'; }
+    card.querySelectorAll('input,button').forEach(el => el.disabled = true);
+  });
+
+  const prevAttempts2 = await getPrevAttempts(student.name, student.cls);
+  const attemptNo = prevAttempts2 + 1;
+  const pct = Math.round((correct / TOTAL) * 100);
+  const record = { name: student.name, cls: student.cls, correct, total: TOTAL, pct, attempt: attemptNo, ts: new Date().toISOString() };
+  await saveData(record);
+
+  document.getElementById('res-student').textContent = student.name + '  \u00b7  Class ' + student.cls;
+  document.getElementById('res-pct').textContent = pct + '%';
+  document.getElementById('res-msg').textContent = correct + ' out of ' + TOTAL + ' correct.  ' +
+    (pct >= 70 ? '\ud83c\udf89 Well done!' : pct >= 50 ? 'Good effort \u2014 keep studying!' : 'Review your notes and try again!');
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = TOTAL - correct;
+  const note = document.getElementById('att-note');
+  const retryWrap = document.getElementById('retry-wrap');
+  if (attemptNo === 1) {
+    note.textContent = '\u26a0\ufe0f This was attempt 1 of 2. You have one attempt remaining.';
+    note.style.display = 'block';
+    retryWrap.innerHTML = '<button class="btn-retry" onclick="location.reload()">\u21ba Try Again (Final Attempt)</button>';
+  } else {
+    note.textContent = '\u26d4 You have used both attempts. This result is final.';
+    note.style.display = 'block';
+    retryWrap.innerHTML = '<p style="margin-top:18px;font-size:.82rem;color:var(--muted)">No more attempts allowed.</p>';
+  }
+
+  this.disabled = true;
+  show('results');
+});
+
+document.getElementById('teacher-link').addEventListener('click', function() {
+  document.getElementById('pw-modal').classList.add('open');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-err').style.display = 'none';
+  setTimeout(() => document.getElementById('pw-input').focus(), 80);
+});
+
+function closePw() { document.getElementById('pw-modal').classList.remove('open'); }
+
+function checkPw() {
+  if (document.getElementById('pw-input').value === PW) {
+    closePw(); show('teacher'); renderDash();
+  } else {
+    document.getElementById('pw-err').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+async function renderDash() {
+  document.getElementById('dash-chips').innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:10px;">\u23f3 Loading results from server...</div>';
+  const all = await loadData();
+  const avg = all.length ? Math.round(all.reduce((s,r) => s+r.pct, 0) / all.length) : 0;
+  const best = all.length ? Math.max(...all.map(r=>r.pct)) : 0;
+  const passes = all.filter(r=>r.pct>=50).length;
+  document.getElementById('dash-chips').innerHTML =
+    chip(all.length,'Total Submissions') + chip(avg+'%','Class Average') +
+    chip(best+'%','Highest Score') + chip(passes,'Passed (\u226550%)');
+  renderTable(all);
+}
+
+function chip(v,l){ return '<div class="chip"><div class="cv">'+v+'</div><div class="cl">'+l+'</div></div>'; }
+
+function renderTable(all) {
+  all = all || [];
+  const search = (document.getElementById('f-name').value||'').toLowerCase();
+  const cls    = document.getElementById('f-class').value||'';
+  const sort   = document.getElementById('f-sort').value||'newest';
+  let rows = all.filter(r => r.name.toLowerCase().includes(search) && (!cls || r.cls===cls));
+  rows.sort((a,b) => {
+    if(sort==='newest') return new Date(b.ts)-new Date(a.ts);
+    if(sort==='oldest') return new Date(a.ts)-new Date(b.ts);
+    if(sort==='hi')     return b.pct-a.pct;
+    if(sort==='lo')     return a.pct-b.pct;
+    if(sort==='name')   return a.name.localeCompare(b.name);
+    return 0;
+  });
+  const tbody = document.getElementById('dash-tbody');
+  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="8" class="no-data">No results yet.</td></tr>'; return; }
+  tbody.innerHTML = rows.map((r,i) => {
+    const d  = new Date(r.ts);
+    const dt = d.toLocaleDateString('en-ZA') + ' ' + d.toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'});
+    const pill = r.pct>=70 ? '<span class="pill pass">Pass</span>' : r.pct>=50 ? '<span class="pill avg">Average</span>' : '<span class="pill fail">Below avg</span>';
+    return '<tr><td style="color:var(--muted)">'+(i+1)+'</td><td><strong>'+r.name+'</strong></td><td>'+r.cls+'</td><td>'+r.correct+'/'+r.total+'</td><td><strong>'+r.pct+'%</strong></td><td><span class="att">#'+r.attempt+'</span></td><td style="color:var(--muted);font-size:.78rem">'+dt+'</td><td>'+pill+'</td></tr>';
+  }).join('');
+}
+
+async function clearAll() {
+  if (confirm('Delete ALL student results from Google Sheets? This cannot be undone.')) {
+    try { await fetch(GAS_URL + '?action=clear'); renderDash(); }
+    catch(e) { alert('Could not clear results. Try again.'); }
+  }
+}
+
+async function syncLocalToSheets() {
+  const localKey = 'it_gr9_results';
+  const syncedKey = 'it_gr9_synced';
+  let local = [];
+  try { local = JSON.parse(localStorage.getItem(localKey) || '[]'); } catch(e) { return; }
+  if (!local.length) return;
+  const alreadySynced = JSON.parse(localStorage.getItem(syncedKey) || '[]');
+  const toSync = local.filter(r => !alreadySynced.includes(r.name+'|'+r.cls+'|'+r.ts));
+  if (!toSync.length) return;
+  const newlySynced = [...alreadySynced];
+  for (const r of toSync) {
+    try {
+      await fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(r) });
+      newlySynced.push(r.name+'|'+r.cls+'|'+r.ts);
+    } catch(e) { console.warn('Failed to sync:', r.name); }
+  }
+  localStorage.setItem(syncedKey, JSON.stringify(newlySynced));
+}
+
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz74Qn-HvP4KY4OueggZgxetkZakiwViJ-kOg9kRICxxq6ESZEJAMRYU-XBkN3D_iJK1w/exec';
+
+async function saveData(record) {
+  try {
+    await fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(record) });
+  } catch(e) { console.error('Save error', e); }
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(GAS_URL + '?action=get');
+    const rows = await res.json();
+    return rows.slice(1).map(r => ({
+      name:r[0], cls:r[1], correct:Number(r[2]),
+      total:Number(r[3]), pct:Number(r[4]),
+      attempt:Number(r[5]), ts:r[6]
+    }));
+  } catch(e) { console.error('Load error', e); return []; }
+}
+
+async function getPrevAttempts(name, cls) {
+  const all = await loadData();
+  return all.filter(r => r.name.toLowerCase() === name.toLowerCase() && r.cls === cls).length;
+}
+</script>
+</body>
+</html>
