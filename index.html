@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grade 10 IT — Six Weeks Test 2</title>
+<title>Grade 9 IT Test — Computer Hardware &amp; Storage</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0e1117;--surface:#161b27;--card:#1c2333;--border:#2a3347;--accent:#4f8ef7;--accent2:#38d9a9;--text:#e8eaf0;--muted:#7a8399;--correct:#38d9a9;--wrong:#fc5c65;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px;}
-.screen{display:none!important;}.screen.active{display:block!important;}
+.screen{display:none!important;}
+.screen.active{display:block!important;}
 #screen-landing{max-width:520px;margin:0 auto;padding:60px 24px;}
 .logo{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--accent);margin-bottom:6px;}
-.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:32px;}
+.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:40px;}
 .fg{margin-bottom:20px;}
 .fg label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px;}
 .fg input,.fg select{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:13px 15px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
@@ -23,23 +24,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .btn-start:hover{opacity:.9;transform:translateY(-1px);}
 .t-link{display:block;text-align:center;margin-top:22px;font-size:.82rem;color:var(--muted);cursor:pointer;text-decoration:underline;}
 .t-link:hover{color:var(--accent);}
-#closed-banner{display:none;background:rgba(252,92,101,.1);border:1px solid rgba(252,92,101,.35);border-radius:10px;padding:18px 20px;margin-bottom:24px;text-align:center;}
-#closed-banner h3{color:var(--wrong);font-family:'Space Mono',monospace;font-size:1rem;margin-bottom:6px;}
-#closed-banner p{color:var(--muted);font-size:.82rem;}
-#setup-warning{display:none;background:rgba(247,183,49,.08);border:1px solid rgba(247,183,49,.35);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:.82rem;color:#f7b731;}
-#setup-warning strong{display:block;margin-bottom:4px;}
-.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.t-header h1{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
-.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:4px;}
+.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.t-header h1{font-family:'Space Mono',monospace;font-size:1.25rem;color:var(--accent);}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:5px;}
 .meta strong{color:var(--text);}
-.timer-box{display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:10px 18px;}
-.timer-box.warn{border-color:#f7b731;background:rgba(247,183,49,.08);}
-.timer-box.danger{border-color:var(--wrong);background:rgba(252,92,101,.1);animation:pulse 1s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
-.timer-icon{font-size:1.1rem;}
-.timer-val{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;color:var(--text);}
-.timer-box.warn .timer-val{color:#f7b731;}
-.timer-box.danger .timer-val{color:var(--wrong);}
+.badge{background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
 .prog-bar-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 36px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;}
 .prog-outer{flex:1;height:6px;background:var(--border);border-radius:4px;overflow:hidden;}
 .prog-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .4s;}
@@ -55,17 +44,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .opt{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.88rem;transition:all .18s;}
 .opt:hover{border-color:var(--accent);background:#1a2438;}
 .opt input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;}
+.opt.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
 .opt.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
 .fb{margin-top:9px;font-size:.8rem;border-radius:6px;padding:7px 12px;display:none;}
-.fb.show{display:block;}.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
+.fb.show{display:block;}
+.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}
+.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
 .btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s,transform .15s;}
 .btn-submit:hover{opacity:.9;transform:translateY(-1px);}
 .btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;}
-#submit-overlay{display:none;position:fixed;inset:0;background:rgba(14,17,23,.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
-#submit-overlay.show{display:flex;}
-.spinner{width:42px;height:42px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-#submit-overlay p{color:var(--muted);font-size:.88rem;}
 #screen-results{max-width:720px;margin:50px auto 0;padding:0 24px;}
 .res-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:38px;text-align:center;}
 .res-card h2{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--accent2);margin-bottom:4px;}
@@ -77,32 +64,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .rstat .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 .v.c{color:var(--correct);}.v.w{color:var(--wrong);}
 .att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(--accent);}
-.sync-status{margin-top:12px;border-radius:8px;padding:10px 14px;font-size:.8rem;display:flex;align-items:center;gap:8px;}
-.sync-status.syncing{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);color:var(--accent);}
-.sync-status.synced{background:rgba(56,217,169,.07);border:1px solid rgba(56,217,169,.2);color:var(--correct);}
-.sync-status.sync-fail{background:rgba(252,92,101,.07);border:1px solid rgba(252,92,101,.2);color:var(--wrong);}
-.sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.sync-dot.syncing{background:var(--accent);animation:pulse 1s infinite;}
-.sync-dot.synced{background:var(--correct);}
-.sync-dot.fail{background:var(--wrong);}
 .btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-retry:hover{background:rgba(79,142,247,.1);}
-#screen-teacher{max-width:980px;margin:0 auto;padding:38px 24px;}
+#screen-teacher{max-width:960px;margin:0 auto;padding:38px 24px;}
 .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
-.dash-head h2{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--accent);}
+.dash-head h2{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
 .btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-back:hover{border-color:var(--accent);color:var(--accent);}
-.sheets-panel{background:rgba(79,142,247,.04);border:1px solid rgba(79,142,247,.18);border-radius:12px;padding:18px 22px;margin-bottom:22px;}
-.sheets-panel h3{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
-.sheets-panel p{font-size:.8rem;color:var(--muted);margin-bottom:12px;line-height:1.6;}
-.sheets-url-row{display:flex;gap:10px;}
-.sheets-url-row input{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.8rem;font-family:'Space Mono',monospace;}
-.sheets-url-row input:focus{outline:none;border-color:var(--accent);}
-.btn-save-url{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
-.btn-save-url:hover{opacity:.85;}
-.url-status{font-size:.78rem;margin-top:8px;}
-.url-status.ok{color:var(--correct);}
-.url-status.bad{color:var(--wrong);}
+.btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-clear:hover{background:rgba(252,92,101,.08);}
+.chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
+.chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
+.chip .cl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.filters input,.filters select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;}
+.filters input:focus,.filters select:focus{outline:none;border-color:var(--accent);}
 table{width:100%;border-collapse:collapse;font-size:.83rem;}
 thead th{background:var(--surface);padding:10px 13px;text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);}
@@ -110,6 +87,7 @@ tbody tr:hover{background:var(--surface);}
 tbody td{padding:11px 13px;vertical-align:middle;}
 .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;}
 .pass{background:rgba(56,217,169,.12);color:var(--correct);}
+.avg{background:rgba(247,183,49,.12);color:#f7b731;}
 .fail{background:rgba(252,92,101,.12);color:var(--wrong);}
 .att{display:inline-block;background:rgba(79,142,247,.14);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:'Space Mono',monospace;}
 .no-data{text-align:center;padding:50px;color:var(--muted);}
@@ -123,7 +101,30 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 .btn-unlock{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
 .btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.landing-info{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;color:var(--muted);}
+
+/* New Integration Rules */
+#submit-overlay{display:none;position:fixed;inset:0;background:rgba(14,17,23,.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#submit-overlay.show{display:flex;}
+.spinner{width:42px;height:42px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#submit-overlay p{color:var(--muted);font-size:.88rem;}
+.sheets-panel{background:rgba(79,142,247,.04);border:1px solid rgba(79,142,247,.18);border-radius:12px;padding:18px 22px;margin-bottom:22px;}
+.sheets-panel h3{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.sheets-url-row{display:flex;gap:10px;}
+.sheets-url-row input{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.8rem;font-family:'Space Mono',monospace;}
+.btn-save-url{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.url-status{font-size:.78rem;margin-top:8px;}
+.url-status.ok{color:var(--correct);}
+.url-status.bad{color:var(--wrong);}
+.sync-status{margin-top:14px;border-radius:8px;padding:10px 14px;font-size:.8rem;display:flex;align-items:center;gap:8px;justify-content:center;}
+.sync-status.syncing{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);color:var(--accent);}
+.sync-status.synced{background:rgba(56,217,169,.07);border:1px solid rgba(56,217,169,.2);color:var(--correct);}
+.sync-status.sync-fail{background:rgba(252,92,101,.07);border:1px solid rgba(252,92,101,.2);color:var(--wrong);}
+.sync-dot{width:8px;height:8px;border-radius:50%;}
+.sync-dot.syncing{background:var(--accent);animation:pulse 1s infinite;}
+.sync-dot.synced{background:var(--correct);}
+.sync-dot.fail{background:var(--wrong);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 @media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.sheets-url-row{flex-direction:column;}}
 </style>
 </head>
@@ -131,350 +132,690 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 
 <div id="submit-overlay">
   <div class="spinner"></div>
-  <p>Submitting your test… please wait.</p>
+  <p>Submitting your responses safely to Google Sheets…</p>
 </div>
 
-<!-- LANDING SCREEN -->
 <div id="screen-landing" class="screen active">
-  <div style="max-width:520px;margin:0 auto;padding:60px 24px;">
-    <div class="logo">Oberlin High School</div>
-    <div class="logo-sub">Grade 10 IT &nbsp;&middot;&nbsp; Six Weeks Test 2 &nbsp;&middot;&nbsp; 100 Questions</div>
-    <div id="setup-warning">
-      <strong>⚠ Google Sheets not connected</strong>
-      Results will only be saved locally. Paste the Web App URL in the Teacher Dashboard or source file.
-    </div>
-    <div class="landing-info">
-      <span style="color:var(--accent);font-weight:600;">&#9719; Time Limit:</span> <span id="info-duration">90 minutes</span>
-    </div>
-    <div class="fg">
-      <label>Full Name</label>
-      <input type="text" id="inp-name" placeholder="e.g. John Smith">
-      <div class="err-msg" id="err-name">Please enter your full name.</div>
-    </div>
-    <div class="fg">
-      <label>Class</label>
-      <select id="inp-class">
-        <option value="">— Select your class —</option>
-        <option>10O</option><option>10B</option><option>10E</option>
-        <option>10R</option><option>10L</option><option>10I</option>
-        <option>10N</option><option>10H</option>
-      </select>
-      <div class="err-msg" id="err-class">Please select your class.</div>
-    </div>
-    <button class="btn-start" id="btn-start">Begin Test &rarr;</button>
-    <span class="t-link" id="teacher-link">Teacher Dashboard</span>
+  <div class="logo">Oberlin High School</div>
+  <div class="logo-sub">Grade 9 IT &nbsp;&middot;&nbsp; Computer Hardware &amp; Storage &nbsp;&middot;&nbsp; 60 Questions &nbsp;&middot;&nbsp; 60 Marks</div>
+  <div id="sync-notice" style="display:none;background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);border-radius:8px;padding:10px 14px;font-size:.82rem;color:#38d9a9;margin-bottom:20px;"></div>
+  <div class="fg">
+    <label>Full Name</label>
+    <input type="text" id="inp-name" placeholder="e.g. John Smith">
+    <div class="err-msg" id="err-name">Please enter your full name.</div>
   </div>
+  <div class="fg">
+    <label>Class</label>
+    <select id="inp-class">
+      <option value="">— Select your class —</option>
+      <option>9O</option><option>9B</option><option>9E</option>
+      <option>9R</option><option>9L</option><option>9I</option>
+      <option>9N</option><option>9H</option>
+    </select>
+    <div class="err-msg" id="err-class">Please select your class.</div>
+  </div>
+  <button class="btn-start" id="btn-start">Begin Test &rarr;</button>
+  <span class="t-link" id="teacher-link">Teacher Results Dashboard</span>
 </div>
 
-<!-- TEST SCREEN -->
 <div id="screen-test" class="screen">
   <div class="t-header">
     <div>
-      <h1>Oberlin High School &mdash; Grade 10 IT</h1>
-      <div class="meta"><span id="hdr-name"></span><span><strong>100 Questions</strong></span></div>
+      <h1>Oberlin High School &mdash; Grade 9 IT: Computer Hardware &amp; Storage</h1>
+      <div class="meta"><span id="hdr-name"></span><span><strong>60 Questions</strong> &nbsp;|&nbsp; <strong>60 Marks</strong></span></div>
     </div>
-    <div class="timer-box" id="timer-box">
-      <span class="timer-icon">&#9719;</span>
-      <span class="timer-val" id="timer-val">90:00</span>
-    </div>
+    <span class="badge">Online Test</span>
   </div>
   <div class="prog-bar-wrap">
     <div class="prog-outer"><div class="prog-inner" id="prog-inner"></div></div>
-    <div class="prog-label" id="prog-label">0 / 100 answered</div>
+    <div class="prog-label" id="prog-label">0 / 60 answered</div>
   </div>
-  <div class="q-wrap" id="q-wrap"></div>
-  <div style="text-align:center; padding-bottom:50px;">
-    <button class="btn-submit" id="btn-submit" disabled>Submit Test</button>
-  </div>
-</div>
+  <div class="q-wrap" id="q-wrap">
 
-<!-- RESULTS SCREEN -->
-<div id="screen-results" class="screen">
-  <div style="max-width:720px;margin:50px auto 0;padding:0 24px;">
-    <div class="res-card">
-      <h2>Test Complete!</h2>
-      <div class="res-student" id="res-student"></div>
-      <div class="score-big" id="score-big">0%</div>
-      <div class="res-grid">
-        <div class="rstat"><div class="v c" id="res-correct">0</div><div class="l">Correct</div></div>
-        <div class="rstat"><div class="v w" id="res-wrong">0</div><div class="l">Wrong</div></div>
-      </div>
-      <div class="sync-status syncing" id="sync-status">
-        <div class="sync-dot syncing" id="sync-dot"></div>
-        <span id="sync-msg">Saving your result to Google Sheets…</span>
-      </div>
-      <button class="btn-retry" id="btn-retry">Take Test Again</button>
+    <div class="sec-title">Section A &mdash; The CPU &amp; Its Components (Q1&ndash;15)</div>
+
+    <div class="qcard" data-q="1" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q1</span><span class="qtxt">The part of the CPU that performs arithmetic calculations and logic operations is the:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="A"> Control Unit (CU)</label>
+        <label class="opt"><input type="radio" name="q1" value="B"> Random Access Memory (RAM)</label>
+        <label class="opt"><input type="radio" name="q1" value="C"> Arithmetic and Logic Unit (ALU)</label>
+        <label class="opt"><input type="radio" name="q1" value="D"> Read Only Memory (ROM)</label>
+      </div><div class="fb"></div>
     </div>
+
+    <div class="qcard" data-q="2" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q2</span><span class="qtxt">The Control Unit (CU) is responsible for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="A"> Performing all mathematical calculations</label>
+        <label class="opt"><input type="radio" name="q2" value="B"> Directing and co-ordinating all activities within the CPU</label>
+        <label class="opt"><input type="radio" name="q2" value="C"> Storing permanent startup instructions</label>
+        <label class="opt"><input type="radio" name="q2" value="D"> Holding data currently being processed</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="3" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q3</span><span class="qtxt">Which two units make up the Central Processing Unit (CPU)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="A"> Control Unit (CU) and Arithmetic and Logic Unit (ALU)</label>
+        <label class="opt"><input type="radio" name="q3" value="B"> RAM and ROM</label>
+        <label class="opt"><input type="radio" name="q3" value="C"> Hard disk and motherboard</label>
+        <label class="opt"><input type="radio" name="q3" value="D"> Program Counter and Cache Memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="4" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q4</span><span class="qtxt">The Program Counter (PC) in a CPU holds:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="A"> The result of the most recent arithmetic operation</label>
+        <label class="opt"><input type="radio" name="q4" value="B"> The instruction currently being decoded</label>
+        <label class="opt"><input type="radio" name="q4" value="C"> The memory address of the next instruction to be executed</label>
+        <label class="opt"><input type="radio" name="q4" value="D"> Permanent BIOS startup data</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="5" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q5</span><span class="qtxt">Which of the following is a logic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="A"> Addition</label>
+        <label class="opt"><input type="radio" name="q5" value="B"> Subtraction</label>
+        <label class="opt"><input type="radio" name="q5" value="C"> Multiplication</label>
+        <label class="opt"><input type="radio" name="q5" value="D"> AND</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="6" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q6</span><span class="qtxt">Which of the following is NOT a logic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="A"> AND</label>
+        <label class="opt"><input type="radio" name="q6" value="B"> ADD</label>
+        <label class="opt"><input type="radio" name="q6" value="C"> OR</label>
+        <label class="opt"><input type="radio" name="q6" value="D"> NOT</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="7" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q7</span><span class="qtxt">A register inside the CPU is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="A"> A small, temporary storage location that holds a single instruction or data item</label>
+        <label class="opt"><input type="radio" name="q7" value="B"> A large bank of permanent memory on the motherboard</label>
+        <label class="opt"><input type="radio" name="q7" value="C"> The bus connecting the CPU to RAM</label>
+        <label class="opt"><input type="radio" name="q7" value="D"> A type of secondary storage device</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="8" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q8</span><span class="qtxt">The Instruction Register (IR) in a CPU is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="A"> Store the address of the next instruction</label>
+        <label class="opt"><input type="radio" name="q8" value="B"> Hold the result of calculations temporarily</label>
+        <label class="opt"><input type="radio" name="q8" value="C"> Hold the instruction currently being decoded and executed</label>
+        <label class="opt"><input type="radio" name="q8" value="D"> Store permanent startup code</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="9" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q9</span><span class="qtxt">The fetch-decode-execute cycle describes:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="A"> How data is written to and read from secondary storage</label>
+        <label class="opt"><input type="radio" name="q9" value="B"> The steps the Control Unit carries out when processing each instruction</label>
+        <label class="opt"><input type="radio" name="q9" value="C"> How RAM communicates with ROM</label>
+        <label class="opt"><input type="radio" name="q9" value="D"> The process of formatting a hard disk</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="10" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q10</span><span class="qtxt">Cache memory is used in a computer system to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="A"> Store programs permanently when the power is off</label>
+        <label class="opt"><input type="radio" name="q10" value="B"> Back up important data files automatically</label>
+        <label class="opt"><input type="radio" name="q10" value="C"> Replace secondary storage when it is full</label>
+        <label class="opt"><input type="radio" name="q10" value="D"> Speed up the CPU by storing frequently used instructions close to the processor</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="11" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q11</span><span class="qtxt">Which of the following is an arithmetic operation performed by the ALU?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q11" value="A"> Division</label>
+        <label class="opt"><input type="radio" name="q11" value="B"> AND</label>
+        <label class="opt"><input type="radio" name="q11" value="C"> OR</label>
+        <label class="opt"><input type="radio" name="q11" value="D"> NOT</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="12" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q12</span><span class="qtxt">The accumulator register in the ALU is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q12" value="A"> Count the number of instructions executed</label>
+        <label class="opt"><input type="radio" name="q12" value="B"> Store the address of the next instruction</label>
+        <label class="opt"><input type="radio" name="q12" value="C"> Temporarily hold the results of calculations</label>
+        <label class="opt"><input type="radio" name="q12" value="D"> Hold the BIOS startup program</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="13" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q13</span><span class="qtxt">Word size in a CPU refers to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q13" value="A"> The number of words per second a printer can output</label>
+        <label class="opt"><input type="radio" name="q13" value="B"> The number of bits the CPU can process in a single operation</label>
+        <label class="opt"><input type="radio" name="q13" value="C"> The maximum number of characters in a file name</label>
+        <label class="opt"><input type="radio" name="q13" value="D"> The speed of the system clock in MHz</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="14" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q14</span><span class="qtxt">Clock speed of a CPU is measured in:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q14" value="A"> Megabytes (MB)</label>
+        <label class="opt"><input type="radio" name="q14" value="B"> Gigabytes (GB)</label>
+        <label class="opt"><input type="radio" name="q14" value="C"> Kilobits (Kb)</label>
+        <label class="opt"><input type="radio" name="q14" value="D"> Gigahertz (GHz) or Megahertz (MHz)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="15" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q15</span><span class="qtxt">Which factor does NOT directly affect CPU performance?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q15" value="A"> The brand of the computer monitor</label>
+        <label class="opt"><input type="radio" name="q15" value="B"> Clock speed</label>
+        <label class="opt"><input type="radio" name="q15" value="C"> Word size</label>
+        <label class="opt"><input type="radio" name="q15" value="D"> Cache memory size</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section B &mdash; Memory: RAM &amp; ROM (Q16&ndash;25)</div>
+
+    <div class="qcard" data-q="16" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q16</span><span class="qtxt">RAM is described as volatile because:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q16" value="A"> It can only be read and never written to</label>
+        <label class="opt"><input type="radio" name="q16" value="B"> It loses all its data when the power is switched off</label>
+        <label class="opt"><input type="radio" name="q16" value="C"> It stores data permanently on magnetic platters</label>
+        <label class="opt"><input type="radio" name="q16" value="D"> It is used only during the boot-up process</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="17" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q17</span><span class="qtxt">ROM is mainly used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q17" value="A"> Store temporary data while the CPU processes it</label>
+        <label class="opt"><input type="radio" name="q17" value="B"> Perform arithmetic calculations for the ALU</label>
+        <label class="opt"><input type="radio" name="q17" value="C"> Store the startup (BIOS) instructions that run when the computer is switched on</label>
+        <label class="opt"><input type="radio" name="q17" value="D"> Save user files and documents permanently</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="18" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q18</span><span class="qtxt">Which of the following correctly describes a difference between RAM and ROM?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q18" value="A"> RAM is volatile and temporary; ROM is non-volatile and permanent</label>
+        <label class="opt"><input type="radio" name="q18" value="B"> RAM stores the BIOS; ROM stores user programs</label>
+        <label class="opt"><input type="radio" name="q18" value="C"> RAM is read-only; ROM can be read and written freely</label>
+        <label class="opt"><input type="radio" name="q18" value="D"> RAM is a type of secondary storage; ROM is main memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="19" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q19</span><span class="qtxt">Main memory (RAM) is used to:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q19" value="A"> Store data permanently for long-term use</label>
+        <label class="opt"><input type="radio" name="q19" value="B"> Perform logic operations on data</label>
+        <label class="opt"><input type="radio" name="q19" value="C"> Control peripheral devices attached to the computer</label>
+        <label class="opt"><input type="radio" name="q19" value="D"> Hold programs and data currently being used by the CPU</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="20" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q20</span><span class="qtxt">ROM is described as non-volatile because:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q20" value="A"> It can be written to by the user at any time</label>
+        <label class="opt"><input type="radio" name="q20" value="B"> It retains its data even when the power is switched off</label>
+        <label class="opt"><input type="radio" name="q20" value="C"> It is stored on a spinning magnetic hard disk</label>
+        <label class="opt"><input type="radio" name="q20" value="D"> It holds the results of CPU calculations temporarily</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="21" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q21</span><span class="qtxt">Increasing the amount of RAM in a computer will most likely:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q21" value="A"> Increase the permanent storage capacity of the computer</label>
+        <label class="opt"><input type="radio" name="q21" value="B"> Make the monitor display at higher resolution</label>
+        <label class="opt"><input type="radio" name="q21" value="C"> Allow more programs to run simultaneously and improve overall speed</label>
+        <label class="opt"><input type="radio" name="q21" value="D"> Replace the need for a hard disk entirely</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="22" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q22</span><span class="qtxt">Which type of memory is used by the CPU to run the operating system and applications?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q22" value="A"> RAM (Random Access Memory)</label>
+        <label class="opt"><input type="radio" name="q22" value="B"> ROM (Read Only Memory)</label>
+        <label class="opt"><input type="radio" name="q22" value="C"> Magnetic tape</label>
+        <label class="opt"><input type="radio" name="q22" value="D"> CD-ROM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="23" data-type="mcq" data-answer="D">
+      <div class="qhead"><span class="qnum">Q23</span><span class="qtxt">PROM stands for:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q23" value="A"> Programmable Random Output Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="B"> Portable Read Only Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="C"> Primary Random Optical Memory</label>
+        <label class="opt"><input type="radio" name="q23" value="D"> Programmable Read Only Memory</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="24" data-type="mcq" data-answer="B">
+      <div class="qhead"><span class="qnum">Q24</span><span class="qtxt">Which type of ROM can be erased using ultraviolet light and then reprogrammed?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q24" value="A"> PROM</label>
+        <label class="opt"><input type="radio" name="q24" value="B"> EPROM</label>
+        <label class="opt"><input type="radio" name="q24" value="C"> DRAM</label>
+        <label class="opt"><input type="radio" name="q24" value="D"> SRAM</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="25" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q25</span><span class="qtxt">Virtual memory is best described as:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q25" value="A"> A special type of ROM used for network storage</label>
+        <label class="opt"><input type="radio" name="q25" value="B"> Extra RAM chips added to expand the motherboard</label>
+        <label class="opt"><input type="radio" name="q25" value="C"> An area of the hard disk used to extend RAM when physical RAM is full</label>
+        <label class="opt"><input type="radio" name="q25" value="D"> Cache memory built directly into the CPU chip</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="sec-title">Section C &mdash; Data Representation &amp; Storage Units (Q26&ndash;35)</div>
+
+    <div class="qcard" data-q="26" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q26</span><span class="qtxt">One byte consists of:</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q26" value="A"> 2 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="B"> 4 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="C"> 8 bits</label>
+        <label class="opt"><input type="radio" name="q26" value="D"> 16 bits</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="27" data-type="mcq" data-answer="C">
+      <div class="qhead"><span class="qnum">Q27</span><span class="qtxt">Which of the following storage units is the largest?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q27" value="A"> Kilobyte (KB)</label>
+        <label class="opt"><input type="radio" name="q27" value="B"> Megabyte (MB)</label>
+        <label class="opt"><input type="radio" name="q27" value="C"> Gigabyte (GB)</label>
+        <label class="opt"><input type="radio" name="q27" value="D"> Byte (B)</label>
+      </div><div class="fb"></div>
+    </div>
+
+    <div class="qcard" data-q="28" data-type="mcq" data-answer="A">
+      <div class="qhead"><span class="qnum">Q28</span><span class="qtxt">How many bytes are in 1 kilobyte (KB)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q28" value="A"> 1024</label>
+        <label class="opt"><input type="radio" name="q28" value="B"> 1000</label>
+        <label class="opt"><input type="radio" name="q28" value="C"> 8</label>
+        <label class="opt"><input type="radio" name="q28" value="D"> 64</label>
+      </div><div class="fb"></div>
+    </div>
+
+  </div>
+
+  <button class="btn-submit" id="btn-submit" disabled>Submit Test</button>
+</div>
+
+<div id="screen-results" class="screen">
+  <div class="res-card">
+    <h2>Test Complete!</h2>
+    <div class="res-student" id="res-student"></div>
+    <div class="score-big" id="score-big">0%</div>
+    <div class="res-msg" id="res-msg">Well done on completing your quiz.</div>
+    <div class="res-grid">
+      <div class="rstat"><div class="v c" id="res-correct">0</div><div class="l">Correct</div></div>
+      <div class="rstat"><div class="v w" id="res-wrong">0</div><div class="l">Wrong</div></div>
+    </div>
+    
+    <div class="sync-status syncing" id="sync-status">
+      <div class="sync-dot syncing" id="sync-dot"></div>
+      <span id="sync-msg">Syncing layout statistics with database...</span>
+    </div>
+
+    <button class="btn-retry" id="btn-retry">Take Test Again</button>
   </div>
 </div>
 
-<!-- TEACHER DASHBOARD -->
 <div id="screen-teacher" class="screen">
   <div class="dash-head">
-    <h2>Teacher Dashboard</h2>
-    <div style="display:flex;gap:10px;">
-      <button class="btn-back" id="btn-back">&#8592; Back</button>
+    <h2>Teacher Results Dashboard</h2>
+    <div style="display:flex; gap:10px;">
+      <button class="btn-clear" id="btn-clear">Clear Local Logs</button>
+      <button class="btn-back" id="btn-back">&larr; Main Menu</button>
     </div>
   </div>
+
   <div class="sheets-panel">
-    <h3>&#128196; Google Sheets Integration</h3>
+    <h3>🔗 Google Sheets API Endpoint</h3>
     <div class="sheets-url-row">
-      <input type="text" id="sheets-url-input" placeholder="https://script.google.com/macros/s/…/exec">
-      <button class="btn-save-url" id="btn-save-url">Save URL</button>
+      <input type="text" id="sheets-url-input" placeholder="https://script.google.com/macros/s/XXXXX/exec">
+      <button class="btn-save-url" id="btn-save-url">Save Hook Link</button>
     </div>
     <div class="url-status" id="url-status"></div>
   </div>
-  <table>
-    <thead><tr><th>Name</th><th>Class</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Submitted</th></tr></thead>
-    <tbody id="results-tbody"><tr><td colspan="6" class="no-data">No results yet.</td></tr></tbody>
-  </table>
+
+  <div class="chips">
+    <div class="chip"><div class="cv" id="ch-total">0</div><div class="cl">Submissions</div></div>
+    <div class="chip"><div class="cv" id="ch-avg">0%</div><div class="cl">Average Score</div></div>
+  </div>
+
+  <div class="filters">
+    <select id="fl-class">
+      <option value="">All Classes</option>
+      <option>9O</option><option>9B</option><option>9E</option>
+      <option>9R</option><option>9L</option><option>9I</option>
+      <option>9N</option><option>9H</option>
+    </select>
+    <input type="text" id="fl-name" placeholder="Search student name...">
+  </div>
+
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Student Name</th><th>Class</th><th>Final Grade</th><th>Correct</th><th>Wrong</th><th>Timestamp</th></tr>
+      </thead>
+      <tbody id="teacher-tbody"></tbody>
+    </table>
+  </div>
 </div>
 
-<!-- PASSWORD MODAL -->
 <div class="modal-bg" id="modal-bg">
   <div class="modal-box">
-    <h3>Teacher Access</h3>
-    <input type="password" id="modal-pw" placeholder="Password">
-    <button class="btn-unlock" id="btn-unlock">Unlock</button>
-    <div class="pw-err" id="pw-err">Incorrect password.</div>
-    <button class="btn-cancel" id="btn-cancel">Cancel</button>
+    <h3>Staff Authentication</h3>
+    <p>Enter the master security token to access metrics.</p>
+    <input type="password" id="modal-pw">
+    <button class="btn-unlock" id="btn-unlock">Unlock Access</button>
+    <div class="pw-err" id="pw-err">Incorrect access key pattern.</div>
+    <button class="btn-cancel" id="btn-cancel">Abort</button>
   </div>
 </div>
 
 <script>
-// =====================================================================
-//  ▼▼▼  PASTE YOUR APPS SCRIPT WEB APP URL HERE (between the quotes)  ▼▼▼
-// =====================================================================
-let SHEETS_URL = ''; 
+// ==========================================
+//  Global Setup & Runtime Management Hooks
+// ==========================================
+let WEB_APP_URL = ""; 
 
-const TOTAL = 100;
-const PW = 'teacher2025';
-const STORE_RESULTS = 'g10t2_results_v3';
-const STORE_SETTINGS = 'g10t2_settings_v3';
-const STORE_URL = 'g10t2_sheets_url';
+const MASTER_PASS = "teacher2025";
+const STORAGE_RESULTS_KEY = "g9_it_quiz_local_v1";
+const STORAGE_URL_KEY = "g9_it_sheets_endpoint_url";
 
-// Generates 100 simple IT multi-choice test questions
-const ALL_QUESTIONS = Array.from({ length: TOTAL }, (_, i) => ({
-  id: i + 1,
-  q: `Question ${i + 1}: Which component handles core calculations and processing in system architecture?`,
-  opts: ["CPU", "Monitor", "Keyboard", "Mouse"],
-  ans: "CPU"
-}));
+let localScoresDatabase = JSON.parse(localStorage.getItem(STORAGE_RESULTS_KEY) || "[]");
+let chosenAnswers = {};
+let totalExpectedQuestions = 0;
 
-let studentAnswers = {};
-let localResults = JSON.parse(localStorage.getItem(STORE_RESULTS) || '[]');
-let testDurationMinutes = 90;
-let timerInterval = null;
-let timeRemaining = testDurationMinutes * 60;
-
-window.addEventListener('DOMContentLoaded', () => {
-  // Check runtime local storage for saved configurations first
-  const savedUrl = localStorage.getItem(STORE_URL);
-  if (savedUrl) {
-    SHEETS_URL = savedUrl;
-    document.getElementById('sheets-url-input').value = savedUrl;
+window.addEventListener("DOMContentLoaded", () => {
+  // Pull existing saved spreadsheet URL configurations if present
+  const savedUrl = localStorage.getItem(STORAGE_URL_KEY);
+  if(savedUrl) {
+    WEB_APP_URL = savedUrl;
+    document.getElementById("sheets-url-input").value = savedUrl;
+    showNoticeBanner("✓ Connected with remote cloud database endpoint.");
+  } else {
+    showNoticeBanner("⚠ Running in local standalone node mode. Connect Google Sheet inside configurations panel.");
   }
+
+  // Count active test items automatically from markup tree
+  totalExpectedQuestions = document.querySelectorAll(".qcard").length;
+  document.getElementById("prog-label").innerText = `0 / ${totalExpectedQuestions} answered`;
   
-  if(!SHEETS_URL) {
-    document.getElementById('setup-warning').style.display = 'block';
-  }
-  renderQuestions();
-  updateTeacherTable();
+  initQuizListeners();
+  renderTeacherTable();
 });
 
-function switchScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
+function showNoticeBanner(msg) {
+  const banner = document.getElementById("sync-notice");
+  banner.innerText = msg;
+  banner.style.display = "block";
 }
 
-function renderQuestions() {
-  const container = document.getElementById('q-wrap');
-  container.innerHTML = '';
-  
-  ALL_QUESTIONS.forEach((q) => {
-    const card = document.createElement('div');
-    card.className = 'qcard';
-    
-    const qhead = document.createElement('div');
-    qhead.className = 'qhead';
-    qhead.innerHTML = `<span class="qnum">${q.id}</span><div class="qtxt">${q.q}</div>`;
-    card.appendChild(qhead);
-    
-    const optsDiv = document.createElement('div');
-    optsDiv.className = 'opts';
-    
-    q.opts.forEach(optText => {
-      const label = document.createElement('label');
-      label.className = 'opt';
-      label.innerHTML = `<input type="radio" name="q-${q.id}" value="${optText}"> <span>${optText}</span>`;
-      
-      label.querySelector('input').addEventListener('change', (e) => {
-        studentAnswers[q.id] = e.target.value;
-        updateProgress();
+function initQuizListeners() {
+  // Capture select option switches
+  document.querySelectorAll(".qcard").forEach(card => {
+    card.querySelectorAll("input[type='radio']").forEach(radio => {
+      radio.addEventListener("change", (e) => {
+        const qNum = card.getAttribute("data-q");
+        chosenAnswers[qNum] = e.target.value;
+        
+        // Highlight active visually selection row
+        card.querySelectorAll(".opt").forEach(lbl => lbl.style.borderColor = "var(--border)");
+        e.target.closest(".opt").style.borderColor = "var(--accent)";
+        
+        recalculateProgress();
       });
-      optsDiv.appendChild(label);
     });
-    
-    card.appendChild(optsDiv);
-    container.appendChild(card);
   });
 }
 
-function updateProgress() {
-  const answeredCount = Object.keys(studentAnswers).length;
-  const pct = Math.round((answeredCount / ALL_QUESTIONS.length) * 100);
-  document.getElementById('prog-inner').style.width = `${pct}%`;
-  document.getElementById('prog-label').innerText = `${answeredCount} / ${ALL_QUESTIONS.length} answered`;
-  document.getElementById('btn-submit').disabled = answeredCount < ALL_QUESTIONS.length;
-}
-
-function startTimer() {
-  timeRemaining = testDurationMinutes * 60;
-  timerInterval = setInterval(() => {
-    timeRemaining--;
-    let mins = Math.floor(timeRemaining / 60);
-    let secs = timeRemaining % 60;
-    document.getElementById('timer-val').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    
-    if(timeRemaining <= 0) {
-      clearInterval(timerInterval);
-      submitTest();
-    }
-  }, 1000);
-}
-
-document.getElementById('btn-start').addEventListener('click', () => {
-  const name = document.getElementById('inp-name').value.trim();
-  const cls = document.getElementById('inp-class').value;
+function recalculateProgress() {
+  const answeredCount = Object.keys(chosenAnswers).length;
+  const pct = Math.round((answeredCount / totalExpectedQuestions) * 100);
+  document.getElementById("prog-inner").style.width = `${pct}%`;
+  document.getElementById("prog-label").innerText = `${answeredCount} / ${totalExpectedQuestions} answered`;
   
-  document.getElementById('err-name').style.display = name ? 'none' : 'block';
-  document.getElementById('err-class').style.display = cls ? 'none' : 'block';
+  // Enable submit if everything was processed natively
+  document.getElementById("btn-submit").disabled = answeredCount < totalExpectedQuestions;
+}
+
+// Nav Switches
+function transitionTo(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+document.getElementById("btn-start").addEventListener("click", () => {
+  const name = document.getElementById("inp-name").value.trim();
+  const cls = document.getElementById("inp-class").value;
+  
+  document.getElementById("err-name").style.display = name ? "none" : "block";
+  document.getElementById("err-class").style.display = cls ? "none" : "block";
   
   if(name && cls) {
-    document.getElementById('hdr-name').innerText = name;
-    switchScreen('screen-test');
-    startTimer();
+    document.getElementById("hdr-name").innerText = name;
+    transitionTo("screen-test");
   }
 });
 
-document.getElementById('btn-submit').addEventListener('click', () => submitTest());
+// Post Submission Handler
+document.getElementById("btn-submit").addEventListener("click", processQuizFormSubmission);
 
-async function submitTest() {
-  clearInterval(timerInterval);
-  document.getElementById('submit-overlay').classList.add('show');
-  switchScreen('screen-results');
-
-  const name = document.getElementById('inp-name').value.trim();
-  const cls = document.getElementById('inp-class').value;
-
-  let correct = 0;
-  ALL_QUESTIONS.forEach(q => {
-    if(studentAnswers[q.id] === q.ans) correct++;
+async function processQuizFormSubmission() {
+  document.getElementById("submit-overlay").classList.add("show");
+  
+  const studentName = document.getElementById("inp-name").value.trim();
+  const studentClass = document.getElementById("inp-class").value;
+  
+  let scoreCorrect = 0;
+  
+  document.querySelectorAll(".qcard").forEach(card => {
+    const qNum = card.getAttribute("data-q");
+    const rightAns = card.getAttribute("data-answer");
+    const userSelection = chosenAnswers[qNum];
+    
+    const feedbackBox = card.querySelector(".fb");
+    feedbackBox.className = "fb show";
+    
+    // Evaluate correctness profiles
+    if(userSelection === rightAns) {
+      scoreCorrect++;
+      feedbackBox.innerText = `Correct (Option ${rightAns})`;
+      feedbackBox.classList.add("ok");
+    } else {
+      feedbackBox.innerText = `Incorrect. Correct answer was ${rightAns}`;
+      feedbackBox.classList.add("bad");
+    }
+    
+    // Visual node treatment mapping
+    card.querySelectorAll(".opt").forEach(label => {
+      const inputVal = label.querySelector("input").value;
+      if(inputVal === rightAns) label.classList.add("correct");
+      if(inputVal === userSelection && userSelection !== rightAns) label.classList.add("wrong");
+    });
   });
-  const totalQ = ALL_QUESTIONS.length;
-  const wrong = totalQ - correct;
-  const scorePct = Math.round((correct / totalQ) * 100);
 
-  document.getElementById('res-student').innerText = `${name} (${cls})`;
-  document.getElementById('score-big').innerText = `${scorePct}%`;
-  document.getElementById('res-correct').innerText = correct;
-  document.getElementById('res-wrong').innerText = wrong;
+  const totalWrong = totalExpectedQuestions - scoreCorrect;
+  const computedPct = Math.round((scoreCorrect / totalExpectedQuestions) * 100);
+  
+  // Render Summary Cards
+  document.getElementById("res-student").innerText = `${studentName} (${studentClass})`;
+  document.getElementById("score-big").innerText = `${computedPct}%`;
+  document.getElementById("res-correct").innerText = scoreCorrect;
+  document.getElementById("res-wrong").innerText = totalWrong;
+  
+  transitionTo("screen-results");
+  document.getElementById("submit-overlay").classList.remove("show");
 
-  const payload = {
-    name: name,
-    studentClass: cls,
-    score: scorePct,
-    correct: correct,
-    wrong: wrong,
-    timeUsed: `${testDurationMinutes} mins`
+  // Local storage logging architecture state update 
+  const entryPayload = {
+    name: studentName,
+    studentClass: studentClass,
+    score: computedPct,
+    correct: scoreCorrect,
+    wrong: totalWrong,
+    timestamp: new Date().toLocaleString()
   };
+  
+  localScoresDatabase.push(entryPayload);
+  localStorage.setItem(STORAGE_RESULTS_KEY, JSON.stringify(localScoresDatabase));
+  renderTeacherTable();
 
-  localResults.push({ ...payload, timestamp: new Date().toLocaleString() });
-  localStorage.setItem(STORE_RESULTS, JSON.stringify(localResults));
-  updateTeacherTable();
-
-  const targetUrl = SHEETS_URL || document.getElementById('sheets-url-input').value.trim();
-  if(targetUrl) {
+  // Network engine execution payload push configuration 
+  const hookUrl = WEB_APP_URL || document.getElementById("sheets-url-input").value.trim();
+  if(hookUrl) {
+    setSyncState("syncing", "Uploading results data straight to master Google Sheet document...");
     try {
-      await fetch(targetUrl, {
+      await fetch(hookUrl, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(entryPayload)
       });
-      document.getElementById('sync-status').className = "sync-status synced";
-      document.getElementById('sync-dot').className = "sync-dot synced";
-      document.getElementById('sync-msg').innerText = "Saved securely to Google Sheets!";
-    } catch (e) {
-      setSyncFailed();
+      setSyncState("synced", "✓ Data securely committed and stored remotely inside Google Sheets!");
+    } catch(err) {
+      setSyncState("sync-fail", "❌ Network dispatch failed. Cached natively on browser engine storage safely.");
     }
   } else {
-    setSyncFailed("Saved locally. Google Sheet URL configuration missing.");
+    setSyncState("sync-fail", "⚠ Saved locally. Remote Google Sheets App Script URL connection not setup.");
   }
-  document.getElementById('submit-overlay').classList.remove('show');
 }
 
-function setSyncFailed(msg = "Network issue. Saved locally.") {
-  document.getElementById('sync-status').className = "sync-status sync-fail";
-  document.getElementById('sync-dot').className = "sync-dot fail";
-  document.getElementById('sync-msg').innerText = msg;
+function setSyncState(stateClass, msgText) {
+  const box = document.getElementById("sync-status");
+  const dot = document.getElementById("sync-dot");
+  const text = document.getElementById("sync-msg");
+  
+  box.className = `sync-status ${stateClass}`;
+  dot.className = `sync-dot ${stateClass === 'sync-fail' ? 'fail' : stateClass}`;
+  text.innerText = msgText;
 }
 
-document.getElementById('teacher-link').addEventListener('click', () => {
-  document.getElementById('modal-bg').classList.add('open');
-});
-document.getElementById('btn-cancel').addEventListener('click', () => {
-  document.getElementById('modal-bg').classList.remove('open');
-});
-document.getElementById('btn-unlock').addEventListener('click', () => {
-  if(document.getElementById('modal-pw').value === PW) {
-    document.getElementById('modal-bg').classList.remove('open');
-    document.getElementById('modal-pw').value = "";
-    switchScreen('screen-teacher');
-  } else {
-    document.getElementById('pw-err').style.display = 'block';
-  }
-});
-document.getElementById('btn-back').addEventListener('click', () => switchScreen('screen-landing'));
+// Teacher Dashboard Controls
+document.getElementById("teacher-link").addEventListener("click", () => document.getElementById("modal-bg").classList.add("open"));
+document.getElementById("btn-cancel").addEventListener("click", () => document.getElementById("modal-bg").classList.remove("open"));
+document.getElementById("btn-back").addEventListener("click", () => transitionTo("screen-landing"));
 
-document.getElementById('btn-save-url').addEventListener('click', () => {
-  const val = document.getElementById('sheets-url-input').value.trim();
-  if(val.startsWith("https://script.google.com")) {
-    localStorage.setItem(STORE_URL, val);
-    SHEETS_URL = val;
-    document.getElementById('url-status').className = "url-status ok";
-    document.getElementById('url-status').innerText = "✓ Web App link saved successfully!";
-    document.getElementById('setup-warning').style.display = 'none';
+document.getElementById("btn-unlock").addEventListener("click", () => {
+  const inputPw = document.getElementById("modal-pw").value;
+  if(inputPw === MASTER_PASS) {
+    document.getElementById("modal-pw").value = "";
+    document.getElementById("pw-err").style.display = "none";
+    document.getElementById("modal-bg").classList.remove("open");
+    transitionTo("screen-teacher");
   } else {
-    document.getElementById('url-status').className = "url-status bad";
-    document.getElementById('url-status').innerText = "❌ Invalid Web App link format.";
+    document.getElementById("pw-err").style.display = "block";
   }
 });
 
-function updateTeacherTable() {
-  const tbody = document.getElementById('results-tbody');
-  if(localResults.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="no-data">No results yet.</td></tr>';
+document.getElementById("btn-save-url").addEventListener("click", () => {
+  const inputUrl = document.getElementById("sheets-url-input").value.trim();
+  if(inputUrl.startsWith("https://script.google.com")) {
+    localStorage.setItem(STORAGE_URL_KEY, inputUrl);
+    WEB_APP_URL = inputUrl;
+    document.getElementById("url-status").className = "url-status ok";
+    document.getElementById("url-status").innerText = "✓ Remote connection link verified and committed to persistent space storage.";
+  } else {
+    document.getElementById("url-status").className = "url-status bad";
+    document.getElementById("url-status").innerText = "❌ Incorrect address format pattern detected.";
+  }
+});
+
+document.getElementById("btn-clear").addEventListener("click", () => {
+  if(confirm("Are you sure you want to completely erase the logs stored within this device context?")) {
+    localScoresDatabase = [];
+    localStorage.removeItem(STORAGE_RESULTS_KEY);
+    renderTeacherTable();
+  }
+});
+
+// Interactive search inputs filters bindings
+document.getElementById("fl-class").addEventListener("change", renderTeacherTable);
+document.getElementById("fl-name").addEventListener("input", renderTeacherTable);
+
+function renderTeacherTable() {
+  const tbody = document.getElementById("teacher-tbody");
+  const classFilter = document.getElementById("fl-class").value;
+  const nameFilter = document.getElementById("fl-name").value.toLowerCase();
+  
+  let filtered = localScoresDatabase;
+  if(classFilter) filtered = filtered.filter(x => x.studentClass === classFilter);
+  if(nameFilter) filtered = filtered.filter(x => x.name.toLowerCase().includes(nameFilter));
+  
+  // Recalculate metrics card items profile view data metrics layout calculations
+  document.getElementById("ch-total").innerText = filtered.length;
+  if(filtered.length > 0) {
+    let sum = filtered.reduce((acc, obj) => acc + obj.score, 0);
+    document.getElementById("ch-avg").innerText = `${Math.round(sum / filtered.length)}%`;
+  } else {
+    document.getElementById("ch-avg").innerText = "0%";
+  }
+  
+  if(filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" class="no-data">No results found mapping current analytical requirements profiles.</td></tr>`;
     return;
   }
-  tbody.innerHTML = localResults.map(r => `
-    <tr>
-      <td><strong>${r.name}</strong></td>
-      <td>${r.studentClass}</td>
-      <td><span class="pill ${r.score >= 50 ? 'pass':'fail'}">${r.score}%</span></td>
-      <td style="color:var(--correct)">${r.correct}</td>
-      <td style="color:var(--wrong)">${r.wrong}</td>
-      <td><span class="att">${r.timestamp || 'Just now'}</span></td>
-    </tr>
-  `).join('');
+  
+  tbody.innerHTML = filtered.map(item => {
+    let rankClass = "fail";
+    if(item.score >= 50 && item.score < 75) rankClass = "avg";
+    if(item.score >= 75) rankClass = "pass";
+    
+    return `
+      <tr>
+        <td><strong>${item.name}</strong></td>
+        <td>${item.studentClass}</td>
+        <td><span class="pill ${rankClass}">${item.score}%</span></td>
+        <td style="color:var(--correct)">${item.correct}</td>
+        <td style="color:var(--wrong)">${item.wrong}</td>
+        <td><span class="att">${item.timestamp}</span></td>
+      </tr>
+    `;
+  }).join("");
 }
 
-document.getElementById('btn-retry').addEventListener('click', () => {
-  studentAnswers = {};
-  document.getElementById('inp-name').value = '';
-  document.getElementById('inp-class').value = '';
-  updateProgress();
-  switchScreen('screen-landing');
+document.getElementById("btn-retry").addEventListener("click", () => {
+  chosenAnswers = {};
+  document.getElementById("inp-name").value = "";
+  document.getElementById("inp-class").value = "";
+  
+  document.querySelectorAll(".qcard").forEach(card => {
+    card.querySelectorAll(".opt").forEach(lbl => {
+      lbl.className = "opt";
+      lbl.style.borderColor = "var(--border)";
+    });
+    card.querySelector(".fb").className = "fb";
+    card.querySelector("input[type='radio']").checked = false;
+  });
+  
+  document.querySelectorAll("input[type='radio']").forEach(r => r.checked = false);
+  recalculateProgress();
+  transitionTo("screen-landing");
 });
 </script>
 </body>
