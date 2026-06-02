@@ -92,25 +92,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .dash-head h2{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--accent);}
 .btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-back:hover{border-color:var(--accent);color:var(--accent);}
-.btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.btn-clear:hover{background:rgba(252,92,101,.08);}
-.settings-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:26px;}
-.settings-panel h3{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
-.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
-.s-field label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px;}
-.s-field input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;}
-.s-field input:focus{outline:none;border-color:var(--accent2);}
-.s-field textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.8rem;font-family:'Space Mono',monospace;resize:vertical;min-height:60px;}
-.s-field textarea:focus{outline:none;border-color:var(--accent2);}
-.s-toggle{display:flex;align-items:center;gap:10px;margin-top:4px;}
-.s-toggle input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent2);cursor:pointer;}
-.s-toggle span{font-size:.88rem;color:var(--text);}
-.btn-save-settings{margin-top:16px;background:var(--accent2);color:#0e1117;border:none;border-radius:8px;padding:10px 28px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.btn-save-settings:hover{opacity:.85;}
-.settings-status{margin-top:10px;font-size:.8rem;color:var(--accent2);display:none;}
-.test-status-banner{border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.82rem;display:flex;align-items:center;gap:8px;}
-.test-status-banner.open{background:rgba(56,217,169,.08);border:1px solid rgba(56,217,169,.25);color:var(--correct);}
-.test-status-banner.closed{background:rgba(252,92,101,.08);border:1px solid rgba(252,92,101,.25);color:var(--wrong);}
 .sheets-panel{background:rgba(79,142,247,.04);border:1px solid rgba(79,142,247,.18);border-radius:12px;padding:18px 22px;margin-bottom:22px;}
 .sheets-panel h3{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
 .sheets-panel p{font-size:.8rem;color:var(--muted);margin-bottom:12px;line-height:1.6;}
@@ -122,16 +103,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .url-status{font-size:.78rem;margin-top:8px;}
 .url-status.ok{color:var(--correct);}
 .url-status.bad{color:var(--wrong);}
-.chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
-.chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
-.chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
-.chip .cl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
-.filters input,.filters select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;}
-.filters input:focus,.filters select:focus{outline:none;border-color:var(--accent);}
-.btn-refresh{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2);border-radius:8px;padding:8px 18px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.btn-refresh:hover{background:rgba(56,217,169,.08);}
-.btn-refresh:disabled{opacity:.4;cursor:not-allowed;}
 table{width:100%;border-collapse:collapse;font-size:.83rem;}
 thead th{background:var(--surface);padding:10px 13px;text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);}
@@ -139,7 +110,6 @@ tbody tr:hover{background:var(--surface);}
 tbody td{padding:11px 13px;vertical-align:middle;}
 .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;}
 .pass{background:rgba(56,217,169,.12);color:var(--correct);}
-.avg{background:rgba(247,183,49,.12);color:#f7b731;}
 .fail{background:rgba(252,92,101,.12);color:var(--wrong);}
 .att{display:inline-block;background:rgba(79,142,247,.14);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:'Space Mono',monospace;}
 .no-data{text-align:center;padding:50px;color:var(--muted);}
@@ -154,7 +124,7 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 .pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
 .btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .landing-info{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;color:var(--muted);}
-@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.settings-grid{grid-template-columns:1fr;}.sheets-url-row{flex-direction:column;}}
+@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.sheets-url-row{flex-direction:column;}}
 </style>
 </head>
 <body>
@@ -164,17 +134,14 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   <p>Submitting your test… please wait.</p>
 </div>
 
+<!-- LANDING SCREEN -->
 <div id="screen-landing" class="screen active">
   <div style="max-width:520px;margin:0 auto;padding:60px 24px;">
     <div class="logo">Oberlin High School</div>
     <div class="logo-sub">Grade 10 IT &nbsp;&middot;&nbsp; Six Weeks Test 2 &nbsp;&middot;&nbsp; 100 Questions</div>
     <div id="setup-warning">
       <strong>⚠ Google Sheets not connected</strong>
-      Results will only be saved locally on this device. Paste the link in the Teacher Dashboard.
-    </div>
-    <div id="closed-banner">
-      <h3>&#x26D4; Test Unavailable</h3>
-      <p id="closed-reason">This test is currently closed.</p>
+      Results will only be saved locally. Paste the Web App URL in the Teacher Dashboard or source file.
     </div>
     <div class="landing-info">
       <span style="color:var(--accent);font-weight:600;">&#9719; Time Limit:</span> <span id="info-duration">90 minutes</span>
@@ -199,6 +166,7 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   </div>
 </div>
 
+<!-- TEST SCREEN -->
 <div id="screen-test" class="screen">
   <div class="t-header">
     <div>
@@ -214,24 +182,22 @@ tbody td{padding:11px 13px;vertical-align:middle;}
     <div class="prog-outer"><div class="prog-inner" id="prog-inner"></div></div>
     <div class="prog-label" id="prog-label">0 / 100 answered</div>
   </div>
-  <div class="q-wrap" id="q-wrap">
-    </div>
+  <div class="q-wrap" id="q-wrap"></div>
   <div style="text-align:center; padding-bottom:50px;">
     <button class="btn-submit" id="btn-submit" disabled>Submit Test</button>
   </div>
 </div>
 
+<!-- RESULTS SCREEN -->
 <div id="screen-results" class="screen">
   <div style="max-width:720px;margin:50px auto 0;padding:0 24px;">
     <div class="res-card">
       <h2>Test Complete!</h2>
       <div class="res-student" id="res-student"></div>
       <div class="score-big" id="score-big">0%</div>
-      <div class="res-msg" id="res-msg"></div>
       <div class="res-grid">
         <div class="rstat"><div class="v c" id="res-correct">0</div><div class="l">Correct</div></div>
         <div class="rstat"><div class="v w" id="res-wrong">0</div><div class="l">Wrong</div></div>
-        <div class="rstat"><div class="v" id="res-total" style="color:var(--accent)">100</div><div class="l">Total</div></div>
       </div>
       <div class="sync-status syncing" id="sync-status">
         <div class="sync-dot syncing" id="sync-dot"></div>
@@ -242,15 +208,14 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   </div>
 </div>
 
+<!-- TEACHER DASHBOARD -->
 <div id="screen-teacher" class="screen">
   <div class="dash-head">
     <h2>Teacher Dashboard</h2>
     <div style="display:flex;gap:10px;">
-      <button class="btn-refresh" id="btn-refresh">&#8635; Refresh</button>
       <button class="btn-back" id="btn-back">&#8592; Back</button>
     </div>
   </div>
-
   <div class="sheets-panel">
     <h3>&#128196; Google Sheets Integration</h3>
     <div class="sheets-url-row">
@@ -259,13 +224,13 @@ tbody td{padding:11px 13px;vertical-align:middle;}
     </div>
     <div class="url-status" id="url-status"></div>
   </div>
-
   <table>
     <thead><tr><th>Name</th><th>Class</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Submitted</th></tr></thead>
     <tbody id="results-tbody"><tr><td colspan="6" class="no-data">No results yet.</td></tr></tbody>
   </table>
 </div>
 
+<!-- PASSWORD MODAL -->
 <div class="modal-bg" id="modal-bg">
   <div class="modal-box">
     <h3>Teacher Access</h3>
@@ -282,22 +247,34 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 // =====================================================================
 let SHEETS_URL = ''; 
 
-// Mock Sample Questions (Generates 100 simple IT-based multi-choice elements)
-const ALL_QUESTIONS = Array.from({ length: 100 }, (_, i) => ({
+const TOTAL = 100;
+const PW = 'teacher2025';
+const STORE_RESULTS = 'g10t2_results_v3';
+const STORE_SETTINGS = 'g10t2_settings_v3';
+const STORE_URL = 'g10t2_sheets_url';
+
+// Generates 100 simple IT multi-choice test questions
+const ALL_QUESTIONS = Array.from({ length: TOTAL }, (_, i) => ({
   id: i + 1,
-  q: `Question ${i + 1}: Which component is vital for computer systems architecture?`,
+  q: `Question ${i + 1}: Which component handles core calculations and processing in system architecture?`,
   opts: ["CPU", "Monitor", "Keyboard", "Mouse"],
   ans: "CPU"
 }));
 
 let studentAnswers = {};
-let localResults = JSON.parse(localStorage.getItem('it_results') || '[]');
+let localResults = JSON.parse(localStorage.getItem(STORE_RESULTS) || '[]');
 let testDurationMinutes = 90;
 let timerInterval = null;
 let timeRemaining = testDurationMinutes * 60;
 
-// Setup & Init
 window.addEventListener('DOMContentLoaded', () => {
+  // Check runtime local storage for saved configurations first
+  const savedUrl = localStorage.getItem(STORE_URL);
+  if (savedUrl) {
+    SHEETS_URL = savedUrl;
+    document.getElementById('sheets-url-input').value = savedUrl;
+  }
+  
   if(!SHEETS_URL) {
     document.getElementById('setup-warning').style.display = 'block';
   }
@@ -305,18 +282,16 @@ window.addEventListener('DOMContentLoaded', () => {
   updateTeacherTable();
 });
 
-// Navigation Engine
 function switchScreen(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
 }
 
-// Question Builder
 function renderQuestions() {
   const container = document.getElementById('q-wrap');
   container.innerHTML = '';
   
-  ALL_QUESTIONS.forEach((q, index) => {
+  ALL_QUESTIONS.forEach((q) => {
     const card = document.createElement('div');
     card.className = 'qcard';
     
@@ -337,7 +312,6 @@ function renderQuestions() {
         studentAnswers[q.id] = e.target.value;
         updateProgress();
       });
-      
       optsDiv.appendChild(label);
     });
     
@@ -351,11 +325,9 @@ function updateProgress() {
   const pct = Math.round((answeredCount / ALL_QUESTIONS.length) * 100);
   document.getElementById('prog-inner').style.width = `${pct}%`;
   document.getElementById('prog-label').innerText = `${answeredCount} / ${ALL_QUESTIONS.length} answered`;
-  
   document.getElementById('btn-submit').disabled = answeredCount < ALL_QUESTIONS.length;
 }
 
-// Timer Logic
 function startTimer() {
   timeRemaining = testDurationMinutes * 60;
   timerInterval = setInterval(() => {
@@ -366,12 +338,11 @@ function startTimer() {
     
     if(timeRemaining <= 0) {
       clearInterval(timerInterval);
-      forceSubmit();
+      submitTest();
     }
   }, 1000);
 }
 
-// Action Button Listeners
 document.getElementById('btn-start').addEventListener('click', () => {
   const name = document.getElementById('inp-name').value.trim();
   const cls = document.getElementById('inp-class').value;
@@ -387,11 +358,6 @@ document.getElementById('btn-start').addEventListener('click', () => {
 });
 
 document.getElementById('btn-submit').addEventListener('click', () => submitTest());
-
-function forceSubmit() {
-  alert("Time is up! Your exam will be submitted automatically.");
-  submitTest();
-}
 
 async function submitTest() {
   clearInterval(timerInterval);
@@ -409,12 +375,10 @@ async function submitTest() {
   const wrong = totalQ - correct;
   const scorePct = Math.round((correct / totalQ) * 100);
 
-  // Set visual scoring screens
   document.getElementById('res-student').innerText = `${name} (${cls})`;
   document.getElementById('score-big').innerText = `${scorePct}%`;
   document.getElementById('res-correct').innerText = correct;
   document.getElementById('res-wrong').innerText = wrong;
-  document.getElementById('res-msg').innerText = scorePct >= 50 ? "Excellent Job! You passed." : "Keep studying and try again.";
 
   const payload = {
     name: name,
@@ -425,13 +389,11 @@ async function submitTest() {
     timeUsed: `${testDurationMinutes} mins`
   };
 
-  // Save to browser memory local storage
   localResults.push({ ...payload, timestamp: new Date().toLocaleString() });
-  localStorage.setItem('it_results', JSON.stringify(localResults));
+  localStorage.setItem(STORE_RESULTS, JSON.stringify(localResults));
   updateTeacherTable();
 
-  // Network Sync Payload transmission
-  const targetUrl = SHEETS_URL || document.getElementById('sheets-url-input').value;
+  const targetUrl = SHEETS_URL || document.getElementById('sheets-url-input').value.trim();
   if(targetUrl) {
     try {
       await fetch(targetUrl, {
@@ -447,7 +409,7 @@ async function submitTest() {
       setSyncFailed();
     }
   } else {
-    setSyncFailed("Local profile created. Sheets not configured.");
+    setSyncFailed("Saved locally. Google Sheet URL configuration missing.");
   }
   document.getElementById('submit-overlay').classList.remove('show');
 }
@@ -458,7 +420,6 @@ function setSyncFailed(msg = "Network issue. Saved locally.") {
   document.getElementById('sync-msg').innerText = msg;
 }
 
-// Teacher Dashboard Controls
 document.getElementById('teacher-link').addEventListener('click', () => {
   document.getElementById('modal-bg').classList.add('open');
 });
@@ -466,7 +427,7 @@ document.getElementById('btn-cancel').addEventListener('click', () => {
   document.getElementById('modal-bg').classList.remove('open');
 });
 document.getElementById('btn-unlock').addEventListener('click', () => {
-  if(document.getElementById('modal-pw').value === "admin123") { // Default password
+  if(document.getElementById('modal-pw').value === PW) {
     document.getElementById('modal-bg').classList.remove('open');
     document.getElementById('modal-pw').value = "";
     switchScreen('screen-teacher');
@@ -479,12 +440,14 @@ document.getElementById('btn-back').addEventListener('click', () => switchScreen
 document.getElementById('btn-save-url').addEventListener('click', () => {
   const val = document.getElementById('sheets-url-input').value.trim();
   if(val.startsWith("https://script.google.com")) {
+    localStorage.setItem(STORE_URL, val);
+    SHEETS_URL = val;
     document.getElementById('url-status').className = "url-status ok";
-    document.getElementById('url-status').innerText = "✓ Web App link configured dynamically!";
+    document.getElementById('url-status').innerText = "✓ Web App link saved successfully!";
     document.getElementById('setup-warning').style.display = 'none';
   } else {
     document.getElementById('url-status').className = "url-status bad";
-    document.getElementById('url-status').innerText = "❌ Invalid Apps Script URL.";
+    document.getElementById('url-status').innerText = "❌ Invalid Web App link format.";
   }
 });
 
