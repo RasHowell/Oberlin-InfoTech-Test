@@ -3,21 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grade 10 IT Six Weeks Test — Oberlin High School</title>
+<title>Grade 10 IT — Six Weeks Test 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0e1117;--surface:#161b27;--card:#1c2333;--border:#2a3347;--accent:#4f8ef7;--accent2:#38d9a9;--text:#e8eaf0;--muted:#7a8399;--correct:#38d9a9;--wrong:#fc5c65;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px;}
-
-/* SCREENS */
-.screen{display:none!important;}
-.screen.active{display:block!important;}
-
-/* LANDING */
+.screen{display:none!important;}.screen.active{display:block!important;}
 #screen-landing{max-width:520px;margin:0 auto;padding:60px 24px;}
 .logo{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--accent);margin-bottom:6px;}
-.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:40px;}
+.logo-sub{color:var(--muted);font-size:.85rem;margin-bottom:32px;}
 .fg{margin-bottom:20px;}
 .fg label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px;}
 .fg input,.fg select{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:13px 15px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
@@ -28,21 +23,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .btn-start:hover{opacity:.9;transform:translateY(-1px);}
 .t-link{display:block;text-align:center;margin-top:22px;font-size:.82rem;color:var(--muted);cursor:pointer;text-decoration:underline;}
 .t-link:hover{color:var(--accent);}
-
-/* TEST HEADER */
-.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:20px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.t-header h1{font-family:'Space Mono',monospace;font-size:1.25rem;color:var(--accent);}
-.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:5px;}
+/* Closed banner */
+#closed-banner{display:none;background:rgba(252,92,101,.1);border:1px solid rgba(252,92,101,.35);border-radius:10px;padding:18px 20px;margin-bottom:24px;text-align:center;}
+#closed-banner h3{color:var(--wrong);font-family:'Space Mono',monospace;font-size:1rem;margin-bottom:6px;}
+#closed-banner p{color:var(--muted);font-size:.82rem;}
+/* Timer */
+.t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.t-header h1{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:4px;}
 .meta strong{color:var(--text);}
 .badge{background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
-
-/* PROGRESS BAR */
+.timer-box{display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:10px 18px;}
+.timer-box.warn{border-color:#f7b731;background:rgba(247,183,49,.08);}
+.timer-box.danger{border-color:var(--wrong);background:rgba(252,92,101,.1);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+.timer-icon{font-size:1.1rem;}
+.timer-val{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;color:var(--text);}
+.timer-box.warn .timer-val{color:#f7b731;}
+.timer-box.danger .timer-val{color:var(--wrong);}
 .prog-bar-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 36px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;}
 .prog-outer{flex:1;height:6px;background:var(--border);border-radius:4px;overflow:hidden;}
 .prog-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;transition:width .4s;}
 .prog-label{font-size:.75rem;color:var(--muted);white-space:nowrap;}
-
-/* QUESTIONS */
 .q-wrap{max-width:780px;margin:0 auto;padding:32px 24px 0;}
 .sec-title{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:34px 0 14px;padding-left:11px;border-left:3px solid var(--accent);}
 .qcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
@@ -56,25 +58,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .opt input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;}
 .opt.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
 .opt.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
-.tf-row{display:flex;gap:10px;}
-.tf{flex:1;padding:10px 14px;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;}
-.tf:hover{border-color:var(--accent);}
-.tf.sel{border-color:var(--accent);background:#1a2438;}
-.tf.correct{border-color:var(--correct)!important;background:rgba(56,217,169,.09)!important;}
-.tf.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
-.sa{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;resize:vertical;min-height:58px;transition:border-color .2s;}
-.sa:focus{outline:none;border-color:var(--accent);}
-.sa.correct{border-color:var(--correct)!important;}
-.sa.wrong{border-color:var(--wrong)!important;}
 .fb{margin-top:9px;font-size:.8rem;border-radius:6px;padding:7px 12px;display:none;}
-.fb.show{display:block;}
-.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}
-.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
+.fb.show{display:block;}.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
 .btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s,transform .15s;}
 .btn-submit:hover{opacity:.9;transform:translateY(-1px);}
 .btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;}
-
-/* RESULTS */
 #screen-results{max-width:720px;margin:50px auto 0;padding:0 24px;}
 .res-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:38px;text-align:center;}
 .res-card h2{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--accent2);margin-bottom:4px;}
@@ -88,15 +76,31 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(--accent);}
 .btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-retry:hover{background:rgba(79,142,247,.1);}
-
-/* TEACHER DASHBOARD */
-#screen-teacher{max-width:960px;margin:0 auto;padding:38px 24px;}
+/* Teacher dashboard */
+#screen-teacher{max-width:980px;margin:0 auto;padding:38px 24px;}
 .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
-.dash-head h2{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
+.dash-head h2{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--accent);}
 .btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-back:hover{border-color:var(--accent);color:var(--accent);}
 .btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-clear:hover{background:rgba(252,92,101,.08);}
+/* Settings panel */
+.settings-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:26px;}
+.settings-panel h3{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.s-field label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px;}
+.s-field input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;}
+.s-field input:focus{outline:none;border-color:var(--accent2);}
+.s-toggle{display:flex;align-items:center;gap:10px;margin-top:4px;}
+.s-toggle input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent2);cursor:pointer;}
+.s-toggle span{font-size:.88rem;color:var(--text);}
+.btn-save-settings{margin-top:16px;background:var(--accent2);color:#0e1117;border:none;border-radius:8px;padding:10px 28px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-save-settings:hover{opacity:.85;}
+.settings-status{margin-top:10px;font-size:.8rem;color:var(--accent2);display:none;}
+/* Status banner */
+.test-status-banner{border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.82rem;display:flex;align-items:center;gap:8px;}
+.test-status-banner.open{background:rgba(56,217,169,.08);border:1px solid rgba(56,217,169,.25);color:var(--correct);}
+.test-status-banner.closed{background:rgba(252,92,101,.08);border:1px solid rgba(252,92,101,.25);color:var(--wrong);}
 .chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
 .chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
 .chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
@@ -115,9 +119,7 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 .fail{background:rgba(252,92,101,.12);color:var(--wrong);}
 .att{display:inline-block;background:rgba(79,142,247,.14);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:.7rem;font-family:'Space Mono',monospace;}
 .no-data{text-align:center;padding:50px;color:var(--muted);}
-
-/* PASSWORD MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:999;display:none;}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);align-items:center;justify-content:center;z-index:999;display:none;}
 .modal-bg.open{display:flex;}
 .modal-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px;width:320px;text-align:center;}
 .modal-box h3{font-family:'Space Mono',monospace;color:var(--accent);margin-bottom:5px;}
@@ -127,970 +129,528 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 .btn-unlock{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
 .btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}}
+@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.settings-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════ SCREEN: LANDING ═══════════════════ -->
+<!-- LANDING -->
 <div id="screen-landing" class="screen active">
-  <div class="logo">Oberlin High School</div>
-  <div class="logo-sub">Grade 10 IT &nbsp;·&nbsp; Six Weeks Test &nbsp;·&nbsp; 60 Questions &nbsp;·&nbsp; 60 Marks</div>
-  <div id="sync-notice" style="display:none;background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);border-radius:8px;padding:10px 14px;font-size:.82rem;color:#38d9a9;margin-bottom:20px;"></div>
-
-  <div class="fg">
-    <label>Full Name</label>
-    <input type="text" id="inp-name" placeholder="e.g. Thabo Nkosi">
-    <div class="err-msg" id="err-name">Please enter your full name.</div>
+  <div style="max-width:520px;margin:0 auto;padding:60px 24px;">
+    <div class="logo">Oberlin High School</div>
+    <div class="logo-sub">Grade 10 IT &nbsp;&middot;&nbsp; Six Weeks Test 2 &nbsp;&middot;&nbsp; 100 Questions &nbsp;&middot;&nbsp; 100 Marks</div>
+    <div id="closed-banner">
+      <h3>&#x26D4; Test Unavailable</h3>
+      <p id="closed-reason">This test is currently closed.</p>
+    </div>
+    <div id="landing-info" style="background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;color:var(--muted);">
+      <span style="color:var(--accent);font-weight:600;">&#9719; Time Limit:</span> <span id="info-duration">90 minutes</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <span style="color:var(--accent2);font-weight:600;">&#128197; Closes:</span> <span id="info-close">Not set</span>
+    </div>
+    <div class="fg">
+      <label>Full Name</label>
+      <input type="text" id="inp-name" placeholder="e.g. John Smith">
+      <div class="err-msg" id="err-name">Please enter your full name.</div>
+    </div>
+    <div class="fg">
+      <label>Class</label>
+      <select id="inp-class">
+        <option value="">— Select your class —</option>
+        <option>10O</option><option>10B</option><option>10E</option>
+        <option>10R</option><option>10L</option><option>10I</option>
+        <option>10N</option><option>10H</option>
+      </select>
+      <div class="err-msg" id="err-class">Please select your class.</div>
+    </div>
+    <button class="btn-start" id="btn-start">Begin Test &rarr;</button>
+    <span class="t-link" id="teacher-link">Teacher Dashboard</span>
   </div>
-  <div class="fg">
-    <label>Class</label>
-    <select id="inp-class">
-      <option value="">— Select your class —</option>
-      <option>10O</option><option>10B</option><option>10E</option>
-      <option>10R</option><option>10L</option><option>10I</option><option>10N</option>
-    </select>
-    <div class="err-msg" id="err-class">Please select your class.</div>
-  </div>
-
-  <button class="btn-start" id="btn-start">Begin Test →</button>
-  <span class="t-link" id="teacher-link">Teacher Results Dashboard</span>
 </div>
 
-<!-- ═══════════════════ SCREEN: TEST ═══════════════════ -->
+<!-- TEST -->
 <div id="screen-test" class="screen">
   <div class="t-header">
     <div>
-      <h1>Oberlin High School — Grade 10 IT Six Weeks Test</h1>
-      <div class="meta"><span id="hdr-name"></span><span><strong>60 Questions</strong> &nbsp;|&nbsp; <strong>60 Marks</strong></span></div>
+      <h1>Oberlin High School &mdash; Grade 10 IT: Six Weeks Test 2</h1>
+      <div class="meta"><span id="hdr-name"></span><span><strong>100 Questions</strong> &nbsp;|&nbsp; <strong>100 Marks</strong></span></div>
     </div>
-    <span class="badge">Online Test</span>
+    <div class="timer-box" id="timer-box">
+      <span class="timer-icon">&#9719;</span>
+      <span class="timer-val" id="timer-val">90:00</span>
+    </div>
   </div>
   <div class="prog-bar-wrap">
     <div class="prog-outer"><div class="prog-inner" id="prog-inner"></div></div>
-    <div class="prog-label" id="prog-label">0 / 60 answered</div>
+    <div class="prog-label" id="prog-label">0 / 100 answered</div>
   </div>
   <div class="q-wrap" id="q-wrap">
-
-    <div class="sec-title">Section A — Software &amp; Operating Systems (Q1–10)</div>
-
-    <div class="qcard" data-q="1" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q1</span><span class="qtxt">Which of the following BEST describes system software?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q1" value="A"> Software written for a specific business task only</label>
-        <label class="opt"><input type="radio" name="q1" value="B"> Software that manages and supports the resources and operations of a computer system</label>
-        <label class="opt"><input type="radio" name="q1" value="C"> Software that allows data to be transferred between programs</label>
-        <label class="opt"><input type="radio" name="q1" value="D"> Software written by end-users using macros</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="2" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q2</span><span class="qtxt">Microsoft Office is an example of which type of software?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q2" value="A"> Specialised software</label>
-        <label class="opt"><input type="radio" name="q2" value="B"> Custom-written software</label>
-        <label class="opt"><input type="radio" name="q2" value="C"> Integrated software</label>
-        <label class="opt"><input type="radio" name="q2" value="D"> General-purpose software</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="3" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q3</span><span class="qtxt">The graphical user interface (GUI) is also known as WIMP — Windows, Icons, Menus and Pointing devices.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="4" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q4</span><span class="qtxt">A batch-processing system is one where:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q4" value="A"> Data is collected in a queue and processed without user interaction</label>
-        <label class="opt"><input type="radio" name="q4" value="B"> The CPU gives each user a small time slice in rotation</label>
-        <label class="opt"><input type="radio" name="q4" value="C"> Data is processed immediately as it arrives</label>
-        <label class="opt"><input type="radio" name="q4" value="D"> The system responds to events within a set time</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="5" data-type="short" data-answer="macros">
-      <div class="qhead"><span class="qnum">Q5</span><span class="qtxt">Short programs written to automate several steps in software (e.g. spreadsheets), often written by end-users, are called <strong>___________</strong>.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="6" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q6</span><span class="qtxt">Which type of software is written to meet the specific needs of a particular company and is therefore expensive and highly specialised?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q6" value="A"> General-purpose software</label>
-        <label class="opt"><input type="radio" name="q6" value="B"> Specialised software</label>
-        <label class="opt"><input type="radio" name="q6" value="C"> Integrated software</label>
-        <label class="opt"><input type="radio" name="q6" value="D"> Custom-written (tailor-made) software</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="7" data-type="tf" data-answer="False">
-      <div class="qhead"><span class="qnum">Q7</span><span class="qtxt">A command-driven interface uses a mouse to select options from pull-down menus.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="8" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q8</span><span class="qtxt">A time-sharing processing system works by:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q8" value="A"> Processing each user's job completely before starting the next</label>
-        <label class="opt"><input type="radio" name="q8" value="B"> Giving each terminal a small time slice of the CPU in rotation</label>
-        <label class="opt"><input type="radio" name="q8" value="C"> Responding to events within a predetermined time</label>
-        <label class="opt"><input type="radio" name="q8" value="D"> Running jobs from a batch queue overnight</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="9" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q9</span><span class="qtxt">Which of the following is a utility program function?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q9" value="A"> Running a word processor document</label>
-        <label class="opt"><input type="radio" name="q9" value="B"> Displaying a pull-down menu</label>
-        <label class="opt"><input type="radio" name="q9" value="C"> Disk defragmentation and virus protection</label>
-        <label class="opt"><input type="radio" name="q9" value="D"> Translating high-level code to machine code</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="10" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q10</span><span class="qtxt">An operating system manages computer resources, files, memory, tasks and maintains security.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section B — Computer Hardware &amp; CPU (Q11–20)</div>
-
-    <div class="qcard" data-q="11" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q11</span><span class="qtxt">Which two units make up the Central Processing Unit (CPU)?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q11" value="A"> RAM and ROM</label>
-        <label class="opt"><input type="radio" name="q11" value="B"> Control Unit (CU) and Arithmetic and Logic Unit (ALU)</label>
-        <label class="opt"><input type="radio" name="q11" value="C"> Program Counter and Instruction Register</label>
-        <label class="opt"><input type="radio" name="q11" value="D"> Hard disk and motherboard</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="12" data-type="tf" data-answer="False">
-      <div class="qhead"><span class="qnum">Q12</span><span class="qtxt">Supercomputers are mainly used in banks for bulk data processing such as bank transactions.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="13" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q13</span><span class="qtxt">The program counter (PC) in a CPU holds:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q13" value="A"> The result of arithmetic operations</label>
-        <label class="opt"><input type="radio" name="q13" value="B"> The instruction currently being executed</label>
-        <label class="opt"><input type="radio" name="q13" value="C"> The address of the next instruction to be processed</label>
-        <label class="opt"><input type="radio" name="q13" value="D"> Permanent startup instructions</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="14" data-type="short" data-answer="transistors">
-      <div class="qhead"><span class="qnum">Q14</span><span class="qtxt">Invented in 1947, <strong>___________</strong> formed the basis of second generation computers, making them smaller, faster and more reliable.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="15" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q15</span><span class="qtxt">Which generation of computers is characterised by Ultra Large Scale Integration (ULSI)?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q15" value="A"> Second generation</label>
-        <label class="opt"><input type="radio" name="q15" value="B"> Third generation</label>
-        <label class="opt"><input type="radio" name="q15" value="C"> Fifth generation</label>
-        <label class="opt"><input type="radio" name="q15" value="D"> Fourth generation</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="16" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q16</span><span class="qtxt">A register in the CPU is best described as:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q16" value="A"> A temporary storage location that holds a single instruction or data item</label>
-        <label class="opt"><input type="radio" name="q16" value="B"> A permanent memory chip on the motherboard</label>
-        <label class="opt"><input type="radio" name="q16" value="C"> A large cache memory bank</label>
-        <label class="opt"><input type="radio" name="q16" value="D"> The bus connecting the CPU to RAM</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="17" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q17</span><span class="qtxt">Fifth generation computers are expected to use artificial intelligence and accept spoken word instructions.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="18" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q18</span><span class="qtxt">What is the main electronic component of first generation computers?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q18" value="A"> Transistor</label>
-        <label class="opt"><input type="radio" name="q18" value="B"> Vacuum tube (valve)</label>
-        <label class="opt"><input type="radio" name="q18" value="C"> Integrated circuit</label>
-        <label class="opt"><input type="radio" name="q18" value="D"> Microprocessor chip</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="19" data-type="short" data-answer="embedded">
-      <div class="qhead"><span class="qnum">Q19</span><span class="qtxt">A special purpose computer used inside a device and dedicated to specific functions is called an <strong>___________</strong> computer.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="20" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q20</span><span class="qtxt">The Arithmetic and Logic Unit (ALU) is responsible for:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q20" value="A"> Directing and co-ordinating all activities within the CPU</label>
-        <label class="opt"><input type="radio" name="q20" value="B"> Storing startup instructions permanently</label>
-        <label class="opt"><input type="radio" name="q20" value="C"> Performing all arithmetic and logic functions</label>
-        <label class="opt"><input type="radio" name="q20" value="D"> Managing files and memory allocation</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section C — Input Devices &amp; Data Capture (Q21–30)</div>
-
-    <div class="qcard" data-q="21" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q21</span><span class="qtxt">Validation is best described as:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q21" value="A"> Checking data has been accurately copied or transcribed</label>
-        <label class="opt"><input type="radio" name="q21" value="B"> Checking data before processing to ensure it obeys the rules applied to it</label>
-        <label class="opt"><input type="radio" name="q21" value="C"> Checking that a field is not left empty</label>
-        <label class="opt"><input type="radio" name="q21" value="D"> Checking the number of characters entered</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="22" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q22</span><span class="qtxt">MICR (Magnetic Ink Character Recognition) is used mainly to read cheques whose data is encoded with magnetic ink.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="23" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q23</span><span class="qtxt">Which check ensures that an entered value is of a specific type (e.g. numeric)?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q23" value="A"> Data type check</label>
-        <label class="opt"><input type="radio" name="q23" value="B"> Range check</label>
-        <label class="opt"><input type="radio" name="q23" value="C"> Format check</label>
-        <label class="opt"><input type="radio" name="q23" value="D"> Presence check</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="24" data-type="short" data-answer="rfid">
-      <div class="qhead"><span class="qnum">Q24</span><span class="qtxt">What does RFID stand for? (abbreviation accepted)</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="25" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q25</span><span class="qtxt">A barcode contains information encoded as:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q25" value="A"> Magnetic pulses on a strip</label>
-        <label class="opt"><input type="radio" name="q25" value="B"> Reflected light patterns in a grid</label>
-        <label class="opt"><input type="radio" name="q25" value="C"> Vertical lines of differing thickness with numbers at the bottom</label>
-        <label class="opt"><input type="radio" name="q25" value="D"> Embedded chips that transmit radio waves</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="26" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q26</span><span class="qtxt">A turnaround document is one which:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q26" value="A"> Is used only as a source document for data capture</label>
-        <label class="opt"><input type="radio" name="q26" value="B"> Checks that data has been accurately transcribed</label>
-        <label class="opt"><input type="radio" name="q26" value="C"> Is produced to verify data before processing</label>
-        <label class="opt"><input type="radio" name="q26" value="D"> Is produced as output, has more data added, and is re-input for further processing</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="27" data-type="tf" data-answer="False">
-      <div class="qhead"><span class="qnum">Q27</span><span class="qtxt">OMR (Optical Mark Reader) is used mainly to read printed text and convert it into editable digital format.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="28" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q28</span><span class="qtxt">Which check attaches an extra digit to a string so any digit changed by mistake will be detected?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q28" value="A"> Range check</label>
-        <label class="opt"><input type="radio" name="q28" value="B"> Check digit</label>
-        <label class="opt"><input type="radio" name="q28" value="C"> Parity check</label>
-        <label class="opt"><input type="radio" name="q28" value="D"> Presence check</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="29" data-type="short" data-answer="biometrics">
-      <div class="qhead"><span class="qnum">Q29</span><span class="qtxt">The science of identifying individuals through body characteristics such as fingerprint, iris, retina and voice patterns is called <strong>___________</strong>.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="30" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q30</span><span class="qtxt">Pointing devices are used to:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q30" value="A"> Move a pointer or cursor on screen and enable selection of objects</label>
-        <label class="opt"><input type="radio" name="q30" value="B"> Convert analogue signals to digital</label>
-        <label class="opt"><input type="radio" name="q30" value="C"> Capture images and store them in memory</label>
-        <label class="opt"><input type="radio" name="q30" value="D"> Scan and read magnetic ink characters</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section D — Output Devices (Q31–40)</div>
-
-    <div class="qcard" data-q="31" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q31</span><span class="qtxt">Which of the following is a hard copy output device?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q31" value="A"> Monitor (VDU)</label>
-        <label class="opt"><input type="radio" name="q31" value="B"> Speaker</label>
-        <label class="opt"><input type="radio" name="q31" value="C"> Projector screen</label>
-        <label class="opt"><input type="radio" name="q31" value="D"> Laser printer</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="32" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q32</span><span class="qtxt">Soft copy output disappears when the computer is switched off.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="33" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q33</span><span class="qtxt">Impact printers include:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q33" value="A"> Thermal, laser and inkjet printers</label>
-        <label class="opt"><input type="radio" name="q33" value="B"> Dot matrix, daisy wheel and drum/chain/band printers</label>
-        <label class="opt"><input type="radio" name="q33" value="C"> Laser and LED printers only</label>
-        <label class="opt"><input type="radio" name="q33" value="D"> Inkjet and bubble-jet printers</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="34" data-type="short" data-answer="pixel">
-      <div class="qhead"><span class="qnum">Q34</span><span class="qtxt">The smallest unit on a screen that can be turned on, off or coloured in different shades is called a <strong>___________</strong>.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="35" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q35</span><span class="qtxt">A plotter is used in CAD to:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q35" value="A"> Print text documents at high speed</label>
-        <label class="opt"><input type="radio" name="q35" value="B"> Scan technical drawings into the computer</label>
-        <label class="opt"><input type="radio" name="q35" value="C"> Draw high quality graphics, charts and maps on large sheets of paper</label>
-        <label class="opt"><input type="radio" name="q35" value="D"> Store computer output on microfilm</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="36" data-type="tf" data-answer="False">
-      <div class="qhead"><span class="qnum">Q36</span><span class="qtxt">Modems are output-only devices used exclusively to send data over a telephone line.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="37" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q37</span><span class="qtxt">Computer Output on Microfilm/Microfiche (COM) is used to:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q37" value="A"> Store computer documents by vastly reducing them to fit on photographic prints</label>
-        <label class="opt"><input type="radio" name="q37" value="B"> Print high-resolution colour graphics on large paper</label>
-        <label class="opt"><input type="radio" name="q37" value="C"> Display output in real time on a monitor</label>
-        <label class="opt"><input type="radio" name="q37" value="D"> Convert analogue audio output to digital</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="38" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q38</span><span class="qtxt">A monitor's performance depends on which factors?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q38" value="A"> Processor speed and RAM size</label>
-        <label class="opt"><input type="radio" name="q38" value="B"> Graphics/video card, size, resolution, image aspect ratio and refresh rate</label>
-        <label class="opt"><input type="radio" name="q38" value="C"> Hard disk speed and network bandwidth</label>
-        <label class="opt"><input type="radio" name="q38" value="D"> Number of USB ports and power supply wattage</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="39" data-type="short" data-answer="inkjet">
-      <div class="qhead"><span class="qnum">Q39</span><span class="qtxt">A non-impact printer that sprays ink onto paper to form characters and images is called an <strong>___________</strong> printer.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="40" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q40</span><span class="qtxt">Output can be either human readable or machine readable.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section E — Storage (Q41–50)</div>
-
-    <div class="qcard" data-q="41" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q41</span><span class="qtxt">ROM chips differ from RAM chips because ROM:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q41" value="A"> Is volatile and loses data when power is removed</label>
-        <label class="opt"><input type="radio" name="q41" value="B"> Is non-volatile and can only be read, not written to</label>
-        <label class="opt"><input type="radio" name="q41" value="C"> Can be written to many times and stores temporary data</label>
-        <label class="opt"><input type="radio" name="q41" value="D"> Holds data currently being processed by the CPU</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="42" data-type="tf" data-answer="False">
-      <div class="qhead"><span class="qnum">Q42</span><span class="qtxt">Magnetic tapes provide direct access to data, making them fast for retrieving individual records.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="43" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q43</span><span class="qtxt">A floppy disk has a storage capacity of:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q43" value="A"> 4 GB</label>
-        <label class="opt"><input type="radio" name="q43" value="B"> 700 MB</label>
-        <label class="opt"><input type="radio" name="q43" value="C"> 1.44 MB</label>
-        <label class="opt"><input type="radio" name="q43" value="D"> 2 GB</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="44" data-type="short" data-answer="volatile">
-      <div class="qhead"><span class="qnum">Q44</span><span class="qtxt">RAM is described as <strong>___________</strong> because it loses its data when the power is switched off.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="45" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q45</span><span class="qtxt">Which of the following is the smallest unit of storage?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q45" value="A"> Byte</label>
-        <label class="opt"><input type="radio" name="q45" value="B"> Kilobyte</label>
-        <label class="opt"><input type="radio" name="q45" value="C"> Word</label>
-        <label class="opt"><input type="radio" name="q45" value="D"> Bit</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="46" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q46</span><span class="qtxt">RAID stands for:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q46" value="A"> Redundant Array of Independent Disk</label>
-        <label class="opt"><input type="radio" name="q46" value="B"> Rapid Access Integrated Drive</label>
-        <label class="opt"><input type="radio" name="q46" value="C"> Random Access Input Device</label>
-        <label class="opt"><input type="radio" name="q46" value="D"> Rewritable Array of Integrated Disks</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="47" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q47</span><span class="qtxt">Flash memory is non-volatile solid-state memory used in devices such as digital cameras, cell phones and USB drives.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="48" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q48</span><span class="qtxt">Optical disks include which of the following?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q48" value="A"> Floppy disk and magnetic tape</label>
-        <label class="opt"><input type="radio" name="q48" value="B"> Hard disk and SSD</label>
-        <label class="opt"><input type="radio" name="q48" value="C"> CD-ROM, CD-R, CD-RW and DVDs</label>
-        <label class="opt"><input type="radio" name="q48" value="D"> USB drives and flash cards</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="49" data-type="short" data-answer="formatting">
-      <div class="qhead"><span class="qnum">Q49</span><span class="qtxt">Writing electronic information on a disk so the computer can recognise it as a valid storage device is called <strong>___________</strong> a disk.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="50" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q50</span><span class="qtxt">Which of the following correctly defines one gigabyte (GB)?</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q50" value="A"> Approximately one thousand bytes</label>
-        <label class="opt"><input type="radio" name="q50" value="B"> Approximately one billion bytes</label>
-        <label class="opt"><input type="radio" name="q50" value="C"> Approximately one million bytes</label>
-        <label class="opt"><input type="radio" name="q50" value="D"> Exactly 1 024 bytes</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section F — Data Representation &amp; Number Systems (Q51–55)</div>
-
-    <div class="qcard" data-q="51" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q51</span><span class="qtxt">To find the two's complement of a binary number you must:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q51" value="A"> Flip all the bits (one's complement) then add 1</label>
-        <label class="opt"><input type="radio" name="q51" value="B"> Flip all the bits only</label>
-        <label class="opt"><input type="radio" name="q51" value="C"> Set the leftmost bit to 1 and keep the rest the same</label>
-        <label class="opt"><input type="radio" name="q51" value="D"> Divide by 2 and record the remainder</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="52" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q52</span><span class="qtxt">ASCII is a seven-bit code used to represent characters in computers.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="53" data-type="short" data-answer="8">
-      <div class="qhead"><span class="qnum">Q53</span><span class="qtxt">How many bits make up one byte? (Enter a number)</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="54" data-type="mcq" data-answer="D">
-      <div class="qhead"><span class="qnum">Q54</span><span class="qtxt">A parity bit is used to:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q54" value="A"> Compress data before transmission</label>
-        <label class="opt"><input type="radio" name="q54" value="B"> Encrypt data during transmission</label>
-        <label class="opt"><input type="radio" name="q54" value="C"> Speed up data transmission</label>
-        <label class="opt"><input type="radio" name="q54" value="D"> Detect errors in data transmitted between computers</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="55" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q55</span><span class="qtxt">In sign and magnitude representation, the MSB '1' represents:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q55" value="A"> A positive number</label>
-        <label class="opt"><input type="radio" name="q55" value="B"> A negative number</label>
-        <label class="opt"><input type="radio" name="q55" value="C"> Zero</label>
-        <label class="opt"><input type="radio" name="q55" value="D"> An overflow error</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="sec-title">Section G — Networks &amp; the Internet (Q56–60)</div>
-
-    <div class="qcard" data-q="56" data-type="mcq" data-answer="C">
-      <div class="qhead"><span class="qnum">Q56</span><span class="qtxt">A LAN (Local Area Network) is best described as:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q56" value="A"> A network connecting computers across different countries via satellite links</label>
-        <label class="opt"><input type="radio" name="q56" value="B"> A network that only connects to the Internet through an ISP</label>
-        <label class="opt"><input type="radio" name="q56" value="C"> Microcomputers connected within a small geographical area to share information and peripherals</label>
-        <label class="opt"><input type="radio" name="q56" value="D"> A network that converts analogue signals to digital for transmission</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="57" data-type="tf" data-answer="True">
-      <div class="qhead"><span class="qnum">Q57</span><span class="qtxt">VoIP (Voice over Internet Protocol) uses the Internet rather than traditional telephone lines to transmit voice calls.</span></div>
-      <div class="tf-row"><button class="tf" data-val="True">✓ True</button><button class="tf" data-val="False">✗ False</button></div>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="58" data-type="mcq" data-answer="A">
-      <div class="qhead"><span class="qnum">Q58</span><span class="qtxt">The protocol used over the Internet allowing different operating systems to communicate is:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q58" value="A"> TCP/IP</label>
-        <label class="opt"><input type="radio" name="q58" value="B"> HTTP</label>
-        <label class="opt"><input type="radio" name="q58" value="C"> FTP</label>
-        <label class="opt"><input type="radio" name="q58" value="D"> PPP</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="59" data-type="short" data-answer="wiki">
-      <div class="qhead"><span class="qnum">Q59</span><span class="qtxt">A website where users can add, remove and edit every page collaboratively without HTML knowledge is called a <strong>___________</strong>.</span></div>
-      <textarea class="sa" placeholder="Type your answer…"></textarea>
-      <div class="fb"></div>
-    </div>
-
-    <div class="qcard" data-q="60" data-type="mcq" data-answer="B">
-      <div class="qhead"><span class="qnum">Q60</span><span class="qtxt">HTTP stands for:</span></div>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q60" value="A"> Hypertext Transfer Pathway</label>
-        <label class="opt"><input type="radio" name="q60" value="B"> HyperText Transfer Protocol</label>
-        <label class="opt"><input type="radio" name="q60" value="C"> Hybrid Terminal Transfer Process</label>
-        <label class="opt"><input type="radio" name="q60" value="D"> High-speed Text Transfer Protocol</label>
-      </div><div class="fb"></div>
-    </div>
-
-    <button class="btn-submit" id="btn-submit">Submit Test</button>
-  </div><!-- /q-wrap -->
-</div><!-- /screen-test -->
-
-<!-- ═══════════════════ SCREEN: RESULTS ═══════════════════ -->
+    <!-- Questions injected by JS -->
+    <button class="btn-submit" id="btn-submit" disabled>Submit Test</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
 <div id="screen-results" class="screen">
-  <div id="res-inner" style="max-width:720px;margin:50px auto 0;padding:0 24px;">
+  <div style="max-width:720px;margin:50px auto 0;padding:0 24px;">
     <div class="res-card">
       <h2>Test Complete!</h2>
       <div class="res-student" id="res-student"></div>
-      <div class="score-big" id="res-pct">—</div>
+      <div class="score-big" id="score-big"></div>
       <div class="res-msg" id="res-msg"></div>
       <div class="res-grid">
-        <div class="rstat"><div class="v c" id="res-correct">—</div><div class="l">Correct</div></div>
-        <div class="rstat"><div class="v w" id="res-wrong">—</div><div class="l">Incorrect</div></div>
-        <div class="rstat"><div class="v" style="color:var(--accent)">60</div><div class="l">Total</div></div>
+        <div class="rstat"><div class="v c" id="res-correct">0</div><div class="l">Correct</div></div>
+        <div class="rstat"><div class="v w" id="res-wrong">0</div><div class="l">Wrong</div></div>
+        <div class="rstat"><div class="v" id="res-total" style="color:var(--accent)">100</div><div class="l">Total</div></div>
       </div>
-      <div class="att-note" id="att-note" style="display:none;"></div>
-      <div id="retry-wrap"></div>
+      <div class="att-note" id="res-timed-note"></div>
+      <button class="btn-retry" id="btn-retry">Take Test Again</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════ SCREEN: TEACHER ═══════════════════ -->
+<!-- TEACHER DASHBOARD -->
 <div id="screen-teacher" class="screen">
   <div class="dash-head">
-    <h2>📊 Teacher Results Dashboard</h2>
+    <h2>Teacher Dashboard &mdash; Six Weeks Test 2 (Grade 10)</h2>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn-clear" onclick="clearAll()">🗑 Clear All Results</button>
-      <button class="btn-back" onclick="goToLanding()">← Back</button>
+      <button class="btn-back" id="btn-back">&#8592; Back</button>
+      <button class="btn-clear" id="btn-clear">Clear All Results</button>
     </div>
   </div>
-  <div class="chips" id="dash-chips"></div>
+
+  <!-- Test Settings -->
+  <div class="settings-panel">
+    <h3>&#9881; Test Controls</h3>
+    <div class="settings-grid">
+      <div class="s-field">
+        <label>Time Limit (minutes)</label>
+        <input type="number" id="set-duration" min="1" max="300" value="90" placeholder="e.g. 90">
+      </div>
+      <div class="s-field">
+        <label>Close Test At (date &amp; time)</label>
+        <input type="datetime-local" id="set-close">
+      </div>
+      <div class="s-field" style="display:flex;flex-direction:column;justify-content:flex-end;">
+        <label>Test Status</label>
+        <div class="s-toggle">
+          <input type="checkbox" id="set-open" checked>
+          <span id="set-open-label">Test is OPEN</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-save-settings" id="btn-save-settings">Save Settings</button>
+    <div class="settings-status" id="settings-status">&#10003; Settings saved.</div>
+  </div>
+
+  <div id="dash-status-banner" class="test-status-banner open">&#x25CF; Test is currently OPEN</div>
+
+  <div class="chips">
+    <div class="chip"><div class="cv" id="chip-attempts">0</div><div class="cl">Attempts</div></div>
+    <div class="chip"><div class="cv" id="chip-avg">&#8212;</div><div class="cl">Avg Score</div></div>
+    <div class="chip"><div class="cv" id="chip-pass">0</div><div class="cl">Pass &#8805;50</div></div>
+    <div class="chip"><div class="cv" id="chip-fail">0</div><div class="cl">Fail &lt;50</div></div>
+  </div>
   <div class="filters">
-    <input type="text" id="f-name" placeholder="🔍 Search name…" oninput="renderDash()">
-    <select id="f-class" onchange="renderDash()">
-      <option value="">All Classes</option>
+    <input type="text" id="f-search" placeholder="Search name&#8230;">
+    <select id="f-class">
+      <option value="">All classes</option>
       <option>10O</option><option>10B</option><option>10E</option>
-      <option>10R</option><option>10L</option><option>10I</option><option>10N</option>
-    </select>
-    <select id="f-sort" onchange="renderDash()">
-      <option value="newest">Newest first</option>
-      <option value="oldest">Oldest first</option>
-      <option value="hi">Highest score</option>
-      <option value="lo">Lowest score</option>
-      <option value="name">Name A–Z</option>
+      <option>10R</option><option>10L</option><option>10I</option>
+      <option>10N</option><option>10H</option>
     </select>
   </div>
   <table>
-    <thead>
-      <tr><th>#</th><th>Name</th><th>Class</th><th>Score</th><th>%</th><th>Attempt</th><th>Date &amp; Time</th><th>Result</th></tr>
-    </thead>
-    <tbody id="dash-tbody"></tbody>
+    <thead><tr><th>Name</th><th>Class</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Time Used</th><th>Grade</th><th>Submitted</th></tr></thead>
+    <tbody id="results-tbody"><tr><td colspan="8" class="no-data">No results yet.</td></tr></tbody>
   </table>
 </div>
 
-<!-- ═══════════════════ PASSWORD MODAL ═══════════════════ -->
-<div class="modal-bg" id="pw-modal">
+<!-- TEACHER PASSWORD MODAL -->
+<div class="modal-bg" id="modal-bg">
   <div class="modal-box">
     <h3>Teacher Access</h3>
-    <p>Enter the teacher password to view student results.</p>
-    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
-    <div class="pw-err" id="pw-err">Incorrect password. Try again.</div>
-    <button class="btn-unlock" onclick="checkPw()">Unlock Dashboard</button>
-    <button class="btn-cancel" onclick="closePw()">Cancel</button>
+    <p>Enter the teacher password to view the dashboard.</p>
+    <input type="password" id="modal-pw" placeholder="Password" maxlength="20">
+    <button class="btn-unlock" id="btn-unlock">Unlock</button>
+    <div class="pw-err" id="pw-err">Incorrect password.</div>
+    <button class="btn-cancel" id="btn-cancel">Cancel</button>
   </div>
 </div>
 
 <script>
-const TOTAL = 60;
+const ALL_QUESTIONS = [{"id": 1, "section": "Section A — Computer Hardware &amp; CPU", "q": "The part of the CPU that performs arithmetic calculations and logic operations is the:", "opts": [{"k": "A", "t": "Control Unit (CU)"}, {"k": "B", "t": "Random Access Memory (RAM)"}, {"k": "C", "t": "Arithmetic and Logic Unit (ALU)"}, {"k": "D", "t": "Read Only Memory (ROM)"}], "ans": "C"}, {"id": 2, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Control Unit (CU) is responsible for:", "opts": [{"k": "A", "t": "Performing all mathematical calculations"}, {"k": "B", "t": "Directing and co-ordinating all activities within the CPU"}, {"k": "C", "t": "Storing permanent startup instructions"}, {"k": "D", "t": "Holding data currently being processed"}], "ans": "B"}, {"id": 3, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which two units make up the Central Processing Unit (CPU)?", "opts": [{"k": "A", "t": "Control Unit (CU) and Arithmetic and Logic Unit (ALU)"}, {"k": "B", "t": "RAM and ROM"}, {"k": "C", "t": "Hard disk and motherboard"}, {"k": "D", "t": "Program Counter and Cache Memory"}], "ans": "A"}, {"id": 4, "section": "Section A — Computer Hardware &amp; CPU", "q": "Clock speed of a CPU is measured in:", "opts": [{"k": "A", "t": "Megabytes (MB)"}, {"k": "B", "t": "Gigabytes (GB)"}, {"k": "C", "t": "Kilobits (Kb)"}, {"k": "D", "t": "Gigahertz (GHz) or Megahertz (MHz)"}], "ans": "D"}, {"id": 5, "section": "Section A — Computer Hardware &amp; CPU", "q": "The fetch-decode-execute cycle describes:", "opts": [{"k": "A", "t": "How data is written to and read from secondary storage"}, {"k": "B", "t": "The steps the Control Unit carries out when processing each instruction"}, {"k": "C", "t": "How RAM communicates with ROM"}, {"k": "D", "t": "The process of formatting a hard disk"}], "ans": "B"}, {"id": 6, "section": "Section A — Computer Hardware &amp; CPU", "q": "Cache memory is used in a computer system to:", "opts": [{"k": "A", "t": "Store programs permanently when the power is off"}, {"k": "B", "t": "Back up important data files automatically"}, {"k": "C", "t": "Speed up the CPU by storing frequently used instructions close to the processor"}, {"k": "D", "t": "Replace secondary storage when it is full"}], "ans": "C"}, {"id": 7, "section": "Section A — Computer Hardware &amp; CPU", "q": "Word size in a CPU refers to:", "opts": [{"k": "A", "t": "The number of words per second a printer can output"}, {"k": "B", "t": "The number of bits the CPU can process in a single operation"}, {"k": "C", "t": "The maximum number of characters in a file name"}, {"k": "D", "t": "The speed of the system clock in MHz"}], "ans": "B"}, {"id": 8, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following is an arithmetic operation performed by the ALU?", "opts": [{"k": "A", "t": "Division"}, {"k": "B", "t": "AND"}, {"k": "C", "t": "OR"}, {"k": "D", "t": "NOT"}], "ans": "A"}, {"id": 9, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Program Counter (PC) in a CPU holds:", "opts": [{"k": "A", "t": "The result of the most recent arithmetic operation"}, {"k": "B", "t": "The instruction currently being decoded"}, {"k": "C", "t": "The memory address of the next instruction to be executed"}, {"k": "D", "t": "Permanent BIOS startup data"}], "ans": "C"}, {"id": 10, "section": "Section A — Computer Hardware &amp; CPU", "q": "RAM is described as volatile because:", "opts": [{"k": "A", "t": "It can only be read and never written to"}, {"k": "B", "t": "It loses all its data when the power is switched off"}, {"k": "C", "t": "It stores data permanently on magnetic platters"}, {"k": "D", "t": "It is used only during the boot-up process"}], "ans": "B"}, {"id": 11, "section": "Section A — Computer Hardware &amp; CPU", "q": "ROM is mainly used to:", "opts": [{"k": "A", "t": "Store temporary data while the CPU processes it"}, {"k": "B", "t": "Perform arithmetic calculations for the ALU"}, {"k": "C", "t": "Store the startup (BIOS) instructions that run when the computer is switched on"}, {"k": "D", "t": "Save user files and documents permanently"}], "ans": "C"}, {"id": 12, "section": "Section A — Computer Hardware &amp; CPU", "q": "One byte consists of:", "opts": [{"k": "A", "t": "2 bits"}, {"k": "B", "t": "4 bits"}, {"k": "C", "t": "8 bits"}, {"k": "D", "t": "16 bits"}], "ans": "C"}, {"id": 13, "section": "Section A — Computer Hardware &amp; CPU", "q": "1 GB is equal to:", "opts": [{"k": "A", "t": "1 024 bytes"}, {"k": "B", "t": "1 024 KB"}, {"k": "C", "t": "1 024 GB"}, {"k": "D", "t": "1 024 MB"}], "ans": "D"}, {"id": 14, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following BEST describes secondary storage?", "opts": [{"k": "A", "t": "Memory that is volatile and loses data when power is removed"}, {"k": "B", "t": "The memory used by the CPU to run programs currently open"}, {"k": "C", "t": "Read-only memory that holds startup instructions permanently"}, {"k": "D", "t": "Permanent storage outside the CPU that retains data without power"}], "ans": "D"}, {"id": 15, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which storage device uses sequential access to retrieve data?", "opts": [{"k": "A", "t": "Hard disk drive"}, {"k": "B", "t": "USB flash drive"}, {"k": "C", "t": "Magnetic tape"}, {"k": "D", "t": "CD-ROM"}], "ans": "C"}, {"id": 16, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, which keyboard shortcut is used to BOLD selected text?", "opts": [{"k": "A", "t": "Ctrl + I"}, {"k": "B", "t": "Ctrl + B"}, {"k": "C", "t": "Ctrl + U"}, {"k": "D", "t": "Ctrl + E"}], "ans": "B"}, {"id": 17, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to SAVE a document in Microsoft Word?", "opts": [{"k": "A", "t": "Ctrl + P"}, {"k": "B", "t": "Ctrl + O"}, {"k": "C", "t": "Ctrl + S"}, {"k": "D", "t": "Ctrl + N"}], "ans": "C"}, {"id": 18, "section": "Section B — Microsoft Word", "q": "What is the default file extension for a Microsoft Word 2010 or later document?", "opts": [{"k": "A", "t": ".docx"}, {"k": "B", "t": ".doc"}, {"k": "C", "t": ".txt"}, {"k": "D", "t": ".pdf"}], "ans": "A"}, {"id": 19, "section": "Section B — Microsoft Word", "q": "Which Word feature automatically checks and corrects spelling errors as you type?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "Mail Merge"}, {"k": "D", "t": "AutoCorrect"}], "ans": "D"}, {"id": 20, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to UNDO the last action in Word?", "opts": [{"k": "A", "t": "Ctrl + Y"}, {"k": "B", "t": "Ctrl + Z"}, {"k": "C", "t": "Ctrl + X"}, {"k": "D", "t": "Ctrl + A"}], "ans": "B"}, {"id": 21, "section": "Section B — Microsoft Word", "q": "In Word, \"Cut\" and \"Paste\" moves text, while \"Copy\" and \"Paste\":", "opts": [{"k": "A", "t": "Deletes the original text permanently"}, {"k": "B", "t": "Moves the text to a new location"}, {"k": "C", "t": "Creates a duplicate of the text, leaving the original intact"}, {"k": "D", "t": "Formats the text as bold"}], "ans": "C"}, {"id": 22, "section": "Section B — Microsoft Word", "q": "The Word feature that allows you to send the same letter to multiple recipients with personalised details is called:", "opts": [{"k": "A", "t": "Mail Merge"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "AutoCorrect"}, {"k": "D", "t": "Find &amp; Replace"}], "ans": "A"}, {"id": 23, "section": "Section B — Microsoft Word", "q": "Which Word formatting option aligns text equally on both the left and right margins?", "opts": [{"k": "A", "t": "Left align"}, {"k": "B", "t": "Right align"}, {"k": "C", "t": "Centre align"}, {"k": "D", "t": "Justify"}], "ans": "D"}, {"id": 24, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, \"Find &amp; Replace\" (Ctrl + H) is used to:", "opts": [{"k": "A", "t": "Format selected text with a new font"}, {"k": "B", "t": "Locate specific text and substitute it with different text"}, {"k": "C", "t": "Insert a table into the document"}, {"k": "D", "t": "Check grammar errors automatically"}], "ans": "B"}, {"id": 25, "section": "Section B — Microsoft Word", "q": "A page break in Word is used to:", "opts": [{"k": "A", "t": "Delete a page from the document"}, {"k": "B", "t": "Print only selected pages"}, {"k": "C", "t": "Force text to start at the top of the next page"}, {"k": "D", "t": "Split a table across two columns"}], "ans": "C"}, {"id": 26, "section": "Section B — Microsoft Word", "q": "Which ribbon tab in Word contains the \"Font\" and \"Paragraph\" groups?", "opts": [{"k": "A", "t": "Home"}, {"k": "B", "t": "Insert"}, {"k": "C", "t": "Page Layout"}, {"k": "D", "t": "Review"}], "ans": "A"}, {"id": 27, "section": "Section B — Microsoft Word", "q": "Which view in Microsoft Word shows exactly how the document will look when printed?", "opts": [{"k": "A", "t": "Draft view"}, {"k": "B", "t": "Outline view"}, {"k": "C", "t": "Web Layout view"}, {"k": "D", "t": "Print Layout view"}], "ans": "D"}, {"id": 28, "section": "Section B — Microsoft Word", "q": "In Word, \"Track Changes\" is used to:", "opts": [{"k": "A", "t": "Monitor how many times a document has been saved"}, {"k": "B", "t": "Record edits made to a document so reviewers can accept or reject them"}, {"k": "C", "t": "Automatically correct spelling as you type"}, {"k": "D", "t": "Track the number of words in the document"}], "ans": "B"}, {"id": 29, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut selects ALL text in a Word document?", "opts": [{"k": "A", "t": "Ctrl + S"}, {"k": "B", "t": "Ctrl + C"}, {"k": "C", "t": "Ctrl + A"}, {"k": "D", "t": "Ctrl + F"}], "ans": "C"}, {"id": 30, "section": "Section B — Microsoft Word", "q": "What is a \"Header\" in a Microsoft Word document?", "opts": [{"k": "A", "t": "Text that appears at the top of every page of the document"}, {"k": "B", "t": "The title of the document typed at the beginning"}, {"k": "C", "t": "The first paragraph of the document"}, {"k": "D", "t": "A style applied to Heading 1 text"}], "ans": "A"}, {"id": 31, "section": "Section B — Microsoft Word", "q": "In Word, \"line spacing\" refers to:", "opts": [{"k": "A", "t": "The number of characters per line"}, {"k": "B", "t": "The width of the page margins"}, {"k": "C", "t": "The font size of the text"}, {"k": "D", "t": "The amount of vertical space between lines of text"}], "ans": "D"}, {"id": 32, "section": "Section B — Microsoft Word", "q": "Which Word feature inserts automatic numbering or letters at the start of each paragraph?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Numbered list"}, {"k": "C", "t": "Page break"}, {"k": "D", "t": "Header"}], "ans": "B"}, {"id": 33, "section": "Section B — Microsoft Word", "q": "The \"Spelling &amp; Grammar\" checker in Word can be launched with which key?", "opts": [{"k": "A", "t": "F1"}, {"k": "B", "t": "F4"}, {"k": "C", "t": "F7"}, {"k": "D", "t": "F10"}], "ans": "C"}, {"id": 34, "section": "Section B — Microsoft Word", "q": "In Word, what does \"portrait\" orientation mean?", "opts": [{"k": "A", "t": "The page is taller than it is wide (vertical)"}, {"k": "B", "t": "The page is wider than it is tall (horizontal)"}, {"k": "C", "t": "The page is printed on both sides"}, {"k": "D", "t": "The text runs diagonally across the page"}], "ans": "A"}, {"id": 35, "section": "Section B — Microsoft Word", "q": "Which Word feature allows a long document to be automatically divided into columns of text (like a newspaper)?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Indent"}, {"k": "C", "t": "Line spacing"}, {"k": "D", "t": "Columns (in the Page Layout tab)"}], "ans": "D"}, {"id": 36, "section": "Section C — Microsoft Excel", "q": "What is the default file extension for a Microsoft Excel 2010 or later workbook?", "opts": [{"k": "A", "t": ".xls"}, {"k": "B", "t": ".xlsx"}, {"k": "C", "t": ".csv"}, {"k": "D", "t": ".xlsm"}], "ans": "B"}, {"id": 37, "section": "Section C — Microsoft Excel", "q": "In Excel, the intersection of a row and a column is called a:", "opts": [{"k": "A", "t": "Cell"}, {"k": "B", "t": "Table"}, {"k": "C", "t": "Range"}, {"k": "D", "t": "Worksheet"}], "ans": "A"}, {"id": 38, "section": "Section C — Microsoft Excel", "q": "In Excel, all formulas must begin with:", "opts": [{"k": "A", "t": "A letter"}, {"k": "B", "t": "A number"}, {"k": "C", "t": "An equals sign (=)"}, {"k": "D", "t": "A dollar sign ($)"}], "ans": "C"}, {"id": 39, "section": "Section C — Microsoft Excel", "q": "Which Excel function adds all the values in a range of cells?", "opts": [{"k": "A", "t": "=COUNT()"}, {"k": "B", "t": "=MAX()"}, {"k": "C", "t": "=AVERAGE()"}, {"k": "D", "t": "=SUM()"}], "ans": "D"}, {"id": 40, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =AVERAGE(B1:B5) calculate?", "opts": [{"k": "A", "t": "The total of cells B1 through B5"}, {"k": "B", "t": "The mean (average) of cells B1 through B5"}, {"k": "C", "t": "The number of cells that contain values in B1:B5"}, {"k": "D", "t": "The largest value in cells B1 through B5"}], "ans": "B"}, {"id": 41, "section": "Section C — Microsoft Excel", "q": "In Excel, columns are labelled with:", "opts": [{"k": "A", "t": "Letters (A, B, C…)"}, {"k": "B", "t": "Numbers (1, 2, 3…)"}, {"k": "C", "t": "Roman numerals (I, II, III…)"}, {"k": "D", "t": "Symbols (#, @, $…)"}], "ans": "A"}, {"id": 42, "section": "Section C — Microsoft Excel", "q": "The cell reference $A$1 in Excel is an example of:", "opts": [{"k": "A", "t": "A relative reference"}, {"k": "B", "t": "A mixed reference"}, {"k": "C", "t": "An absolute reference"}, {"k": "D", "t": "A named range"}], "ans": "C"}, {"id": 43, "section": "Section C — Microsoft Excel", "q": "Which Excel function returns the LARGEST value in a range?", "opts": [{"k": "A", "t": "=MIN()"}, {"k": "B", "t": "=SUM()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=MAX()"}], "ans": "D"}, {"id": 44, "section": "Section C — Microsoft Excel", "q": "In Excel, which chart type is BEST for showing how parts relate to a whole (percentages)?", "opts": [{"k": "A", "t": "Line chart"}, {"k": "B", "t": "Pie chart"}, {"k": "C", "t": "Bar chart"}, {"k": "D", "t": "Scatter chart"}], "ans": "B"}, {"id": 45, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =COUNT(A1:A10) do?", "opts": [{"k": "A", "t": "Counts the number of cells in A1:A10 that contain numeric values"}, {"k": "B", "t": "Adds up all values in A1:A10"}, {"k": "C", "t": "Returns the smallest value in A1:A10"}, {"k": "D", "t": "Returns the average of A1:A10"}], "ans": "A"}, {"id": 46, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to arrange rows in alphabetical or numerical order?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Conditional Formatting"}, {"k": "C", "t": "Sort"}, {"k": "D", "t": "Freeze Panes"}], "ans": "C"}, {"id": 47, "section": "Section C — Microsoft Excel", "q": "In Excel, what does \"AutoFill\" do?", "opts": [{"k": "A", "t": "Automatically saves the workbook every few minutes"}, {"k": "B", "t": "Checks spelling in all cells"}, {"k": "C", "t": "Formats cells with a predefined colour scheme"}, {"k": "D", "t": "Extends a pattern or series of data to adjacent cells by dragging the fill handle"}], "ans": "D"}, {"id": 48, "section": "Section C — Microsoft Excel", "q": "Which of the following is a valid Excel formula to multiply the value in A1 by the value in B1?", "opts": [{"k": "A", "t": "=A1 x B1"}, {"k": "B", "t": "=A1*B1"}, {"k": "C", "t": "=MULTIPLY(A1,B1)"}, {"k": "D", "t": "A1×B1"}], "ans": "B"}, {"id": 49, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Freeze Panes\" is used to:", "opts": [{"k": "A", "t": "Keep selected rows or columns visible when scrolling through a large spreadsheet"}, {"k": "B", "t": "Lock a cell so it cannot be edited"}, {"k": "C", "t": "Apply a border around a cell range"}, {"k": "D", "t": "Merge multiple cells into one"}], "ans": "A"}, {"id": 50, "section": "Section C — Microsoft Excel", "q": "What is a \"workbook\" in Microsoft Excel?", "opts": [{"k": "A", "t": "A single row of data in the spreadsheet"}, {"k": "B", "t": "A single column of data in the spreadsheet"}, {"k": "C", "t": "An Excel file that can contain one or more worksheets"}, {"k": "D", "t": "A chart embedded in the spreadsheet"}], "ans": "C"}, {"id": 51, "section": "Section C — Microsoft Excel", "q": "Which Excel function can be used to display different text based on a condition? E.g. If a student's mark is ≥50, display \"Pass\", otherwise display \"Fail\".", "opts": [{"k": "A", "t": "=SUM()"}, {"k": "B", "t": "=VLOOKUP()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=IF()"}], "ans": "D"}, {"id": 52, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Conditional Formatting\" is used to:", "opts": [{"k": "A", "t": "Apply the same formula to every cell in a column"}, {"k": "B", "t": "Automatically format cells with colours, icons, or data bars based on their values"}, {"k": "C", "t": "Lock cells to prevent editing"}, {"k": "D", "t": "Convert text to numbers automatically"}], "ans": "B"}, {"id": 53, "section": "Section C — Microsoft Excel", "q": "What does the Name Box in Excel display?", "opts": [{"k": "A", "t": "The address (reference) of the currently selected cell, e.g. A1"}, {"k": "B", "t": "The formula used in the current cell"}, {"k": "C", "t": "The name of the workbook"}, {"k": "D", "t": "The number of rows in the spreadsheet"}], "ans": "A"}, {"id": 54, "section": "Section C — Microsoft Excel", "q": "Which chart type is BEST for showing trends over time (e.g. monthly sales)?", "opts": [{"k": "A", "t": "Pie chart"}, {"k": "B", "t": "Column chart"}, {"k": "C", "t": "Line chart"}, {"k": "D", "t": "Doughnut chart"}], "ans": "C"}, {"id": 55, "section": "Section C — Microsoft Excel", "q": "In Excel, what happens when you press the Delete key on a selected cell?", "opts": [{"k": "A", "t": "The entire row is deleted from the spreadsheet"}, {"k": "B", "t": "The cell itself is removed, shifting adjacent cells"}, {"k": "C", "t": "The cell formatting (colour, font) is removed"}, {"k": "D", "t": "The contents (data) of the cell are cleared"}], "ans": "D"}, {"id": 56, "section": "Section C — Microsoft Excel", "q": "What does the Excel formula =MIN(C1:C10) return?", "opts": [{"k": "A", "t": "The average of cells C1 to C10"}, {"k": "B", "t": "The smallest value in cells C1 to C10"}, {"k": "C", "t": "The total sum of cells C1 to C10"}, {"k": "D", "t": "The number of cells that contain data in C1:C10"}], "ans": "B"}, {"id": 57, "section": "Section C — Microsoft Excel", "q": "A \"relative cell reference\" in Excel (e.g. A1) means:", "opts": [{"k": "A", "t": "The reference automatically adjusts when the formula is copied to another cell"}, {"k": "B", "t": "The reference stays fixed regardless of where the formula is copied"}, {"k": "C", "t": "The cell is locked and cannot be changed"}, {"k": "D", "t": "The reference refers to a cell in a different workbook"}], "ans": "A"}, {"id": 58, "section": "Section C — Microsoft Excel", "q": "In Excel, \"merging\" cells means:", "opts": [{"k": "A", "t": "Copying data from one cell to another"}, {"k": "B", "t": "Applying a formula across multiple cells simultaneously"}, {"k": "C", "t": "Combining two or more adjacent cells into a single larger cell"}, {"k": "D", "t": "Sorting cells in ascending order"}], "ans": "C"}, {"id": 59, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to display only rows that meet specific criteria while hiding the rest?", "opts": [{"k": "A", "t": "Sort"}, {"k": "B", "t": "Freeze Panes"}, {"k": "C", "t": "Conditional Formatting"}, {"k": "D", "t": "Filter (AutoFilter)"}], "ans": "D"}, {"id": 60, "section": "Section C — Microsoft Excel", "q": "What is a \"formula bar\" in Excel?", "opts": [{"k": "A", "t": "The toolbar at the top of the screen containing formatting buttons"}, {"k": "B", "t": "The bar below the ribbon that displays the content or formula of the selected cell"}, {"k": "C", "t": "A horizontal bar chart showing spreadsheet data"}, {"k": "D", "t": "The row at the bottom of the spreadsheet showing totals"}], "ans": "B"}, {"id": 61, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database is best described as:", "opts": [{"k": "A", "t": "A type of spreadsheet used to perform calculations"}, {"k": "B", "t": "A word processing document used to store letters"}, {"k": "C", "t": "An organised collection of related data that can be stored, retrieved, and managed"}, {"k": "D", "t": "A program used to browse the internet"}], "ans": "C"}, {"id": 62, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a FIELD is:", "opts": [{"k": "A", "t": "A single piece of data about an entity, representing one attribute (e.g. StudentName)"}, {"k": "B", "t": "A complete set of information about one entity (e.g. all details about one student)"}, {"k": "C", "t": "A collection of related tables in the database"}, {"k": "D", "t": "A query that retrieves data from the database"}], "ans": "A"}, {"id": 63, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a RECORD is:", "opts": [{"k": "A", "t": "A single data item, such as a student's first name only"}, {"k": "B", "t": "A complete collection of fields about one specific entity (e.g. all details about one student)"}, {"k": "C", "t": "A relationship between two tables"}, {"k": "D", "t": "A formula used to calculate data"}], "ans": "B"}, {"id": 64, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database terminology, a TABLE is:", "opts": [{"k": "A", "t": "A single record stored in the database"}, {"k": "B", "t": "A type of query used to update data"}, {"k": "C", "t": "A chart showing database relationships"}, {"k": "D", "t": "A structured set of data organised in rows (records) and columns (fields) about one entity type"}], "ans": "D"}, {"id": 65, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A PRIMARY KEY in a database is:", "opts": [{"k": "A", "t": "The first field in every table, always called \"ID\""}, {"k": "B", "t": "A field that can contain duplicate or null values"}, {"k": "C", "t": "A field (or set of fields) that uniquely identifies each record in a table — it must be unique and not empty"}, {"k": "D", "t": "A password used to secure the database"}], "ans": "C"}, {"id": 66, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A FOREIGN KEY in a database is:", "opts": [{"k": "A", "t": "A field in one table that refers to the primary key in another table, used to link the two tables"}, {"k": "B", "t": "A field that uniquely identifies each record in its own table"}, {"k": "C", "t": "A key imported from a foreign (overseas) database"}, {"k": "D", "t": "A secondary password for read-only database access"}], "ans": "A"}, {"id": 67, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, an ENTITY is:", "opts": [{"k": "A", "t": "A single data value stored in a field"}, {"k": "B", "t": "A person, place, object, event, or concept about which data is stored (e.g. Student, Course)"}, {"k": "C", "t": "A relationship linking two tables"}, {"k": "D", "t": "A report generated by the database"}], "ans": "B"}, {"id": 68, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, the characteristics or properties of an entity are called its:", "opts": [{"k": "A", "t": "Records"}, {"k": "B", "t": "Queries"}, {"k": "C", "t": "Tables"}, {"k": "D", "t": "Attributes (which become fields in the table)"}], "ans": "D"}, {"id": 69, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A QUERY in a database is used to:", "opts": [{"k": "A", "t": "Store data permanently in the database"}, {"k": "B", "t": "Design the layout of printed reports"}, {"k": "C", "t": "Ask questions of the database and retrieve specific data that meets set criteria"}, {"k": "D", "t": "Create the structure of tables and fields"}], "ans": "C"}, {"id": 70, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-ONE relationship in a database means:", "opts": [{"k": "A", "t": "Each record in Table A is linked to exactly one record in Table B, and vice versa"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B"}, {"k": "C", "t": "Many records in Table A can be linked to many records in Table B"}, {"k": "D", "t": "Table A and Table B share the same primary key field name"}], "ans": "A"}, {"id": 71, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "Each record in both tables can link to only one record in the other"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B, but each record in Table B links to only one in Table A"}, {"k": "C", "t": "Every record in Table A is linked to every record in Table B"}, {"k": "D", "t": "The two tables have no common fields"}], "ans": "B"}, {"id": 72, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A MANY-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "One record in Table A links to exactly one record in Table B"}, {"k": "B", "t": "One record in Table A links to many records in Table B only"}, {"k": "C", "t": "Table A has more fields than Table B"}, {"k": "D", "t": "Many records in Table A can link to many records in Table B, and vice versa"}], "ans": "D"}, {"id": 73, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a school database, the relationship between STUDENT and CLASS is typically:", "opts": [{"k": "A", "t": "One-to-one (one student belongs to exactly one class, and one class has exactly one student)"}, {"k": "B", "t": "Many-to-many (many students belong to many classes simultaneously)"}, {"k": "C", "t": "Many-to-one (many students belong to one class)"}, {"k": "D", "t": "There is no relationship between students and classes"}], "ans": "C"}, {"id": 74, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the object used to enter, view, and edit data in a user-friendly layout is:", "opts": [{"k": "A", "t": "Form"}, {"k": "B", "t": "Query"}, {"k": "C", "t": "Report"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 75, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, a REPORT is used to:", "opts": [{"k": "A", "t": "Enter new records into a table"}, {"k": "B", "t": "Create relationships between tables"}, {"k": "C", "t": "Query the database with criteria"}, {"k": "D", "t": "Present data in a formatted, printable layout (e.g. summaries, charts)"}], "ans": "D"}, {"id": 76, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "What is a \"data type\" in a database field?", "opts": [{"k": "A", "t": "The name given to a record in the table"}, {"k": "B", "t": "A setting that specifies what kind of data a field can store (e.g. Text, Number, Date)"}, {"k": "C", "t": "The format of the printed report"}, {"k": "D", "t": "The relationship type between two tables"}], "ans": "B"}, {"id": 77, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following would be the MOST appropriate data type for a field storing a student's date of birth in MS Access?", "opts": [{"k": "A", "t": "Text"}, {"k": "B", "t": "Number"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Yes/No"}], "ans": "C"}, {"id": 78, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which MS Access data type would be used for a field that stores whether a student has paid their fees (True/False)?", "opts": [{"k": "A", "t": "Yes/No"}, {"k": "B", "t": "Text"}, {"k": "C", "t": "Number"}, {"k": "D", "t": "Date/Time"}], "ans": "A"}, {"id": 79, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is the BEST example of a primary key for a STUDENT table?", "opts": [{"k": "A", "t": "StudentName (because names are easy to remember)"}, {"k": "B", "t": "DateOfBirth (because all students have a date of birth)"}, {"k": "C", "t": "ClassRoom (because students are grouped by class)"}, {"k": "D", "t": "StudentID (a unique number assigned to each student)"}], "ans": "D"}, {"id": 80, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, \"referential integrity\" means:", "opts": [{"k": "A", "t": "All fields in a table must have the same data type"}, {"k": "B", "t": "A foreign key value must match an existing primary key value in the related table (no orphan records)"}, {"k": "C", "t": "Every table must have at least 10 records"}, {"k": "D", "t": "Queries must return results in alphabetical order"}], "ans": "B"}, {"id": 81, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the \"Design View\" of a table is used to:", "opts": [{"k": "A", "t": "Enter and browse records in the table"}, {"k": "B", "t": "Print the table as a report"}, {"k": "C", "t": "Define the field names, data types, and properties of the table structure"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "C"}, {"id": 82, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, \"Datasheet View\" of a table is used to:", "opts": [{"k": "A", "t": "View, enter, and edit actual records in the table (rows and columns)"}, {"k": "B", "t": "Define the field names and data types"}, {"k": "C", "t": "Set up a query with criteria"}, {"k": "D", "t": "Design a printed report layout"}], "ans": "A"}, {"id": 83, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is NOT a valid Access data type?", "opts": [{"k": "A", "t": "Number"}, {"k": "B", "t": "Text / Short Text"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Formula"}], "ans": "D"}, {"id": 84, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is TRUE about a primary key?", "opts": [{"k": "A", "t": "It can have duplicate values in the same table"}, {"k": "B", "t": "It must be unique for every record and cannot be left empty (null)"}, {"k": "C", "t": "Every table must have exactly three primary key fields"}, {"k": "D", "t": "It is always a number between 1 and 100"}], "ans": "B"}, {"id": 85, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database schema refers to:", "opts": [{"k": "A", "t": "The data stored inside the database tables"}, {"k": "B", "t": "A query that retrieves records from multiple tables"}, {"k": "C", "t": "The structure and organisation of the database — the tables, fields, data types, and relationships"}, {"k": "D", "t": "A printed summary report of the database contents"}], "ans": "C"}, {"id": 86, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a \"field\" corresponds to which concept in entity-relationship modelling?", "opts": [{"k": "A", "t": "An attribute of an entity"}, {"k": "B", "t": "The entity itself"}, {"k": "C", "t": "A relationship between two entities"}, {"k": "D", "t": "A complete record of the entity"}], "ans": "A"}, {"id": 87, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is an example of a ONE-TO-MANY relationship?", "opts": [{"k": "A", "t": "One student is enrolled in exactly one school (and one school has exactly one student)"}, {"k": "B", "t": "One student can take many subjects and one subject can be taken by many students"}, {"k": "C", "t": "One country has one capital city and one capital city belongs to one country"}, {"k": "D", "t": "One teacher teaches many students, but each student has only one teacher for that subject"}], "ans": "D"}, {"id": 88, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, to link two tables in a relationship, you use the:", "opts": [{"k": "A", "t": "Query Wizard"}, {"k": "B", "t": "Relationships window (Database Tools → Relationships)"}, {"k": "C", "t": "Report Designer"}, {"k": "D", "t": "Form Builder"}], "ans": "B"}, {"id": 89, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A student table has the fields: StudentID, FirstName, LastName, DOB, ClassID. Which field is most likely the foreign key linking to a CLASS table?", "opts": [{"k": "A", "t": "StudentID"}, {"k": "B", "t": "FirstName"}, {"k": "C", "t": "ClassID"}, {"k": "D", "t": "DOB"}], "ans": "C"}, {"id": 90, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In Access, the QBE (Query By Example) grid is used to:", "opts": [{"k": "A", "t": "Set up a query by selecting fields, sorting options, and criteria in a visual grid"}, {"k": "B", "t": "Design the visual layout of a data entry form"}, {"k": "C", "t": "Define field data types in Table Design View"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "A"}, {"id": 91, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following best describes \"data redundancy\" in a database?", "opts": [{"k": "A", "t": "Storing data in a secure, encrypted format"}, {"k": "B", "t": "Using primary keys to uniquely identify records"}, {"k": "C", "t": "Having too many tables in the database"}, {"k": "D", "t": "The unnecessary duplication of the same data in multiple places within the database"}], "ans": "D"}, {"id": 92, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A DBMS (Database Management System) is:", "opts": [{"k": "A", "t": "A type of spreadsheet application like Microsoft Excel"}, {"k": "B", "t": "Software that allows users to create, manage, and interact with a database (e.g. Microsoft Access, MySQL)"}, {"k": "C", "t": "A programming language used to write websites"}, {"k": "D", "t": "Hardware used to store backup copies of a database"}], "ans": "B"}, {"id": 93, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is an example of an entity?", "opts": [{"k": "A", "t": "The student's first name \"Marcus\""}, {"k": "B", "t": "The date of birth field \"15/03/2010\""}, {"k": "C", "t": "STUDENT (a thing about which data is collected)"}, {"k": "D", "t": "The primary key field StudentID"}], "ans": "C"}, {"id": 94, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "For the entity BOOK, which of the following would be an ATTRIBUTE?", "opts": [{"k": "A", "t": "ISBN, Title, Author, PublicationYear"}, {"k": "B", "t": "LIBRARY (where books are stored)"}, {"k": "C", "t": "BORROW (a transaction involving the book)"}, {"k": "D", "t": "STUDENT (who borrows the book)"}], "ans": "A"}, {"id": 95, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "When a query in MS Access is run, it:", "opts": [{"k": "A", "t": "Permanently deletes records from the table"}, {"k": "B", "t": "Prints a formatted report to the printer"}, {"k": "C", "t": "Adds new blank records to the database"}, {"k": "D", "t": "Retrieves and displays a dynamic set of records from one or more tables that match the criteria"}], "ans": "D"}, {"id": 96, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is TRUE about a FOREIGN KEY?", "opts": [{"k": "A", "t": "It must always be unique in the table where it appears"}, {"k": "B", "t": "It is a field that creates a link between two tables by matching the primary key of another table"}, {"k": "C", "t": "It is used only in one-to-one relationships"}, {"k": "D", "t": "It cannot be used in a query"}], "ans": "B"}, {"id": 97, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a STUDENT–SUBJECT scenario where students can take many subjects and each subject can be taken by many students, the relationship type is:", "opts": [{"k": "A", "t": "One-to-one"}, {"k": "B", "t": "One-to-many"}, {"k": "C", "t": "Many-to-many"}, {"k": "D", "t": "Many-to-one"}], "ans": "C"}, {"id": 98, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, which object is most suitable for generating a neatly formatted printed summary of student results grouped by class?", "opts": [{"k": "A", "t": "Report"}, {"k": "B", "t": "Form"}, {"k": "C", "t": "Query"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 99, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "The \"AutoNumber\" data type in MS Access is commonly used for a primary key field because:", "opts": [{"k": "A", "t": "It stores the current date automatically"}, {"k": "B", "t": "It allows the user to type any number they choose"}, {"k": "C", "t": "It stores text descriptions of each record"}, {"k": "D", "t": "It automatically generates a unique sequential number for every new record"}], "ans": "D"}, {"id": 100, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following correctly matches a database object in MS Access with its purpose?", "opts": [{"k": "A", "t": "Table → Used to ask questions about the data and filter records by criteria"}, {"k": "B", "t": "Table → Stores the actual data; Query → Retrieves specific data; Form → Provides a user-friendly data entry screen; Report → Presents formatted output for printing"}, {"k": "C", "t": "Form → Stores data permanently; Query → Prints reports; Table → Filters records"}, {"k": "D", "t": "Query → Stores data; Form → Creates charts; Report → Deletes old records"}], "ans": "B"}];
 
-// ── AUTO-SYNC ON PAGE LOAD ──
-window.addEventListener('load', async () => {
-  const local = JSON.parse(localStorage.getItem('it_gr10_results') || '[]');
-  if (local.length > 0) {
-    const notice = document.getElementById('sync-notice');
-    if (notice) {
-      notice.style.display = 'block';
-      notice.textContent = '⏳ Syncing ' + local.length + ' saved result(s) to server...';
-    }
-    await syncLocalToSheets();
-    if (notice) {
-      notice.textContent = '✅ Local results synced successfully!';
-      setTimeout(() => { notice.style.display = 'none'; }, 4000);
+/* ─── Constants & Keys ─── */
+const TOTAL = 100;
+const PW = 'teacher2025';
+const STORE_RESULTS = 'g10t2_results_v2';
+const STORE_SETTINGS = 'g10t2_settings_v2';
+
+/* ─── Settings ─── */
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem(STORE_SETTINGS) || 'null') || { duration: 90, closeAt: '', isOpen: true }; }
+  catch { return { duration: 90, closeAt: '', isOpen: true }; }
+}
+function saveSettings(s) { localStorage.setItem(STORE_SETTINGS, JSON.stringify(s)); }
+
+/* ─── Results ─── */
+function getResults() { try { return JSON.parse(localStorage.getItem(STORE_RESULTS) || '[]'); } catch { return []; } }
+function saveResult(r) { const a = getResults(); a.push(r); localStorage.setItem(STORE_RESULTS, JSON.stringify(a)); }
+
+/* ─── Test closed? ─── */
+function isTestClosed() {
+  const s = getSettings();
+  if (!s.isOpen) return { closed: true, reason: 'The teacher has closed this test.' };
+  if (s.closeAt) {
+    const closeTs = new Date(s.closeAt).getTime();
+    if (!isNaN(closeTs) && Date.now() > closeTs) {
+      return { closed: true, reason: 'The deadline for this test has passed (' + new Date(s.closeAt).toLocaleString() + ').' };
     }
   }
-});
-const PW = 'ras4real'; // change this to your preferred password
+  return { closed: false };
+}
 
-const SHORT_KEYS = {
-  5:  ['macro'],
-  14: ['transistor'],
-  19: ['embedded'],
-  24: ['rfid','radio frequency identification'],
-  29: ['biometric'],
-  34: ['pixel'],
-  39: ['inkjet','ink jet','ink-jet'],
-  44: ['volatile'],
-  49: ['format'],
-  53: ['8','eight'],
-  59: ['wiki']
-};
+/* ─── Shuffle helper (Fisher-Yates) ─── */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-let student = {name:'', cls:''};
-let answered = new Set();
+/* ─── Build shuffled question list (shuffle within each section) ─── */
+function buildQuestionOrder() {
+  const sections = {};
+  ALL_QUESTIONS.forEach(q => {
+    if (!sections[q.section]) sections[q.section] = [];
+    sections[q.section].push(q);
+  });
+  const order = [];
+  Object.keys(sections).forEach(sec => {
+    shuffle(sections[sec]).forEach(q => order.push(q));
+  });
+  return order;
+}
 
-// ── SHOW SCREEN ──
+/* ─── Render questions into #q-wrap ─── */
+let questionOrder = [];
+function renderQuestions() {
+  questionOrder = buildQuestionOrder();
+  const wrap = document.getElementById('q-wrap');
+  // Remove old cards (keep submit btn)
+  wrap.querySelectorAll('.qcard, .sec-title').forEach(el => el.remove());
+  const submitBtn = document.getElementById('btn-submit');
+
+  let lastSec = '';
+  questionOrder.forEach((q, idx) => {
+    const num = idx + 1;
+
+    if (q.section !== lastSec) {
+      lastSec = q.section;
+      const st = document.createElement('div');
+      st.className = 'sec-title';
+      st.innerHTML = q.section;
+      wrap.insertBefore(st, submitBtn);
+    }
+
+    // Shuffle answer options
+    const shuffledOpts = shuffle(q.opts);
+
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.dataset.q = num;
+    card.dataset.ans = q.ans;
+
+    const optsHtml = shuffledOpts.map(opt => `
+      <label class="opt">
+        <input type="radio" name="q${num}" value="${opt.k}">
+        ${opt.t}
+      </label>`).join('');
+
+    card.innerHTML = `
+      <div class="qhead">
+        <span class="qnum">Q${num}</span>
+        <span class="qtxt">${q.q}</span>
+      </div>
+      <div class="opts">${optsHtml}</div>
+      <div class="fb"></div>`;
+
+    wrap.insertBefore(card, submitBtn);
+
+    // Interaction
+    card.querySelectorAll('.opt input').forEach(inp => {
+      inp.addEventListener('change', () => {
+        if (card.dataset.done) return;
+        card.dataset.done = '1';
+        answered++;
+        document.getElementById('prog-inner').style.width = (answered / TOTAL * 100) + '%';
+        document.getElementById('prog-label').textContent = answered + ' / ' + TOTAL + ' answered';
+        if (answered === TOTAL) document.getElementById('btn-submit').disabled = false;
+
+        const chosen = inp.value;
+        const correct = card.dataset.ans;
+        card.querySelectorAll('.opt').forEach(opt => {
+          const v = opt.querySelector('input').value;
+          if (v === correct) opt.classList.add('correct');
+          else if (v === chosen && chosen !== correct) opt.classList.add('wrong');
+        });
+        const fb = card.querySelector('.fb');
+        if (chosen === correct) { fb.textContent = '✓ Correct!'; fb.className = 'fb show ok'; }
+        else { fb.textContent = '✗ Incorrect. The correct answer is ' + correct + '.'; fb.className = 'fb show bad'; }
+        card.querySelectorAll('.opt input').forEach(i => i.disabled = true);
+      });
+    });
+  });
+}
+
+/* ─── Timer ─── */
+let timerInterval = null;
+let timerSecsLeft = 0;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const ss = s % 60;
+  return String(m).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
+}
+
+function startTimer(mins) {
+  timerSecsLeft = mins * 60;
+  document.getElementById('timer-val').textContent = formatTime(timerSecsLeft);
+  timerInterval = setInterval(() => {
+    timerSecsLeft--;
+    document.getElementById('timer-val').textContent = formatTime(timerSecsLeft);
+    const box = document.getElementById('timer-box');
+    if (timerSecsLeft <= 0) {
+      clearInterval(timerInterval);
+      box.className = 'timer-box danger';
+      autoSubmit(true);
+    } else if (timerSecsLeft <= 300) {
+      box.className = 'timer-box danger';
+    } else if (timerSecsLeft <= 600) {
+      box.className = 'timer-box warn';
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+/* ─── Landing page init ─── */
+function initLanding() {
+  const s = getSettings();
+  document.getElementById('info-duration').textContent = s.duration + ' minute' + (s.duration === 1 ? '' : 's');
+  if (s.closeAt) {
+    document.getElementById('info-close').textContent = new Date(s.closeAt).toLocaleString();
+  } else {
+    document.getElementById('info-close').textContent = 'Not set';
+  }
+
+  const closed = isTestClosed();
+  if (closed.closed) {
+    document.getElementById('closed-banner').style.display = 'block';
+    document.getElementById('closed-reason').textContent = closed.reason;
+    document.getElementById('btn-start').disabled = true;
+    document.getElementById('btn-start').style.opacity = '0.4';
+    document.getElementById('btn-start').style.cursor = 'not-allowed';
+  } else {
+    document.getElementById('closed-banner').style.display = 'none';
+    document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-start').style.opacity = '';
+    document.getElementById('btn-start').style.cursor = '';
+  }
+}
+
+/* ─── Screen helper ─── */
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+/* ─── State ─── */
+let answered = 0;
+let testStartTime = null;
+
+/* ─── Start test ─── */
+document.getElementById('btn-start').addEventListener('click', () => {
+  const closed = isTestClosed();
+  if (closed.closed) { initLanding(); return; }
+
+  const name = document.getElementById('inp-name').value.trim();
+  const cls = document.getElementById('inp-class').value;
+  let ok = true;
+  document.getElementById('err-name').style.display = name ? 'none' : 'block'; if (!name) ok = false;
+  document.getElementById('err-class').style.display = cls ? 'none' : 'block'; if (!cls) ok = false;
+  if (!ok) return;
+
+  answered = 0;
+  document.getElementById('prog-inner').style.width = '0%';
+  document.getElementById('prog-label').textContent = '0 / 100 answered';
+  document.getElementById('btn-submit').disabled = true;
+
+  renderQuestions();
+  document.getElementById('hdr-name').textContent = name + ' · ' + cls;
+
+  const s = getSettings();
+  startTimer(s.duration);
+  testStartTime = Date.now();
+
+  show('screen-test');
+  window.scrollTo(0, 0);
+});
+
+/* ─── Auto-submit on timeout ─── */
+function autoSubmit(timedOut) {
+  document.querySelectorAll('.qcard input').forEach(i => i.disabled = true);
+  document.getElementById('btn-submit').disabled = true;
+  submitTest(timedOut);
+}
+
+/* ─── Score & submit ─── */
+function submitTest(timedOut) {
+  stopTimer();
+  const name = document.getElementById('inp-name').value.trim();
+  const cls = document.getElementById('inp-class').value;
+  let correct = 0;
+  document.querySelectorAll('.qcard').forEach(card => {
+    const sel = card.querySelector('input:checked');
+    if (sel && sel.value === card.dataset.ans) correct++;
+  });
+  const wrong = TOTAL - correct;
+  const pct = Math.round(correct / TOTAL * 100);
+  const timeUsed = testStartTime ? Math.round((Date.now() - testStartTime) / 1000) : null;
+  const timeUsedStr = timeUsed ? formatTime(timeUsed) : '—';
+
+  document.getElementById('res-student').textContent = name + ' · Class: ' + cls;
+  document.getElementById('score-big').textContent = pct + '%';
+  const msgs = ['Outstanding! Excellent work!', 'Great result! Well done!', 'Good effort! Keep it up!', 'Fair attempt. Review and improve.', 'Keep studying. You can do better!'];
+  document.getElementById('res-msg').textContent = pct >= 90 ? msgs[0] : pct >= 75 ? msgs[1] : pct >= 60 ? msgs[2] : pct >= 50 ? msgs[3] : msgs[4];
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  const note = timedOut ? '⏰ Time ran out — your answers were submitted automatically.' : '✓ Your result has been recorded. Please inform your teacher.';
+  document.getElementById('res-timed-note').textContent = note;
+
+  saveResult({ name, cls, score: pct, correct, wrong, timeUsed: timeUsedStr, timedOut: !!timedOut, submitted: new Date().toLocaleString() });
+  show('screen-results');
   window.scrollTo(0, 0);
 }
 
-function goToLanding() { show('landing'); }
+document.getElementById('btn-submit').addEventListener('click', () => submitTest(false));
+document.getElementById('btn-retry').addEventListener('click', () => { initLanding(); show('screen-landing'); window.scrollTo(0,0); });
 
-// ── START ──
-document.getElementById('btn-start').addEventListener('click', async function() {
-  const name = document.getElementById('inp-name').value.trim();
-  const cls  = document.getElementById('inp-class').value;
-  let ok = true;
-  document.getElementById('err-name').style.display = name ? 'none' : 'block'; if (!name) ok = false;
-  document.getElementById('err-class').style.display = cls  ? 'none' : 'block'; if (!cls)  ok = false;
-  if (!ok) return;
-
-  // Show loading state
-  const btn = document.getElementById('btn-start');
-  btn.textContent = 'Checking... please wait';
-  btn.disabled = true;
-
-  // Check attempt limit (max 2) from Google Sheets
-  const prevAttempts = await getPrevAttempts(name, cls);
-
-  if (prevAttempts >= 2) {
-    const errEl = document.getElementById('err-name');
-    errEl.style.color = 'var(--wrong)';
-    errEl.textContent = '\u26d4 ' + name + ' has already used both attempts. No further attempts are allowed.';
-    errEl.style.display = 'block';
-    btn.textContent = 'Begin Test \u2192';
-    btn.disabled = false;
-    return;
-  }
-
-  // Warn if on last attempt
-  if (prevAttempts === 1) {
-    const errEl = document.getElementById('err-name');
-    errEl.style.color = '#f7b731';
-    errEl.textContent = '\u26a0\ufe0f This is your FINAL attempt. You cannot retake the test after submitting.';
-    errEl.style.display = 'block';
-  }
-
-  student = {name, cls};
-  document.getElementById('hdr-name').innerHTML = '<strong>' + name + '</strong> &nbsp;\u00b7&nbsp; Class <strong>' + cls + '</strong>';
-  btn.textContent = 'Begin Test \u2192';
-  btn.disabled = false;
-  show('test');
-  answered = new Set();
-  updateProg();
-});
-
-// ── PROGRESS ──
-function updateProg() {
-  const pct = (answered.size / TOTAL) * 100;
-  document.getElementById('prog-inner').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = answered.size + ' / ' + TOTAL + ' answered';
-}
-
-document.querySelectorAll('.opt input[type=radio]').forEach(r => {
-  r.addEventListener('change', () => { answered.add(r.closest('.qcard').dataset.q); updateProg(); });
-});
-
-document.querySelectorAll('.tf').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('.qcard');
-    card.querySelectorAll('.tf').forEach(b => { b.classList.remove('sel'); delete b.dataset.selected; });
-    btn.classList.add('sel'); btn.dataset.selected = 'true';
-    answered.add(card.dataset.q); updateProg();
-  });
-});
-
-document.querySelectorAll('.sa').forEach(inp => {
-  inp.addEventListener('input', () => {
-    const card = inp.closest('.qcard');
-    inp.value.trim() ? answered.add(card.dataset.q) : answered.delete(card.dataset.q);
-    updateProg();
-  });
-});
-
-// ── SUBMIT ──
-document.getElementById('btn-submit').addEventListener('click', async function() {
-  let correct = 0;
-  document.querySelectorAll('.qcard').forEach(card => {
-    const qn   = parseInt(card.dataset.q);
-    const type = card.dataset.type;
-    const ans  = card.dataset.answer;
-    const fb   = card.querySelector('.fb');
-    let ok = false;
-
-    if (type === 'mcq') {
-      const sel = card.querySelector('input[type=radio]:checked');
-      const chosen = sel ? sel.value : null;
-      card.querySelectorAll('.opt').forEach(lbl => {
-        const v = lbl.querySelector('input').value;
-        if (v === ans) lbl.classList.add('correct');
-        else if (v === chosen && chosen !== ans) lbl.classList.add('wrong');
-      });
-      ok = chosen === ans;
-    } else if (type === 'tf') {
-      const selBtn = card.querySelector('.tf[data-selected="true"]');
-      const chosen = selBtn ? selBtn.dataset.val : null;
-      card.querySelectorAll('.tf').forEach(b => {
-        if (b.dataset.val === ans) b.classList.add('correct');
-        else if (b.dataset.val === chosen && chosen !== ans) b.classList.add('wrong');
-      });
-      ok = chosen === ans;
-    } else {
-      const inp = card.querySelector('.sa');
-      const val = inp.value.trim().toLowerCase();
-      const keys = SHORT_KEYS[qn] || [ans.toLowerCase()];
-      ok = keys.some(k => val.includes(k));
-      inp.classList.add(ok ? 'correct' : 'wrong');
-    }
-
-    if (ok) { correct++; fb.textContent = '✓ Correct!'; fb.className = 'fb show ok'; }
-    else {
-      fb.textContent = type === 'short' ? '✗ Correct answer: ' + card.dataset.answer : '✗ Incorrect — correct answer highlighted in green.';
-      fb.className = 'fb show bad';
-    }
-    card.querySelectorAll('input,button,.sa').forEach(el => el.disabled = true);
-  });
-
-  // Save to Google Sheets
-  const prevAttempts2 = await getPrevAttempts(student.name, student.cls);
-  const attemptNo = prevAttempts2 + 1;
-  const pct = Math.round((correct / TOTAL) * 100);
-  const record = { name: student.name, cls: student.cls, correct, total: TOTAL, pct, attempt: attemptNo, ts: new Date().toISOString() };
-  await saveData(record);
-
-  // Show results screen
-  document.getElementById('res-student').textContent = student.name + '  ·  Class ' + student.cls;
-  document.getElementById('res-pct').textContent = pct + '%';
-  document.getElementById('res-msg').textContent = correct + ' out of ' + TOTAL + ' correct.  ' +
-    (pct >= 70 ? '🎉 Well done!' : pct >= 50 ? 'Good effort — keep studying!' : 'Review your notes and try again!');
-  document.getElementById('res-correct').textContent = correct;
-  document.getElementById('res-wrong').textContent = TOTAL - correct;
-  const note = document.getElementById('att-note');
-  const retryWrap = document.getElementById('retry-wrap');
-  if (attemptNo === 1) {
-    note.textContent = '⚠️ This was attempt 1 of 2. You have one attempt remaining.';
-    note.style.display = 'block';
-    retryWrap.innerHTML = '<button class="btn-retry" onclick="location.reload()">↺ Try Again (Final Attempt)</button>';
-  } else {
-    note.textContent = '⛔ You have used both attempts. This result is final. Your teacher has been notified.';
-    note.style.display = 'block';
-    retryWrap.innerHTML = '<p style="margin-top:18px;font-size:.82rem;color:var(--muted)">No more attempts allowed.</p>';
-  }
-
-  this.disabled = true;
-  show('results');
-});
-
-// ── TEACHER ──
-document.getElementById('teacher-link').addEventListener('click', function() {
-  document.getElementById('pw-modal').classList.add('open');
-  document.getElementById('pw-input').value = '';
+/* ─── Teacher modal ─── */
+document.getElementById('teacher-link').addEventListener('click', () => {
+  document.getElementById('modal-bg').classList.add('open');
+  document.getElementById('modal-pw').value = '';
   document.getElementById('pw-err').style.display = 'none';
-  setTimeout(() => document.getElementById('pw-input').focus(), 80);
+  setTimeout(() => document.getElementById('modal-pw').focus(), 100);
+});
+document.getElementById('btn-cancel').addEventListener('click', () => document.getElementById('modal-bg').classList.remove('open'));
+document.getElementById('btn-unlock').addEventListener('click', () => {
+  if (document.getElementById('modal-pw').value === PW) {
+    document.getElementById('modal-bg').classList.remove('open');
+    loadDashboard();
+    show('screen-teacher');
+  } else { document.getElementById('pw-err').style.display = 'block'; }
+});
+document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-unlock').click(); });
+
+/* ─── Teacher dashboard ─── */
+document.getElementById('btn-back').addEventListener('click', () => { initLanding(); show('screen-landing'); });
+document.getElementById('btn-clear').addEventListener('click', () => {
+  if (confirm('Clear ALL student results? This cannot be undone.')) {
+    localStorage.removeItem(STORE_RESULTS);
+    loadDashboard();
+  }
 });
 
-function closePw() { document.getElementById('pw-modal').classList.remove('open'); }
+/* Settings form */
+document.getElementById('set-open').addEventListener('change', function() {
+  document.getElementById('set-open-label').textContent = this.checked ? 'Test is OPEN' : 'Test is CLOSED';
+});
 
-function checkPw() {
-  if (document.getElementById('pw-input').value === PW) {
-    closePw();
-    show('teacher');
-    renderDash();
+document.getElementById('btn-save-settings').addEventListener('click', () => {
+  const dur = parseInt(document.getElementById('set-duration').value) || 90;
+  const closeAt = document.getElementById('set-close').value;
+  const isOpen = document.getElementById('set-open').checked;
+  saveSettings({ duration: dur, closeAt, isOpen });
+  const status = document.getElementById('settings-status');
+  status.style.display = 'block';
+  setTimeout(() => status.style.display = 'none', 2500);
+  updateStatusBanner();
+});
+
+function updateStatusBanner() {
+  const closed = isTestClosed();
+  const banner = document.getElementById('dash-status-banner');
+  if (closed.closed) {
+    banner.className = 'test-status-banner closed';
+    banner.textContent = '● Test is currently CLOSED — ' + closed.reason;
   } else {
-    document.getElementById('pw-err').style.display = 'block';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
+    const s = getSettings();
+    let msg = '● Test is currently OPEN';
+    if (s.closeAt) msg += ' · Closes: ' + new Date(s.closeAt).toLocaleString();
+    msg += ' · Time limit: ' + s.duration + ' min';
+    banner.className = 'test-status-banner open';
+    banner.textContent = msg;
   }
 }
 
-async function renderDash() {
-  document.getElementById('dash-chips').innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:10px;">⏳ Loading results from server...</div>';
-  const all = await loadData();
-  const avg = all.length ? Math.round(all.reduce((s,r) => s+r.pct, 0) / all.length) : 0;
-  const best = all.length ? Math.max(...all.map(r=>r.pct)) : 0;
-  const passes = all.filter(r=>r.pct>=50).length;
-  document.getElementById('dash-chips').innerHTML =
-    chip(all.length,'Total Submissions') + chip(avg+'%','Class Average') +
-    chip(best+'%','Highest Score') + chip(passes,'Passed (≥50%)');
-  renderTable();
+function loadDashboard() {
+  const s = getSettings();
+  document.getElementById('set-duration').value = s.duration;
+  document.getElementById('set-close').value = s.closeAt || '';
+  document.getElementById('set-open').checked = s.isOpen !== false;
+  document.getElementById('set-open-label').textContent = (s.isOpen !== false) ? 'Test is OPEN' : 'Test is CLOSED';
+  updateStatusBanner();
+
+  const data = getResults();
+  document.getElementById('chip-attempts').textContent = data.length;
+  if (data.length) {
+    document.getElementById('chip-avg').textContent = Math.round(data.reduce((a, r) => a + r.score, 0) / data.length) + '%';
+    document.getElementById('chip-pass').textContent = data.filter(r => r.score >= 50).length;
+    document.getElementById('chip-fail').textContent = data.filter(r => r.score < 50).length;
+  } else {
+    document.getElementById('chip-avg').textContent = '—';
+    document.getElementById('chip-pass').textContent = 0;
+    document.getElementById('chip-fail').textContent = 0;
+  }
+  renderTable(data);
+  document.getElementById('f-search').oninput = filterTable;
+  document.getElementById('f-class').onchange = filterTable;
 }
 
-function chip(v,l){ return '<div class="chip"><div class="cv">'+v+'</div><div class="cl">'+l+'</div></div>'; }
+function filterTable() {
+  const q = document.getElementById('f-search').value.toLowerCase();
+  const cls = document.getElementById('f-class').value;
+  renderTable(getResults().filter(r => r.name.toLowerCase().includes(q) && (!cls || r.cls === cls)));
+}
 
-function renderTable(all) {
-  all = all || [];
-  const search = (document.getElementById('f-name').value||'').toLowerCase();
-  const cls    = document.getElementById('f-class').value||'';
-  const sort   = document.getElementById('f-sort').value||'newest';
-
-  let rows = all.filter(r => r.name.toLowerCase().includes(search) && (!cls || r.cls===cls));
-  rows.sort((a,b) => {
-    if(sort==='newest')  return new Date(b.ts)-new Date(a.ts);
-    if(sort==='oldest')  return new Date(a.ts)-new Date(b.ts);
-    if(sort==='hi')      return b.pct-a.pct;
-    if(sort==='lo')      return a.pct-b.pct;
-    if(sort==='name')    return a.name.localeCompare(b.name);
-    return 0;
-  });
-
-  const tbody = document.getElementById('dash-tbody');
-  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="8" class="no-data">No results yet.</td></tr>'; return; }
-
-  tbody.innerHTML = rows.map((r,i) => {
-    const d  = new Date(r.ts);
-    const dt = d.toLocaleDateString('en-ZA') + ' ' + d.toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'});
-    const pill = r.pct>=70 ? '<span class="pill pass">Pass</span>' : r.pct>=50 ? '<span class="pill avg">Average</span>' : '<span class="pill fail">Below avg</span>';
-    return '<tr><td style="color:var(--muted)">'+(i+1)+'</td><td><strong>'+r.name+'</strong></td><td>'+r.cls+'</td><td>'+r.correct+'/'+r.total+'</td><td><strong>'+r.pct+'%</strong></td><td><span class="att">#'+r.attempt+'</span></td><td style="color:var(--muted);font-size:.78rem">'+dt+'</td><td>'+pill+'</td></tr>';
+function renderTable(data) {
+  const tbody = document.getElementById('results-tbody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="8" class="no-data">No results found.</td></tr>'; return; }
+  tbody.innerHTML = data.slice().reverse().map(r => {
+    const g = r.score >= 75 ? 'pass' : r.score >= 50 ? 'avg' : 'fail';
+    const gl = r.score >= 75 ? 'Pass' : r.score >= 50 ? 'Average' : 'Fail';
+    const timedFlag = r.timedOut ? ' <span style="color:var(--wrong);font-size:.7rem">(timeout)</span>' : '';
+    return `<tr>
+      <td>${r.name}</td>
+      <td><span class="att">${r.cls}</span></td>
+      <td><strong>${r.score}%</strong></td>
+      <td style="color:var(--correct)">${r.correct}</td>
+      <td style="color:var(--wrong)">${r.wrong}</td>
+      <td style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.75rem">${r.timeUsed||'—'}${timedFlag}</td>
+      <td><span class="pill ${g}">${gl}</span></td>
+      <td style="color:var(--muted);font-size:.75rem">${r.submitted||''}</td>
+    </tr>`;
   }).join('');
 }
 
-async function clearAll() {
-  if (confirm('Delete ALL student results from Google Sheets? This cannot be undone.')) {
-    try {
-      await fetch(GAS_URL + '?action=clear');
-      renderDash();
-    } catch(e) { alert('Could not clear results. Try again.'); }
-  }
-}
-
-// ── SYNC OLD LOCAL RESULTS TO GOOGLE SHEETS ──
-async function syncLocalToSheets() {
-  const localKey = 'it_gr10_results';
-  const syncedKey = 'it_gr10_synced';
-
-  let local = [];
-  try { local = JSON.parse(localStorage.getItem(localKey) || '[]'); } catch(e) { return; }
-
-  if (!local.length) return; // nothing to sync
-
-  const alreadySynced = JSON.parse(localStorage.getItem(syncedKey) || '[]');
-
-  // Filter only records not yet synced
-  const toSync = local.filter(r => {
-    const id = r.name + '|' + r.cls + '|' + r.ts;
-    return !alreadySynced.includes(id);
-  });
-
-  if (!toSync.length) return; // all already synced
-
-  console.log('Syncing ' + toSync.length + ' local result(s) to Google Sheets...');
-
-  const newlySynced = [...alreadySynced];
-
-  for (const r of toSync) {
-    try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(r)
-      });
-      newlySynced.push(r.name + '|' + r.cls + '|' + r.ts);
-      console.log('Synced: ' + r.name + ' attempt #' + r.attempt);
-    } catch(e) {
-      console.warn('Failed to sync record for ' + r.name, e);
-    }
-  }
-
-  localStorage.setItem(syncedKey, JSON.stringify(newlySynced));
-  console.log('Sync complete!');
-}
-
-// ── GOOGLE SHEETS BACKEND ──
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbz74Qn-HvP4KY4OueggZgxetkZakiwViJ-kOg9kRICxxq6ESZEJAMRYU-XBkN3D_iJK1w/exec';
-
-async function saveData(record) {
-  try {
-    await fetch(GAS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(record)
-    });
-  } catch(e) { console.error('Save error', e); }
-}
-
-async function loadData() {
-  try {
-    const res = await fetch(GAS_URL + '?action=get');
-    const rows = await res.json();
-    return rows.slice(1).map(r => ({
-      name: r[0], cls: r[1], correct: Number(r[2]),
-      total: Number(r[3]), pct: Number(r[4]),
-      attempt: Number(r[5]), ts: r[6]
-    }));
-  } catch(e) { console.error('Load error', e); return []; }
-}
-
-async function getPrevAttempts(name, cls) {
-  const all = await loadData();
-  return all.filter(r => r.name.toLowerCase() === name.toLowerCase() && r.cls === cls).length;
-}
+/* ─── Init ─── */
+initLanding();
 </script>
 </body>
 </html>
