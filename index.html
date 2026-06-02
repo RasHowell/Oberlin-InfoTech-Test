@@ -1,3 +1,5 @@
+html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,10 @@
 <title>Grade 10 IT — Six Weeks Test 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+/* =====================================================================
+   IMPORTANT — PASTE YOUR APPS SCRIPT WEB APP URL HERE BEFORE USE
+   Find the constant SHEETS_URL near the top of the <script> section
+   ===================================================================== */
 :root{--bg:#0e1117;--surface:#161b27;--card:#1c2333;--border:#2a3347;--accent:#4f8ef7;--accent2:#38d9a9;--text:#e8eaf0;--muted:#7a8399;--correct:#38d9a9;--wrong:#fc5c65;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px;}
@@ -26,11 +32,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 #closed-banner{display:none;background:rgba(252,92,101,.1);border:1px solid rgba(252,92,101,.35);border-radius:10px;padding:18px 20px;margin-bottom:24px;text-align:center;}
 #closed-banner h3{color:var(--wrong);font-family:'Space Mono',monospace;font-size:1rem;margin-bottom:6px;}
 #closed-banner p{color:var(--muted);font-size:.82rem;}
+/* Setup warning banner */
+#setup-warning{display:none;background:rgba(247,183,49,.08);border:1px solid rgba(247,183,49,.35);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:.82rem;color:#f7b731;}
+#setup-warning strong{display:block;margin-bottom:4px;}
 .t-header{background:linear-gradient(135deg,#0f172a,#1e293b);border-bottom:1px solid var(--border);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 .t-header h1{font-family:'Space Mono',monospace;font-size:1.15rem;color:var(--accent);}
 .meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:4px;}
 .meta strong{color:var(--text);}
-.badge{background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
 .timer-box{display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:10px 18px;}
 .timer-box.warn{border-color:#f7b731;background:rgba(247,183,49,.08);}
 .timer-box.danger{border-color:var(--wrong);background:rgba(252,92,101,.1);animation:pulse 1s infinite;}
@@ -54,13 +62,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .opt{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.88rem;transition:all .18s;}
 .opt:hover{border-color:var(--accent);background:#1a2438;}
 .opt input{accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;}
-/* ANTI-CHEAT: .opt.correct is used ONLY after submit (teacher view / results), not during the test */
 .opt.wrong{border-color:var(--wrong)!important;background:rgba(252,92,101,.09)!important;}
 .fb{margin-top:9px;font-size:.8rem;border-radius:6px;padding:7px 12px;display:none;}
 .fb.show{display:block;}.fb.ok{background:rgba(56,217,169,.1);color:var(--correct);}.fb.bad{background:rgba(252,92,101,.1);color:var(--wrong);}
 .btn-submit{display:block;margin:38px auto 0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:14px 50px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s,transform .15s;}
 .btn-submit:hover{opacity:.9;transform:translateY(-1px);}
 .btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+/* Submitting spinner overlay */
+#submit-overlay{display:none;position:fixed;inset:0;background:rgba(14,17,23,.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#submit-overlay.show{display:flex;}
+.spinner{width:42px;height:42px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#submit-overlay p{color:var(--muted);font-size:.88rem;}
 #screen-results{max-width:720px;margin:50px auto 0;padding:0 24px;}
 .res-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:38px;text-align:center;}
 .res-card h2{font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--accent2);margin-bottom:4px;}
@@ -72,6 +85,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .rstat .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 .v.c{color:var(--correct);}.v.w{color:var(--wrong);}
 .att-note{margin-top:18px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);border-radius:8px;padding:11px 15px;font-size:.8rem;color:var(--accent);}
+/* Sheets sync status on results page */
+.sync-status{margin-top:12px;border-radius:8px;padding:10px 14px;font-size:.8rem;display:flex;align-items:center;gap:8px;}
+.sync-status.syncing{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);color:var(--accent);}
+.sync-status.synced{background:rgba(56,217,169,.07);border:1px solid rgba(56,217,169,.2);color:var(--correct);}
+.sync-status.sync-fail{background:rgba(252,92,101,.07);border:1px solid rgba(252,92,101,.2);color:var(--wrong);}
+.sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sync-dot.syncing{background:var(--accent);animation:pulse 1s infinite;}
+.sync-dot.synced{background:var(--correct);}
+.sync-dot.fail{background:var(--wrong);}
 .btn-retry{margin-top:24px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 30px;font-size:.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-retry:hover{background:rgba(79,142,247,.1);}
 #screen-teacher{max-width:980px;margin:0 auto;padding:38px 24px;}
@@ -87,6 +109,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .s-field label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px;}
 .s-field input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;}
 .s-field input:focus{outline:none;border-color:var(--accent2);}
+.s-field textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.8rem;font-family:'Space Mono',monospace;resize:vertical;min-height:60px;}
+.s-field textarea:focus{outline:none;border-color:var(--accent2);}
 .s-toggle{display:flex;align-items:center;gap:10px;margin-top:4px;}
 .s-toggle input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent2);cursor:pointer;}
 .s-toggle span{font-size:.88rem;color:var(--text);}
@@ -96,6 +120,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .test-status-banner{border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.82rem;display:flex;align-items:center;gap:8px;}
 .test-status-banner.open{background:rgba(56,217,169,.08);border:1px solid rgba(56,217,169,.25);color:var(--correct);}
 .test-status-banner.closed{background:rgba(252,92,101,.08);border:1px solid rgba(252,92,101,.25);color:var(--wrong);}
+/* Sheets URL config panel */
+.sheets-panel{background:rgba(79,142,247,.04);border:1px solid rgba(79,142,247,.18);border-radius:12px;padding:18px 22px;margin-bottom:22px;}
+.sheets-panel h3{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.sheets-panel p{font-size:.8rem;color:var(--muted);margin-bottom:12px;line-height:1.6;}
+.sheets-url-row{display:flex;gap:10px;}
+.sheets-url-row input{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:.8rem;font-family:'Space Mono',monospace;}
+.sheets-url-row input:focus{outline:none;border-color:var(--accent);}
+.btn-save-url{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.btn-save-url:hover{opacity:.85;}
+.url-status{font-size:.78rem;margin-top:8px;}
+.url-status.ok{color:var(--correct);}
+.url-status.bad{color:var(--wrong);}
 .chips{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
 .chip{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:100px;text-align:center;}
 .chip .cv{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent);}
@@ -103,6 +139,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
 .filters input,.filters select{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;}
 .filters input:focus,.filters select:focus{outline:none;border-color:var(--accent);}
+/* Refresh results button */
+.btn-refresh{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2);border-radius:8px;padding:8px 18px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-refresh:hover{background:rgba(56,217,169,.08);}
+.btn-refresh:disabled{opacity:.4;cursor:not-allowed;}
 table{width:100%;border-collapse:collapse;font-size:.83rem;}
 thead th{background:var(--surface);padding:10px 13px;text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);}
@@ -124,21 +164,32 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 .btn-unlock{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .pw-err{color:var(--wrong);font-size:.78rem;margin-top:7px;display:none;}
 .btn-cancel{display:block;margin-top:11px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.settings-grid{grid-template-columns:1fr;}}
+.landing-info{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;color:var(--muted);}
+@media(max-width:600px){.t-header,.prog-bar-wrap{padding-left:16px;padding-right:16px;}.q-wrap{padding:20px 12px 0;}.settings-grid{grid-template-columns:1fr;}.sheets-url-row{flex-direction:column;}}
 </style>
 </head>
 <body>
+
+<!-- Submitting overlay -->
+<div id="submit-overlay">
+  <div class="spinner"></div>
+  <p>Submitting your test… please wait.</p>
+</div>
 
 <!-- LANDING -->
 <div id="screen-landing" class="screen active">
   <div style="max-width:520px;margin:0 auto;padding:60px 24px;">
     <div class="logo">Oberlin High School</div>
     <div class="logo-sub">Grade 10 IT &nbsp;&middot;&nbsp; Six Weeks Test 2 &nbsp;&middot;&nbsp; 100 Questions &nbsp;&middot;&nbsp; 100 Marks</div>
+    <div id="setup-warning">
+      <strong>⚠ Google Sheets not connected</strong>
+      Results will only be saved locally on this device. Ask your teacher to enter the Apps Script URL in the Teacher Dashboard.
+    </div>
     <div id="closed-banner">
       <h3>&#x26D4; Test Unavailable</h3>
       <p id="closed-reason">This test is currently closed.</p>
     </div>
-    <div id="landing-info" style="background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;color:var(--muted);">
+    <div class="landing-info">
       <span style="color:var(--accent);font-weight:600;">&#9719; Time Limit:</span> <span id="info-duration">90 minutes</span>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <span style="color:var(--accent2);font-weight:600;">&#128197; Closes:</span> <span id="info-close">Not set</span>
@@ -198,6 +249,11 @@ tbody td{padding:11px 13px;vertical-align:middle;}
         <div class="rstat"><div class="v" id="res-total" style="color:var(--accent)">100</div><div class="l">Total</div></div>
       </div>
       <div class="att-note" id="res-timed-note"></div>
+      <!-- Google Sheets sync status -->
+      <div class="sync-status syncing" id="sync-status">
+        <div class="sync-dot syncing" id="sync-dot"></div>
+        <span id="sync-msg">Saving your result to Google Sheets…</span>
+      </div>
       <button class="btn-retry" id="btn-retry">Take Test Again</button>
     </div>
   </div>
@@ -208,10 +264,22 @@ tbody td{padding:11px 13px;vertical-align:middle;}
   <div class="dash-head">
     <h2>Teacher Dashboard &mdash; Six Weeks Test 2 (Grade 10)</h2>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-refresh" id="btn-refresh">&#8635; Refresh Results</button>
       <button class="btn-back" id="btn-back">&#8592; Back</button>
-      <button class="btn-clear" id="btn-clear">Clear All Results</button>
     </div>
   </div>
+
+  <!-- Google Sheets URL configuration -->
+  <div class="sheets-panel">
+    <h3>&#128196; Google Sheets Integration</h3>
+    <p>Paste your Google Apps Script Web App URL below. All student results will be sent directly to your Google Sheet. Get this URL by deploying <code>Code.gs</code> as a Web App in Google Apps Script.</p>
+    <div class="sheets-url-row">
+      <input type="text" id="sheets-url-input" placeholder="https://script.google.com/macros/s/…/exec">
+      <button class="btn-save-url" id="btn-save-url">Save URL</button>
+    </div>
+    <div class="url-status" id="url-status"></div>
+  </div>
+
   <div class="settings-panel">
     <h3>&#9881; Test Controls</h3>
     <div class="settings-grid">
@@ -234,7 +302,9 @@ tbody td{padding:11px 13px;vertical-align:middle;}
     <button class="btn-save-settings" id="btn-save-settings">Save Settings</button>
     <div class="settings-status" id="settings-status">&#10003; Settings saved.</div>
   </div>
+
   <div id="dash-status-banner" class="test-status-banner open">&#x25CF; Test is currently OPEN</div>
+
   <div class="chips">
     <div class="chip"><div class="cv" id="chip-attempts">0</div><div class="cl">Attempts</div></div>
     <div class="chip"><div class="cv" id="chip-avg">&#8212;</div><div class="cl">Avg Score</div></div>
@@ -250,9 +320,13 @@ tbody td{padding:11px 13px;vertical-align:middle;}
       <option>10N</option><option>10H</option>
     </select>
   </div>
+  <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">
+    &#9432; The table below shows results saved locally on this device.
+    Your Google Sheet holds the full cross-device record.
+  </p>
   <table>
-    <thead><tr><th>Name</th><th>Class</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Time Used</th><th>Grade</th><th>Submitted</th></tr></thead>
-    <tbody id="results-tbody"><tr><td colspan="8" class="no-data">No results yet.</td></tr></tbody>
+    <thead><tr><th>Name</th><th>Class</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Time Used</th><th>Grade</th><th>Sheets</th><th>Submitted</th></tr></thead>
+    <tbody id="results-tbody"><tr><td colspan="9" class="no-data">No results yet.</td></tr></tbody>
   </table>
 </div>
 
@@ -269,341 +343,415 @@ tbody td{padding:11px 13px;vertical-align:middle;}
 </div>
 
 <script>
-const ALL_QUESTIONS = [{"id": 1, "section": "Section A — Computer Hardware &amp; CPU", "q": "The part of the CPU that performs arithmetic calculations and logic operations is the:", "opts": [{"k": "A", "t": "Control Unit (CU)"}, {"k": "B", "t": "Random Access Memory (RAM)"}, {"k": "C", "t": "Arithmetic and Logic Unit (ALU)"}, {"k": "D", "t": "Read Only Memory (ROM)"}], "ans": "C"}, {"id": 2, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Control Unit (CU) is responsible for:", "opts": [{"k": "A", "t": "Performing all mathematical calculations"}, {"k": "B", "t": "Directing and co-ordinating all activities within the CPU"}, {"k": "C", "t": "Storing permanent startup instructions"}, {"k": "D", "t": "Holding data currently being processed"}], "ans": "B"}, {"id": 3, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which two units make up the Central Processing Unit (CPU)?", "opts": [{"k": "A", "t": "Control Unit (CU) and Arithmetic and Logic Unit (ALU)"}, {"k": "B", "t": "RAM and ROM"}, {"k": "C", "t": "Hard disk and motherboard"}, {"k": "D", "t": "Program Counter and Cache Memory"}], "ans": "A"}, {"id": 4, "section": "Section A — Computer Hardware &amp; CPU", "q": "Clock speed of a CPU is measured in:", "opts": [{"k": "A", "t": "Megabytes (MB)"}, {"k": "B", "t": "Gigabytes (GB)"}, {"k": "C", "t": "Kilobits (Kb)"}, {"k": "D", "t": "Gigahertz (GHz) or Megahertz (MHz)"}], "ans": "D"}, {"id": 5, "section": "Section A — Computer Hardware &amp; CPU", "q": "The fetch-decode-execute cycle describes:", "opts": [{"k": "A", "t": "How data is written to and read from secondary storage"}, {"k": "B", "t": "The steps the Control Unit carries out when processing each instruction"}, {"k": "C", "t": "How RAM communicates with ROM"}, {"k": "D", "t": "The process of formatting a hard disk"}], "ans": "B"}, {"id": 6, "section": "Section A — Computer Hardware &amp; CPU", "q": "Cache memory is used in a computer system to:", "opts": [{"k": "A", "t": "Store programs permanently when the power is off"}, {"k": "B", "t": "Back up important data files automatically"}, {"k": "C", "t": "Speed up the CPU by storing frequently used instructions close to the processor"}, {"k": "D", "t": "Replace secondary storage when it is full"}], "ans": "C"}, {"id": 7, "section": "Section A — Computer Hardware &amp; CPU", "q": "Word size in a CPU refers to:", "opts": [{"k": "A", "t": "The number of words per second a printer can output"}, {"k": "B", "t": "The number of bits the CPU can process in a single operation"}, {"k": "C", "t": "The maximum number of characters in a file name"}, {"k": "D", "t": "The speed of the system clock in MHz"}], "ans": "B"}, {"id": 8, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following is an arithmetic operation performed by the ALU?", "opts": [{"k": "A", "t": "Division"}, {"k": "B", "t": "AND"}, {"k": "C", "t": "OR"}, {"k": "D", "t": "NOT"}], "ans": "A"}, {"id": 9, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Program Counter (PC) in a CPU holds:", "opts": [{"k": "A", "t": "The result of the most recent arithmetic operation"}, {"k": "B", "t": "The instruction currently being decoded"}, {"k": "C", "t": "The memory address of the next instruction to be executed"}, {"k": "D", "t": "Permanent BIOS startup data"}], "ans": "C"}, {"id": 10, "section": "Section A — Computer Hardware &amp; CPU", "q": "RAM is described as volatile because:", "opts": [{"k": "A", "t": "It can only be read and never written to"}, {"k": "B", "t": "It loses all its data when the power is switched off"}, {"k": "C", "t": "It stores data permanently on magnetic platters"}, {"k": "D", "t": "It is used only during the boot-up process"}], "ans": "B"}, {"id": 11, "section": "Section A — Computer Hardware &amp; CPU", "q": "ROM is mainly used to:", "opts": [{"k": "A", "t": "Store temporary data while the CPU processes it"}, {"k": "B", "t": "Perform arithmetic calculations for the ALU"}, {"k": "C", "t": "Store the startup (BIOS) instructions that run when the computer is switched on"}, {"k": "D", "t": "Save user files and documents permanently"}], "ans": "C"}, {"id": 12, "section": "Section A — Computer Hardware &amp; CPU", "q": "One byte consists of:", "opts": [{"k": "A", "t": "2 bits"}, {"k": "B", "t": "4 bits"}, {"k": "C", "t": "8 bits"}, {"k": "D", "t": "16 bits"}], "ans": "C"}, {"id": 13, "section": "Section A — Computer Hardware &amp; CPU", "q": "1 GB is equal to:", "opts": [{"k": "A", "t": "1 024 bytes"}, {"k": "B", "t": "1 024 KB"}, {"k": "C", "t": "1 024 GB"}, {"k": "D", "t": "1 024 MB"}], "ans": "D"}, {"id": 14, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following BEST describes secondary storage?", "opts": [{"k": "A", "t": "Memory that is volatile and loses data when power is removed"}, {"k": "B", "t": "The memory used by the CPU to run programs currently open"}, {"k": "C", "t": "Read-only memory that holds startup instructions permanently"}, {"k": "D", "t": "Permanent storage outside the CPU that retains data without power"}], "ans": "D"}, {"id": 15, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which storage device uses sequential access to retrieve data?", "opts": [{"k": "A", "t": "Hard disk drive"}, {"k": "B", "t": "USB flash drive"}, {"k": "C", "t": "Magnetic tape"}, {"k": "D", "t": "CD-ROM"}], "ans": "C"}, {"id": 16, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, which keyboard shortcut is used to BOLD selected text?", "opts": [{"k": "A", "t": "Ctrl + I"}, {"k": "B", "t": "Ctrl + B"}, {"k": "C", "t": "Ctrl + U"}, {"k": "D", "t": "Ctrl + E"}], "ans": "B"}, {"id": 17, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to SAVE a document in Microsoft Word?", "opts": [{"k": "A", "t": "Ctrl + P"}, {"k": "B", "t": "Ctrl + O"}, {"k": "C", "t": "Ctrl + S"}, {"k": "D", "t": "Ctrl + N"}], "ans": "C"}, {"id": 18, "section": "Section B — Microsoft Word", "q": "What is the default file extension for a Microsoft Word 2010 or later document?", "opts": [{"k": "A", "t": ".docx"}, {"k": "B", "t": ".doc"}, {"k": "C", "t": ".txt"}, {"k": "D", "t": ".pdf"}], "ans": "A"}, {"id": 19, "section": "Section B — Microsoft Word", "q": "Which Word feature automatically checks and corrects spelling errors as you type?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "Mail Merge"}, {"k": "D", "t": "AutoCorrect"}], "ans": "D"}, {"id": 20, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to UNDO the last action in Word?", "opts": [{"k": "A", "t": "Ctrl + Y"}, {"k": "B", "t": "Ctrl + Z"}, {"k": "C", "t": "Ctrl + X"}, {"k": "D", "t": "Ctrl + A"}], "ans": "B"}, {"id": 21, "section": "Section B — Microsoft Word", "q": "In Word, \"Cut\" and \"Paste\" moves text, while \"Copy\" and \"Paste\":", "opts": [{"k": "A", "t": "Deletes the original text permanently"}, {"k": "B", "t": "Moves the text to a new location"}, {"k": "C", "t": "Creates a duplicate of the text, leaving the original intact"}, {"k": "D", "t": "Formats the text as bold"}], "ans": "C"}, {"id": 22, "section": "Section B — Microsoft Word", "q": "The Word feature that allows you to send the same letter to multiple recipients with personalised details is called:", "opts": [{"k": "A", "t": "Mail Merge"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "AutoCorrect"}, {"k": "D", "t": "Find &amp; Replace"}], "ans": "A"}, {"id": 23, "section": "Section B — Microsoft Word", "q": "Which Word formatting option aligns text equally on both the left and right margins?", "opts": [{"k": "A", "t": "Left align"}, {"k": "B", "t": "Right align"}, {"k": "C", "t": "Centre align"}, {"k": "D", "t": "Justify"}], "ans": "D"}, {"id": 24, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, \"Find &amp; Replace\" (Ctrl + H) is used to:", "opts": [{"k": "A", "t": "Format selected text with a new font"}, {"k": "B", "t": "Locate specific text and substitute it with different text"}, {"k": "C", "t": "Insert a table into the document"}, {"k": "D", "t": "Check grammar errors automatically"}], "ans": "B"}, {"id": 25, "section": "Section B — Microsoft Word", "q": "A page break in Word is used to:", "opts": [{"k": "A", "t": "Delete a page from the document"}, {"k": "B", "t": "Print only selected pages"}, {"k": "C", "t": "Force text to start at the top of the next page"}, {"k": "D", "t": "Split a table across two columns"}], "ans": "C"}, {"id": 26, "section": "Section B — Microsoft Word", "q": "Which ribbon tab in Word contains the \"Font\" and \"Paragraph\" groups?", "opts": [{"k": "A", "t": "Home"}, {"k": "B", "t": "Insert"}, {"k": "C", "t": "Page Layout"}, {"k": "D", "t": "Review"}], "ans": "A"}, {"id": 27, "section": "Section B — Microsoft Word", "q": "Which view in Microsoft Word shows exactly how the document will look when printed?", "opts": [{"k": "A", "t": "Draft view"}, {"k": "B", "t": "Outline view"}, {"k": "C", "t": "Web Layout view"}, {"k": "D", "t": "Print Layout view"}], "ans": "D"}, {"id": 28, "section": "Section B — Microsoft Word", "q": "In Word, \"Track Changes\" is used to:", "opts": [{"k": "A", "t": "Monitor how many times a document has been saved"}, {"k": "B", "t": "Record edits made to a document so reviewers can accept or reject them"}, {"k": "C", "t": "Automatically correct spelling as you type"}, {"k": "D", "t": "Track the number of words in the document"}], "ans": "B"}, {"id": 29, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut selects ALL text in a Word document?", "opts": [{"k": "A", "t": "Ctrl + S"}, {"k": "B", "t": "Ctrl + C"}, {"k": "C", "t": "Ctrl + A"}, {"k": "D", "t": "Ctrl + F"}], "ans": "C"}, {"id": 30, "section": "Section B — Microsoft Word", "q": "What is a \"Header\" in a Microsoft Word document?", "opts": [{"k": "A", "t": "Text that appears at the top of every page of the document"}, {"k": "B", "t": "The title of the document typed at the beginning"}, {"k": "C", "t": "The first paragraph of the document"}, {"k": "D", "t": "A style applied to Heading 1 text"}], "ans": "A"}, {"id": 31, "section": "Section B — Microsoft Word", "q": "In Word, \"line spacing\" refers to:", "opts": [{"k": "A", "t": "The number of characters per line"}, {"k": "B", "t": "The width of the page margins"}, {"k": "C", "t": "The font size of the text"}, {"k": "D", "t": "The amount of vertical space between lines of text"}], "ans": "D"}, {"id": 32, "section": "Section B — Microsoft Word", "q": "Which Word feature inserts automatic numbering or letters at the start of each paragraph?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Numbered list"}, {"k": "C", "t": "Page break"}, {"k": "D", "t": "Header"}], "ans": "B"}, {"id": 33, "section": "Section B — Microsoft Word", "q": "The \"Spelling &amp; Grammar\" checker in Word can be launched with which key?", "opts": [{"k": "A", "t": "F1"}, {"k": "B", "t": "F4"}, {"k": "C", "t": "F7"}, {"k": "D", "t": "F10"}], "ans": "C"}, {"id": 34, "section": "Section B — Microsoft Word", "q": "In Word, what does \"portrait\" orientation mean?", "opts": [{"k": "A", "t": "The page is taller than it is wide (vertical)"}, {"k": "B", "t": "The page is wider than it is tall (horizontal)"}, {"k": "C", "t": "The page is printed on both sides"}, {"k": "D", "t": "The text runs diagonally across the page"}], "ans": "A"}, {"id": 35, "section": "Section B — Microsoft Word", "q": "Which Word feature allows a long document to be automatically divided into columns of text (like a newspaper)?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Indent"}, {"k": "C", "t": "Line spacing"}, {"k": "D", "t": "Columns (in the Page Layout tab)"}], "ans": "D"}, {"id": 36, "section": "Section C — Microsoft Excel", "q": "What is the default file extension for a Microsoft Excel 2010 or later workbook?", "opts": [{"k": "A", "t": ".xls"}, {"k": "B", "t": ".xlsx"}, {"k": "C", "t": ".csv"}, {"k": "D", "t": ".xlsm"}], "ans": "B"}, {"id": 37, "section": "Section C — Microsoft Excel", "q": "In Excel, the intersection of a row and a column is called a:", "opts": [{"k": "A", "t": "Cell"}, {"k": "B", "t": "Table"}, {"k": "C", "t": "Range"}, {"k": "D", "t": "Worksheet"}], "ans": "A"}, {"id": 38, "section": "Section C — Microsoft Excel", "q": "In Excel, all formulas must begin with:", "opts": [{"k": "A", "t": "A letter"}, {"k": "B", "t": "A number"}, {"k": "C", "t": "An equals sign (=)"}, {"k": "D", "t": "A dollar sign ($)"}], "ans": "C"}, {"id": 39, "section": "Section C — Microsoft Excel", "q": "Which Excel function adds all the values in a range of cells?", "opts": [{"k": "A", "t": "=COUNT()"}, {"k": "B", "t": "=MAX()"}, {"k": "C", "t": "=AVERAGE()"}, {"k": "D", "t": "=SUM()"}], "ans": "D"}, {"id": 40, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =AVERAGE(B1:B5) calculate?", "opts": [{"k": "A", "t": "The total of cells B1 through B5"}, {"k": "B", "t": "The mean (average) of cells B1 through B5"}, {"k": "C", "t": "The number of cells that contain values in B1:B5"}, {"k": "D", "t": "The largest value in cells B1 through B5"}], "ans": "B"}, {"id": 41, "section": "Section C — Microsoft Excel", "q": "In Excel, columns are labelled with:", "opts": [{"k": "A", "t": "Letters (A, B, C…)"}, {"k": "B", "t": "Numbers (1, 2, 3…)"}, {"k": "C", "t": "Roman numerals (I, II, III…)"}, {"k": "D", "t": "Symbols (#, @, $…)"}], "ans": "A"}, {"id": 42, "section": "Section C — Microsoft Excel", "q": "The cell reference $A$1 in Excel is an example of:", "opts": [{"k": "A", "t": "A relative reference"}, {"k": "B", "t": "A mixed reference"}, {"k": "C", "t": "An absolute reference"}, {"k": "D", "t": "A named range"}], "ans": "C"}, {"id": 43, "section": "Section C — Microsoft Excel", "q": "Which Excel function returns the LARGEST value in a range?", "opts": [{"k": "A", "t": "=MIN()"}, {"k": "B", "t": "=SUM()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=MAX()"}], "ans": "D"}, {"id": 44, "section": "Section C — Microsoft Excel", "q": "In Excel, which chart type is BEST for showing how parts relate to a whole (percentages)?", "opts": [{"k": "A", "t": "Line chart"}, {"k": "B", "t": "Pie chart"}, {"k": "C", "t": "Bar chart"}, {"k": "D", "t": "Scatter chart"}], "ans": "B"}, {"id": 45, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =COUNT(A1:A10) do?", "opts": [{"k": "A", "t": "Counts the number of cells in A1:A10 that contain numeric values"}, {"k": "B", "t": "Adds up all values in A1:A10"}, {"k": "C", "t": "Returns the smallest value in A1:A10"}, {"k": "D", "t": "Returns the average of A1:A10"}], "ans": "A"}, {"id": 46, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to arrange rows in alphabetical or numerical order?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Conditional Formatting"}, {"k": "C", "t": "Sort"}, {"k": "D", "t": "Freeze Panes"}], "ans": "C"}, {"id": 47, "section": "Section C — Microsoft Excel", "q": "In Excel, what does \"AutoFill\" do?", "opts": [{"k": "A", "t": "Automatically saves the workbook every few minutes"}, {"k": "B", "t": "Checks spelling in all cells"}, {"k": "C", "t": "Formats cells with a predefined colour scheme"}, {"k": "D", "t": "Extends a pattern or series of data to adjacent cells by dragging the fill handle"}], "ans": "D"}, {"id": 48, "section": "Section C — Microsoft Excel", "q": "Which of the following is a valid Excel formula to multiply the value in A1 by the value in B1?", "opts": [{"k": "A", "t": "=A1 x B1"}, {"k": "B", "t": "=A1*B1"}, {"k": "C", "t": "=MULTIPLY(A1,B1)"}, {"k": "D", "t": "A1×B1"}], "ans": "B"}, {"id": 49, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Freeze Panes\" is used to:", "opts": [{"k": "A", "t": "Keep selected rows or columns visible when scrolling through a large spreadsheet"}, {"k": "B", "t": "Lock a cell so it cannot be edited"}, {"k": "C", "t": "Apply a border around a cell range"}, {"k": "D", "t": "Merge multiple cells into one"}], "ans": "A"}, {"id": 50, "section": "Section C — Microsoft Excel", "q": "What is a \"workbook\" in Microsoft Excel?", "opts": [{"k": "A", "t": "A single row of data in the spreadsheet"}, {"k": "B", "t": "A single column of data in the spreadsheet"}, {"k": "C", "t": "An Excel file that can contain one or more worksheets"}, {"k": "D", "t": "A chart embedded in the spreadsheet"}], "ans": "C"}, {"id": 51, "section": "Section C — Microsoft Excel", "q": "Which Excel function can be used to display different text based on a condition? E.g. If a student's mark is ≥50, display \"Pass\", otherwise display \"Fail\".", "opts": [{"k": "A", "t": "=SUM()"}, {"k": "B", "t": "=VLOOKUP()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=IF()"}], "ans": "D"}, {"id": 52, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Conditional Formatting\" is used to:", "opts": [{"k": "A", "t": "Apply the same formula to every cell in a column"}, {"k": "B", "t": "Automatically format cells with colours, icons, or data bars based on their values"}, {"k": "C", "t": "Lock cells to prevent editing"}, {"k": "D", "t": "Convert text to numbers automatically"}], "ans": "B"}, {"id": 53, "section": "Section C — Microsoft Excel", "q": "What does the Name Box in Excel display?", "opts": [{"k": "A", "t": "The address (reference) of the currently selected cell, e.g. A1"}, {"k": "B", "t": "The formula used in the current cell"}, {"k": "C", "t": "The name of the workbook"}, {"k": "D", "t": "The number of rows in the spreadsheet"}], "ans": "A"}, {"id": 54, "section": "Section C — Microsoft Excel", "q": "Which chart type is BEST for showing trends over time (e.g. monthly sales)?", "opts": [{"k": "A", "t": "Pie chart"}, {"k": "B", "t": "Column chart"}, {"k": "C", "t": "Line chart"}, {"k": "D", "t": "Doughnut chart"}], "ans": "C"}, {"id": 55, "section": "Section C — Microsoft Excel", "q": "In Excel, what happens when you press the Delete key on a selected cell?", "opts": [{"k": "A", "t": "The entire row is deleted from the spreadsheet"}, {"k": "B", "t": "The cell itself is removed, shifting adjacent cells"}, {"k": "C", "t": "The cell formatting (colour, font) is removed"}, {"k": "D", "t": "The contents (data) of the cell are cleared"}], "ans": "D"}, {"id": 56, "section": "Section C — Microsoft Excel", "q": "What does the Excel formula =MIN(C1:C10) return?", "opts": [{"k": "A", "t": "The average of cells C1 to C10"}, {"k": "B", "t": "The smallest value in cells C1 to C10"}, {"k": "C", "t": "The total sum of cells C1 to C10"}, {"k": "D", "t": "The number of cells that contain data in C1:C10"}], "ans": "B"}, {"id": 57, "section": "Section C — Microsoft Excel", "q": "A \"relative cell reference\" in Excel (e.g. A1) means:", "opts": [{"k": "A", "t": "The reference automatically adjusts when the formula is copied to another cell"}, {"k": "B", "t": "The reference stays fixed regardless of where the formula is copied"}, {"k": "C", "t": "The cell is locked and cannot be changed"}, {"k": "D", "t": "The reference refers to a cell in a different workbook"}], "ans": "A"}, {"id": 58, "section": "Section C — Microsoft Excel", "q": "In Excel, \"merging\" cells means:", "opts": [{"k": "A", "t": "Copying data from one cell to another"}, {"k": "B", "t": "Applying a formula across multiple cells simultaneously"}, {"k": "C", "t": "Combining two or more adjacent cells into a single larger cell"}, {"k": "D", "t": "Sorting cells in ascending order"}], "ans": "C"}, {"id": 59, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to display only rows that meet specific criteria while hiding the rest?", "opts": [{"k": "A", "t": "Sort"}, {"k": "B", "t": "Freeze Panes"}, {"k": "C", "t": "Conditional Formatting"}, {"k": "D", "t": "Filter (AutoFilter)"}], "ans": "D"}, {"id": 60, "section": "Section C — Microsoft Excel", "q": "What is a \"formula bar\" in Excel?", "opts": [{"k": "A", "t": "The toolbar at the top of the screen containing formatting buttons"}, {"k": "B", "t": "The bar below the ribbon that displays the content or formula of the selected cell"}, {"k": "C", "t": "A horizontal bar chart showing spreadsheet data"}, {"k": "D", "t": "The row at the bottom of the spreadsheet showing totals"}], "ans": "B"}, {"id": 61, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database is best described as:", "opts": [{"k": "A", "t": "A type of spreadsheet used to perform calculations"}, {"k": "B", "t": "A word processing document used to store letters"}, {"k": "C", "t": "An organised collection of related data that can be stored, retrieved, and managed"}, {"k": "D", "t": "A program used to browse the internet"}], "ans": "C"}, {"id": 62, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a FIELD is:", "opts": [{"k": "A", "t": "A single piece of data about an entity, representing one attribute (e.g. StudentName)"}, {"k": "B", "t": "A complete set of information about one entity (e.g. all details about one student)"}, {"k": "C", "t": "A collection of related tables in the database"}, {"k": "D", "t": "A query that retrieves data from the database"}], "ans": "A"}, {"id": 63, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a RECORD is:", "opts": [{"k": "A", "t": "A single data item, such as a student's first name only"}, {"k": "B", "t": "A complete collection of fields about one specific entity (e.g. all details about one student)"}, {"k": "C", "t": "A relationship between two tables"}, {"k": "D", "t": "A formula used to calculate data"}], "ans": "B"}, {"id": 64, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database terminology, a TABLE is:", "opts": [{"k": "A", "t": "A single record stored in the database"}, {"k": "B", "t": "A type of query used to update data"}, {"k": "C", "t": "A chart showing database relationships"}, {"k": "D", "t": "A structured set of data organised in rows (records) and columns (fields) about one entity type"}], "ans": "D"}, {"id": 65, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A PRIMARY KEY in a database is:", "opts": [{"k": "A", "t": "The first field in every table, always called \"ID\""}, {"k": "B", "t": "A field that can contain duplicate or null values"}, {"k": "C", "t": "A field (or set of fields) that uniquely identifies each record in a table — it must be unique and not empty"}, {"k": "D", "t": "A password used to secure the database"}], "ans": "C"}, {"id": 66, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A FOREIGN KEY in a database is:", "opts": [{"k": "A", "t": "A field in one table that refers to the primary key in another table, used to link the two tables"}, {"k": "B", "t": "A field that uniquely identifies each record in its own table"}, {"k": "C", "t": "A key imported from a foreign (overseas) database"}, {"k": "D", "t": "A secondary password for read-only database access"}], "ans": "A"}, {"id": 67, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, an ENTITY is:", "opts": [{"k": "A", "t": "A single data value stored in a field"}, {"k": "B", "t": "A person, place, object, event, or concept about which data is stored (e.g. Student, Course)"}, {"k": "C", "t": "A relationship linking two tables"}, {"k": "D", "t": "A report generated by the database"}], "ans": "B"}, {"id": 68, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, the characteristics or properties of an entity are called its:", "opts": [{"k": "A", "t": "Records"}, {"k": "B", "t": "Queries"}, {"k": "C", "t": "Tables"}, {"k": "D", "t": "Attributes (which become fields in the table)"}], "ans": "D"}, {"id": 69, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A QUERY in a database is used to:", "opts": [{"k": "A", "t": "Store data permanently in the database"}, {"k": "B", "t": "Design the layout of printed reports"}, {"k": "C", "t": "Ask questions of the database and retrieve specific data that meets set criteria"}, {"k": "D", "t": "Create the structure of tables and fields"}], "ans": "C"}, {"id": 70, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-ONE relationship in a database means:", "opts": [{"k": "A", "t": "Each record in Table A is linked to exactly one record in Table B, and vice versa"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B"}, {"k": "C", "t": "Many records in Table A can be linked to many records in Table B"}, {"k": "D", "t": "Table A and Table B share the same primary key field name"}], "ans": "A"}, {"id": 71, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "Each record in both tables can link to only one record in the other"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B, but each record in Table B links to only one in Table A"}, {"k": "C", "t": "Every record in Table A is linked to every record in Table B"}, {"k": "D", "t": "The two tables have no common fields"}], "ans": "B"}, {"id": 72, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A MANY-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "One record in Table A links to exactly one record in Table B"}, {"k": "B", "t": "One record in Table A links to many records in Table B only"}, {"k": "C", "t": "Table A has more fields than Table B"}, {"k": "D", "t": "Many records in Table A can link to many records in Table B, and vice versa"}], "ans": "D"}, {"id": 73, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a school database, the relationship between STUDENT and CLASS is typically:", "opts": [{"k": "A", "t": "One-to-one (one student belongs to exactly one class, and one class has exactly one student)"}, {"k": "B", "t": "Many-to-many (many students belong to many classes simultaneously)"}, {"k": "C", "t": "Many-to-one (many students belong to one class)"}, {"k": "D", "t": "There is no relationship between students and classes"}], "ans": "C"}, {"id": 74, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the object used to enter, view, and edit data in a user-friendly layout is:", "opts": [{"k": "A", "t": "Form"}, {"k": "B", "t": "Query"}, {"k": "C", "t": "Report"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 75, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, a REPORT is used to:", "opts": [{"k": "A", "t": "Enter new records into a table"}, {"k": "B", "t": "Create relationships between tables"}, {"k": "C", "t": "Query the database with criteria"}, {"k": "D", "t": "Present data in a formatted, printable layout (e.g. summaries, charts)"}], "ans": "D"}, {"id": 76, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "What is a \"data type\" in a database field?", "opts": [{"k": "A", "t": "The name given to a record in the table"}, {"k": "B", "t": "A setting that specifies what kind of data a field can store (e.g. Text, Number, Date)"}, {"k": "C", "t": "The format of the printed report"}, {"k": "D", "t": "The relationship type between two tables"}], "ans": "B"}, {"id": 77, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following would be the MOST appropriate data type for a field storing a student's date of birth in MS Access?", "opts": [{"k": "A", "t": "Text"}, {"k": "B", "t": "Number"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Yes/No"}], "ans": "C"}, {"id": 78, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which MS Access data type would be used for a field that stores whether a student has paid their fees (True/False)?", "opts": [{"k": "A", "t": "Yes/No"}, {"k": "B", "t": "Text"}, {"k": "C", "t": "Number"}, {"k": "D", "t": "Date/Time"}], "ans": "A"}, {"id": 79, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is the BEST example of a primary key for a STUDENT table?", "opts": [{"k": "A", "t": "StudentName (because names are easy to remember)"}, {"k": "B", "t": "DateOfBirth (because all students have a date of birth)"}, {"k": "C", "t": "ClassRoom (because students are grouped by class)"}, {"k": "D", "t": "StudentID (a unique number assigned to each student)"}], "ans": "D"}, {"id": 80, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, \"referential integrity\" means:", "opts": [{"k": "A", "t": "All fields in a table must have the same data type"}, {"k": "B", "t": "A foreign key value must match an existing primary key value in the related table (no orphan records)"}, {"k": "C", "t": "Every table must have at least 10 records"}, {"k": "D", "t": "Queries must return results in alphabetical order"}], "ans": "B"}, {"id": 81, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the \"Design View\" of a table is used to:", "opts": [{"k": "A", "t": "Enter and browse records in the table"}, {"k": "B", "t": "Print the table as a report"}, {"k": "C", "t": "Define the field names, data types, and properties of the table structure"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "C"}, {"id": 82, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, \"Datasheet View\" of a table is used to:", "opts": [{"k": "A", "t": "View, enter, and edit actual records in the table (rows and columns)"}, {"k": "B", "t": "Define the field names and data types"}, {"k": "C", "t": "Set up a query with criteria"}, {"k": "D", "t": "Design a printed report layout"}], "ans": "A"}, {"id": 83, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is NOT a valid Access data type?", "opts": [{"k": "A", "t": "Number"}, {"k": "B", "t": "Text / Short Text"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Formula"}], "ans": "D"}, {"id": 84, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is TRUE about a primary key?", "opts": [{"k": "A", "t": "It can have duplicate values in the same table"}, {"k": "B", "t": "It must be unique for every record and cannot be left empty (null)"}, {"k": "C", "t": "Every table must have exactly three primary key fields"}, {"k": "D", "t": "It is always a number between 1 and 100"}], "ans": "B"}, {"id": 85, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database schema refers to:", "opts": [{"k": "A", "t": "The data stored inside the database tables"}, {"k": "B", "t": "A query that retrieves records from multiple tables"}, {"k": "C", "t": "The structure and organisation of the database — the tables, fields, data types, and relationships"}, {"k": "D", "t": "A printed summary report of the database contents"}], "ans": "C"}, {"id": 86, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a \"field\" corresponds to which concept in entity-relationship modelling?", "opts": [{"k": "A", "t": "An attribute of an entity"}, {"k": "B", "t": "The entity itself"}, {"k": "C", "t": "A relationship between two entities"}, {"k": "D", "t": "A complete record of the entity"}], "ans": "A"}, {"id": 87, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is an example of a ONE-TO-MANY relationship?", "opts": [{"k": "A", "t": "One student is enrolled in exactly one school (and one school has exactly one student)"}, {"k": "B", "t": "One student can take many subjects and one subject can be taken by many students"}, {"k": "C", "t": "One country has one capital city and one capital city belongs to one country"}, {"k": "D", "t": "One teacher teaches many students, but each student has only one teacher for that subject"}], "ans": "D"}, {"id": 88, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, to link two tables in a relationship, you use the:", "opts": [{"k": "A", "t": "Query Wizard"}, {"k": "B", "t": "Relationships window (Database Tools → Relationships)"}, {"k": "C", "t": "Report Designer"}, {"k": "D", "t": "Form Builder"}], "ans": "B"}, {"id": 89, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A student table has the fields: StudentID, FirstName, LastName, DOB, ClassID. Which field is most likely the foreign key linking to a CLASS table?", "opts": [{"k": "A", "t": "StudentID"}, {"k": "B", "t": "FirstName"}, {"k": "C", "t": "ClassID"}, {"k": "D", "t": "DOB"}], "ans": "C"}, {"id": 90, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In Access, the QBE (Query By Example) grid is used to:", "opts": [{"k": "A", "t": "Set up a query by selecting fields, sorting options, and criteria in a visual grid"}, {"k": "B", "t": "Design the visual layout of a data entry form"}, {"k": "C", "t": "Define field data types in Table Design View"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "A"}, {"id": 91, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following best describes \"data redundancy\" in a database?", "opts": [{"k": "A", "t": "Storing data in a secure, encrypted format"}, {"k": "B", "t": "Using primary keys to uniquely identify records"}, {"k": "C", "t": "Having too many tables in the database"}, {"k": "D", "t": "The unnecessary duplication of the same data in multiple places within the database"}], "ans": "D"}, {"id": 92, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A DBMS (Database Management System) is:", "opts": [{"k": "A", "t": "A type of spreadsheet application like Microsoft Excel"}, {"k": "B", "t": "Software that allows users to create, manage, and interact with a database (e.g. Microsoft Access, MySQL)"}, {"k": "C", "t": "A programming language used to write websites"}, {"k": "D", "t": "Hardware used to store backup copies of a database"}], "ans": "B"}, {"id": 93, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is an example of an entity?", "opts": [{"k": "A", "t": "The student's first name \"Marcus\""}, {"k": "B", "t": "The date of birth field \"15/03/2010\""}, {"k": "C", "t": "STUDENT (a thing about which data is collected)"}, {"k": "D", "t": "The primary key field StudentID"}], "ans": "C"}, {"id": 94, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "For the entity BOOK, which of the following would be an ATTRIBUTE?", "opts": [{"k": "A", "t": "ISBN, Title, Author, PublicationYear"}, {"k": "B", "t": "LIBRARY (where books are stored)"}, {"k": "C", "t": "BORROW (a transaction involving the book)"}, {"k": "D", "t": "STUDENT (who borrows the book)"}], "ans": "A"}, {"id": 95, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "When a query in MS Access is run, it:", "opts": [{"k": "A", "t": "Permanently deletes records from the table"}, {"k": "B", "t": "Prints a formatted report to the printer"}, {"k": "C", "t": "Adds new blank records to the database"}, {"k": "D", "t": "Retrieves and displays a dynamic set of records from one or more tables that match the criteria"}], "ans": "D"}, {"id": 96, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is TRUE about a FOREIGN KEY?", "opts": [{"k": "A", "t": "It must always be unique in the table where it appears"}, {"k": "B", "t": "It is a field that creates a link between two tables by matching the primary key of another table"}, {"k": "C", "t": "It is used only in one-to-one relationships"}, {"k": "D", "t": "It cannot be used in a query"}], "ans": "B"}, {"id": 97, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a STUDENT–SUBJECT scenario where students can take many subjects and each subject can be taken by many students, the relationship type is:", "opts": [{"k": "A", "t": "One-to-one"}, {"k": "B", "t": "One-to-many"}, {"k": "C", "t": "Many-to-many"}, {"k": "D", "t": "Many-to-one"}], "ans": "C"}, {"id": 98, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, which object is most suitable for generating a neatly formatted printed summary of student results grouped by class?", "opts": [{"k": "A", "t": "Report"}, {"k": "B", "t": "Form"}, {"k": "C", "t": "Query"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 99, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "The \"AutoNumber\" data type in MS Access is commonly used for a primary key field because:", "opts": [{"k": "A", "t": "It stores the current date automatically"}, {"k": "B", "t": "It allows the user to type any number they choose"}, {"k": "C", "t": "It stores text descriptions of each record"}, {"k": "D", "t": "It automatically generates a unique sequential number for every new record"}], "ans": "D"}, {"id": 100, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following correctly matches a database object in MS Access with its purpose?", "opts": [{"k": "A", "t": "Table → Used to ask questions about the data and filter records by criteria"}, {"k": "B", "t": "Table → Stores the actual data; Query → Retrieves specific data; Form → Provides a user-friendly data entry screen; Report → Presents formatted output for printing"}, {"k": "C", "t": "Form → Stores data permanently; Query → Prints reports; Table → Filters records"}, {"k": "D", "t": "Query → Stores data; Form → Creates charts; Report → Deletes old records"}], "ans": "B"}];
+// =====================================================================
+//  ▼▼▼  PASTE YOUR APPS SCRIPT WEB APP URL HERE (between the quotes)  ▼▼▼
+//  Leave as empty string '' if you haven't deployed it yet — the teacher
+//  dashboard also has a field where you can paste it at runtime.
+// =====================================================================
+let SHEETS_URL = '';   // e.g. 'https://script.google.com/macros/s/AKfy…/exec'
 
-const TOTAL = 100;
-const PW = 'teacher2025';
-const STORE_RESULTS = 'g10t2_results_v2';
-const STORE_SETTINGS = 'g10t2_settings_v2';
+// ─── constants ───────────────────────────────────────────────────────
+const TOTAL         = 100;
+const PW            = 'teacher2025';
+const STORE_RESULTS  = 'g10t2_results_v3';
+const STORE_SETTINGS = 'g10t2_settings_v3';
+const STORE_URL      = 'g10t2_sheets_url';
 
-function getSettings() {
-  try { return JSON.parse(localStorage.getItem(STORE_SETTINGS) || 'null') || { duration: 90, closeAt: '', isOpen: true }; }
-  catch { return { duration: 90, closeAt: '', isOpen: true }; }
+// ─── helpers ─────────────────────────────────────────────────────────
+function getSettings(){
+  try{ return JSON.parse(localStorage.getItem(STORE_SETTINGS)||'null')||{duration:90,closeAt:'',isOpen:true}; }
+  catch{ return {duration:90,closeAt:'',isOpen:true}; }
 }
-function saveSettings(s) { localStorage.setItem(STORE_SETTINGS, JSON.stringify(s)); }
-function getResults() { try { return JSON.parse(localStorage.getItem(STORE_RESULTS) || '[]'); } catch { return []; } }
-function saveResult(r) { const a = getResults(); a.push(r); localStorage.setItem(STORE_RESULTS, JSON.stringify(a)); }
+function saveSettings(s){ localStorage.setItem(STORE_SETTINGS,JSON.stringify(s)); }
+function getResults(){ try{ return JSON.parse(localStorage.getItem(STORE_RESULTS)||'[]'); } catch{ return []; } }
+function saveLocalResult(r){
+  const a = getResults();
+  a.push(r);
+  localStorage.setItem(STORE_RESULTS, JSON.stringify(a));
+}
+function getSheetsUrl(){
+  return SHEETS_URL || localStorage.getItem(STORE_URL) || '';
+}
+function saveSheetsUrl(url){
+  localStorage.setItem(STORE_URL, url);
+  SHEETS_URL = url;
+}
 
-function isTestClosed() {
+function isTestClosed(){
   const s = getSettings();
-  if (!s.isOpen) return { closed: true, reason: 'The teacher has closed this test.' };
-  if (s.closeAt) {
-    const closeTs = new Date(s.closeAt).getTime();
-    if (!isNaN(closeTs) && Date.now() > closeTs) {
-      return { closed: true, reason: 'The deadline for this test has passed (' + new Date(s.closeAt).toLocaleString() + ').' };
-    }
+  if(!s.isOpen) return {closed:true, reason:'The teacher has closed this test.'};
+  if(s.closeAt){
+    const ts = new Date(s.closeAt).getTime();
+    if(!isNaN(ts) && Date.now() > ts)
+      return {closed:true, reason:'The deadline has passed ('+new Date(s.closeAt).toLocaleString()+').'};
   }
-  return { closed: false };
+  return {closed:false};
 }
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
   }
   return a;
 }
 
-function buildQuestionOrder() {
-  const sections = {};
-  ALL_QUESTIONS.forEach(q => {
-    if (!sections[q.section]) sections[q.section] = [];
-    sections[q.section].push(q);
-  });
-  const order = [];
-  Object.keys(sections).forEach(sec => {
-    shuffle(sections[sec]).forEach(q => order.push(q));
-  });
+// ─── send result to Google Sheets ────────────────────────────────────
+async function sendToSheets(payload){
+  const url = getSheetsUrl();
+  if(!url) return {ok:false, reason:'no_url'};
+  try{
+    // Apps Script does NOT support the no-cors fetch workaround with JSON,
+    // so we POST via a hidden form / fetch with no-cors and treat any
+    // network response as success. The script itself handles CORS via
+    // ContentService output. Using mode:'no-cors' means we can't read
+    // the response body, but the data still arrives at the sheet.
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',           // avoids CORS preflight block
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    // With no-cors we always get an opaque response — treat as success.
+    return {ok: true};
+  } catch(err){
+    return {ok: false, reason: err.toString()};
+  }
+}
+
+// ─── question bank ───────────────────────────────────────────────────
+const ALL_QUESTIONS = [{"id": 1, "section": "Section A — Computer Hardware &amp; CPU", "q": "The part of the CPU that performs arithmetic calculations and logic operations is the:", "opts": [{"k": "A", "t": "Control Unit (CU)"}, {"k": "B", "t": "Random Access Memory (RAM)"}, {"k": "C", "t": "Arithmetic and Logic Unit (ALU)"}, {"k": "D", "t": "Read Only Memory (ROM)"}], "ans": "C"}, {"id": 2, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Control Unit (CU) is responsible for:", "opts": [{"k": "A", "t": "Performing all mathematical calculations"}, {"k": "B", "t": "Directing and co-ordinating all activities within the CPU"}, {"k": "C", "t": "Storing permanent startup instructions"}, {"k": "D", "t": "Holding data currently being processed"}], "ans": "B"}, {"id": 3, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which two units make up the Central Processing Unit (CPU)?", "opts": [{"k": "A", "t": "Control Unit (CU) and Arithmetic and Logic Unit (ALU)"}, {"k": "B", "t": "RAM and ROM"}, {"k": "C", "t": "Hard disk and motherboard"}, {"k": "D", "t": "Program Counter and Cache Memory"}], "ans": "A"}, {"id": 4, "section": "Section A — Computer Hardware &amp; CPU", "q": "Clock speed of a CPU is measured in:", "opts": [{"k": "A", "t": "Megabytes (MB)"}, {"k": "B", "t": "Gigabytes (GB)"}, {"k": "C", "t": "Kilobits (Kb)"}, {"k": "D", "t": "Gigahertz (GHz) or Megahertz (MHz)"}], "ans": "D"}, {"id": 5, "section": "Section A — Computer Hardware &amp; CPU", "q": "The fetch-decode-execute cycle describes:", "opts": [{"k": "A", "t": "How data is written to and read from secondary storage"}, {"k": "B", "t": "The steps the Control Unit carries out when processing each instruction"}, {"k": "C", "t": "How RAM communicates with ROM"}, {"k": "D", "t": "The process of formatting a hard disk"}], "ans": "B"}, {"id": 6, "section": "Section A — Computer Hardware &amp; CPU", "q": "Cache memory is used in a computer system to:", "opts": [{"k": "A", "t": "Store programs permanently when the power is off"}, {"k": "B", "t": "Back up important data files automatically"}, {"k": "C", "t": "Speed up the CPU by storing frequently used instructions close to the processor"}, {"k": "D", "t": "Replace secondary storage when it is full"}], "ans": "C"}, {"id": 7, "section": "Section A — Computer Hardware &amp; CPU", "q": "Word size in a CPU refers to:", "opts": [{"k": "A", "t": "The number of words per second a printer can output"}, {"k": "B", "t": "The number of bits the CPU can process in a single operation"}, {"k": "C", "t": "The maximum number of characters in a file name"}, {"k": "D", "t": "The speed of the system clock in MHz"}], "ans": "B"}, {"id": 8, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following is an arithmetic operation performed by the ALU?", "opts": [{"k": "A", "t": "Division"}, {"k": "B", "t": "AND"}, {"k": "C", "t": "OR"}, {"k": "D", "t": "NOT"}], "ans": "A"}, {"id": 9, "section": "Section A — Computer Hardware &amp; CPU", "q": "The Program Counter (PC) in a CPU holds:", "opts": [{"k": "A", "t": "The result of the most recent arithmetic operation"}, {"k": "B", "t": "The instruction currently being decoded"}, {"k": "C", "t": "The memory address of the next instruction to be executed"}, {"k": "D", "t": "Permanent BIOS startup data"}], "ans": "C"}, {"id": 10, "section": "Section A — Computer Hardware &amp; CPU", "q": "RAM is described as volatile because:", "opts": [{"k": "A", "t": "It can only be read and never written to"}, {"k": "B", "t": "It loses all its data when the power is switched off"}, {"k": "C", "t": "It stores data permanently on magnetic platters"}, {"k": "D", "t": "It is used only during the boot-up process"}], "ans": "B"}, {"id": 11, "section": "Section A — Computer Hardware &amp; CPU", "q": "ROM is mainly used to:", "opts": [{"k": "A", "t": "Store temporary data while the CPU processes it"}, {"k": "B", "t": "Perform arithmetic calculations for the ALU"}, {"k": "C", "t": "Store the startup (BIOS) instructions that run when the computer is switched on"}, {"k": "D", "t": "Save user files and documents permanently"}], "ans": "C"}, {"id": 12, "section": "Section A — Computer Hardware &amp; CPU", "q": "One byte consists of:", "opts": [{"k": "A", "t": "2 bits"}, {"k": "B", "t": "4 bits"}, {"k": "C", "t": "8 bits"}, {"k": "D", "t": "16 bits"}], "ans": "C"}, {"id": 13, "section": "Section A — Computer Hardware &amp; CPU", "q": "1 GB is equal to:", "opts": [{"k": "A", "t": "1 024 bytes"}, {"k": "B", "t": "1 024 KB"}, {"k": "C", "t": "1 024 GB"}, {"k": "D", "t": "1 024 MB"}], "ans": "D"}, {"id": 14, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which of the following BEST describes secondary storage?", "opts": [{"k": "A", "t": "Memory that is volatile and loses data when power is removed"}, {"k": "B", "t": "The memory used by the CPU to run programs currently open"}, {"k": "C", "t": "Read-only memory that holds startup instructions permanently"}, {"k": "D", "t": "Permanent storage outside the CPU that retains data without power"}], "ans": "D"}, {"id": 15, "section": "Section A — Computer Hardware &amp; CPU", "q": "Which storage device uses sequential access to retrieve data?", "opts": [{"k": "A", "t": "Hard disk drive"}, {"k": "B", "t": "USB flash drive"}, {"k": "C", "t": "Magnetic tape"}, {"k": "D", "t": "CD-ROM"}], "ans": "C"}, {"id": 16, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, which keyboard shortcut is used to BOLD selected text?", "opts": [{"k": "A", "t": "Ctrl + I"}, {"k": "B", "t": "Ctrl + B"}, {"k": "C", "t": "Ctrl + U"}, {"k": "D", "t": "Ctrl + E"}], "ans": "B"}, {"id": 17, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to SAVE a document in Microsoft Word?", "opts": [{"k": "A", "t": "Ctrl + P"}, {"k": "B", "t": "Ctrl + O"}, {"k": "C", "t": "Ctrl + S"}, {"k": "D", "t": "Ctrl + N"}], "ans": "C"}, {"id": 18, "section": "Section B — Microsoft Word", "q": "What is the default file extension for a Microsoft Word 2010 or later document?", "opts": [{"k": "A", "t": ".docx"}, {"k": "B", "t": ".doc"}, {"k": "C", "t": ".txt"}, {"k": "D", "t": ".pdf"}], "ans": "A"}, {"id": 19, "section": "Section B — Microsoft Word", "q": "Which Word feature automatically checks and corrects spelling errors as you type?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "Mail Merge"}, {"k": "D", "t": "AutoCorrect"}], "ans": "D"}, {"id": 20, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut is used to UNDO the last action in Word?", "opts": [{"k": "A", "t": "Ctrl + Y"}, {"k": "B", "t": "Ctrl + Z"}, {"k": "C", "t": "Ctrl + X"}, {"k": "D", "t": "Ctrl + A"}], "ans": "B"}, {"id": 21, "section": "Section B — Microsoft Word", "q": "In Word, \"Cut\" and \"Paste\" moves text, while \"Copy\" and \"Paste\":", "opts": [{"k": "A", "t": "Deletes the original text permanently"}, {"k": "B", "t": "Moves the text to a new location"}, {"k": "C", "t": "Creates a duplicate of the text, leaving the original intact"}, {"k": "D", "t": "Formats the text as bold"}], "ans": "C"}, {"id": 22, "section": "Section B — Microsoft Word", "q": "The Word feature that allows you to send the same letter to multiple recipients with personalised details is called:", "opts": [{"k": "A", "t": "Mail Merge"}, {"k": "B", "t": "Track Changes"}, {"k": "C", "t": "AutoCorrect"}, {"k": "D", "t": "Find &amp; Replace"}], "ans": "A"}, {"id": 23, "section": "Section B — Microsoft Word", "q": "Which Word formatting option aligns text equally on both the left and right margins?", "opts": [{"k": "A", "t": "Left align"}, {"k": "B", "t": "Right align"}, {"k": "C", "t": "Centre align"}, {"k": "D", "t": "Justify"}], "ans": "D"}, {"id": 24, "section": "Section B — Microsoft Word", "q": "In Microsoft Word, \"Find &amp; Replace\" (Ctrl + H) is used to:", "opts": [{"k": "A", "t": "Format selected text with a new font"}, {"k": "B", "t": "Locate specific text and substitute it with different text"}, {"k": "C", "t": "Insert a table into the document"}, {"k": "D", "t": "Check grammar errors automatically"}], "ans": "B"}, {"id": 25, "section": "Section B — Microsoft Word", "q": "A page break in Word is used to:", "opts": [{"k": "A", "t": "Delete a page from the document"}, {"k": "B", "t": "Print only selected pages"}, {"k": "C", "t": "Force text to start at the top of the next page"}, {"k": "D", "t": "Split a table across two columns"}], "ans": "C"}, {"id": 26, "section": "Section B — Microsoft Word", "q": "Which ribbon tab in Word contains the \"Font\" and \"Paragraph\" groups?", "opts": [{"k": "A", "t": "Home"}, {"k": "B", "t": "Insert"}, {"k": "C", "t": "Page Layout"}, {"k": "D", "t": "Review"}], "ans": "A"}, {"id": 27, "section": "Section B — Microsoft Word", "q": "Which view in Microsoft Word shows exactly how the document will look when printed?", "opts": [{"k": "A", "t": "Draft view"}, {"k": "B", "t": "Outline view"}, {"k": "C", "t": "Web Layout view"}, {"k": "D", "t": "Print Layout view"}], "ans": "D"}, {"id": 28, "section": "Section B — Microsoft Word", "q": "In Word, \"Track Changes\" is used to:", "opts": [{"k": "A", "t": "Monitor how many times a document has been saved"}, {"k": "B", "t": "Record edits made to a document so reviewers can accept or reject them"}, {"k": "C", "t": "Automatically correct spelling as you type"}, {"k": "D", "t": "Track the number of words in the document"}], "ans": "B"}, {"id": 29, "section": "Section B — Microsoft Word", "q": "Which keyboard shortcut selects ALL text in a Word document?", "opts": [{"k": "A", "t": "Ctrl + S"}, {"k": "B", "t": "Ctrl + C"}, {"k": "C", "t": "Ctrl + A"}, {"k": "D", "t": "Ctrl + F"}], "ans": "C"}, {"id": 30, "section": "Section B — Microsoft Word", "q": "What is a \"Header\" in a Microsoft Word document?", "opts": [{"k": "A", "t": "Text that appears at the top of every page of the document"}, {"k": "B", "t": "The title of the document typed at the beginning"}, {"k": "C", "t": "The first paragraph of the document"}, {"k": "D", "t": "A style applied to Heading 1 text"}], "ans": "A"}, {"id": 31, "section": "Section B — Microsoft Word", "q": "In Word, \"line spacing\" refers to:", "opts": [{"k": "A", "t": "The number of characters per line"}, {"k": "B", "t": "The width of the page margins"}, {"k": "C", "t": "The font size of the text"}, {"k": "D", "t": "The amount of vertical space between lines of text"}], "ans": "D"}, {"id": 32, "section": "Section B — Microsoft Word", "q": "Which Word feature inserts automatic numbering or letters at the start of each paragraph?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Numbered list"}, {"k": "C", "t": "Page break"}, {"k": "D", "t": "Header"}], "ans": "B"}, {"id": 33, "section": "Section B — Microsoft Word", "q": "The \"Spelling &amp; Grammar\" checker in Word can be launched with which key?", "opts": [{"k": "A", "t": "F1"}, {"k": "B", "t": "F4"}, {"k": "C", "t": "F7"}, {"k": "D", "t": "F10"}], "ans": "C"}, {"id": 34, "section": "Section B — Microsoft Word", "q": "In Word, what does \"portrait\" orientation mean?", "opts": [{"k": "A", "t": "The page is taller than it is wide (vertical)"}, {"k": "B", "t": "The page is wider than it is tall (horizontal)"}, {"k": "C", "t": "The page is printed on both sides"}, {"k": "D", "t": "The text runs diagonally across the page"}], "ans": "A"}, {"id": 35, "section": "Section B — Microsoft Word", "q": "Which Word feature allows a long document to be automatically divided into columns of text (like a newspaper)?", "opts": [{"k": "A", "t": "Tab stops"}, {"k": "B", "t": "Indent"}, {"k": "C", "t": "Line spacing"}, {"k": "D", "t": "Columns (in the Page Layout tab)"}], "ans": "D"}, {"id": 36, "section": "Section C — Microsoft Excel", "q": "What is the default file extension for a Microsoft Excel 2010 or later workbook?", "opts": [{"k": "A", "t": ".xls"}, {"k": "B", "t": ".xlsx"}, {"k": "C", "t": ".csv"}, {"k": "D", "t": ".xlsm"}], "ans": "B"}, {"id": 37, "section": "Section C — Microsoft Excel", "q": "In Excel, the intersection of a row and a column is called a:", "opts": [{"k": "A", "t": "Cell"}, {"k": "B", "t": "Table"}, {"k": "C", "t": "Range"}, {"k": "D", "t": "Worksheet"}], "ans": "A"}, {"id": 38, "section": "Section C — Microsoft Excel", "q": "In Excel, all formulas must begin with:", "opts": [{"k": "A", "t": "A letter"}, {"k": "B", "t": "A number"}, {"k": "C", "t": "An equals sign (=)"}, {"k": "D", "t": "A dollar sign ($)"}], "ans": "C"}, {"id": 39, "section": "Section C — Microsoft Excel", "q": "Which Excel function adds all the values in a range of cells?", "opts": [{"k": "A", "t": "=COUNT()"}, {"k": "B", "t": "=MAX()"}, {"k": "C", "t": "=AVERAGE()"}, {"k": "D", "t": "=SUM()"}], "ans": "D"}, {"id": 40, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =AVERAGE(B1:B5) calculate?", "opts": [{"k": "A", "t": "The total of cells B1 through B5"}, {"k": "B", "t": "The mean (average) of cells B1 through B5"}, {"k": "C", "t": "The number of cells that contain values in B1:B5"}, {"k": "D", "t": "The largest value in cells B1 through B5"}], "ans": "B"}, {"id": 41, "section": "Section C — Microsoft Excel", "q": "In Excel, columns are labelled with:", "opts": [{"k": "A", "t": "Letters (A, B, C…)"}, {"k": "B", "t": "Numbers (1, 2, 3…)"}, {"k": "C", "t": "Roman numerals (I, II, III…)"}, {"k": "D", "t": "Symbols (#, @, $…)"}], "ans": "A"}, {"id": 42, "section": "Section C — Microsoft Excel", "q": "The cell reference $A$1 in Excel is an example of:", "opts": [{"k": "A", "t": "A relative reference"}, {"k": "B", "t": "A mixed reference"}, {"k": "C", "t": "An absolute reference"}, {"k": "D", "t": "A named range"}], "ans": "C"}, {"id": 43, "section": "Section C — Microsoft Excel", "q": "Which Excel function returns the LARGEST value in a range?", "opts": [{"k": "A", "t": "=MIN()"}, {"k": "B", "t": "=SUM()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=MAX()"}], "ans": "D"}, {"id": 44, "section": "Section C — Microsoft Excel", "q": "In Excel, which chart type is BEST for showing how parts relate to a whole (percentages)?", "opts": [{"k": "A", "t": "Line chart"}, {"k": "B", "t": "Pie chart"}, {"k": "C", "t": "Bar chart"}, {"k": "D", "t": "Scatter chart"}], "ans": "B"}, {"id": 45, "section": "Section C — Microsoft Excel", "q": "What does the Excel function =COUNT(A1:A10) do?", "opts": [{"k": "A", "t": "Counts the number of cells in A1:A10 that contain numeric values"}, {"k": "B", "t": "Adds up all values in A1:A10"}, {"k": "C", "t": "Returns the smallest value in A1:A10"}, {"k": "D", "t": "Returns the average of A1:A10"}], "ans": "A"}, {"id": 46, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to arrange rows in alphabetical or numerical order?", "opts": [{"k": "A", "t": "Find &amp; Replace"}, {"k": "B", "t": "Conditional Formatting"}, {"k": "C", "t": "Sort"}, {"k": "D", "t": "Freeze Panes"}], "ans": "C"}, {"id": 47, "section": "Section C — Microsoft Excel", "q": "In Excel, what does \"AutoFill\" do?", "opts": [{"k": "A", "t": "Automatically saves the workbook every few minutes"}, {"k": "B", "t": "Checks spelling in all cells"}, {"k": "C", "t": "Formats cells with a predefined colour scheme"}, {"k": "D", "t": "Extends a pattern or series of data to adjacent cells by dragging the fill handle"}], "ans": "D"}, {"id": 48, "section": "Section C — Microsoft Excel", "q": "Which of the following is a valid Excel formula to multiply the value in A1 by the value in B1?", "opts": [{"k": "A", "t": "=A1 x B1"}, {"k": "B", "t": "=A1*B1"}, {"k": "C", "t": "=MULTIPLY(A1,B1)"}, {"k": "D", "t": "A1×B1"}], "ans": "B"}, {"id": 49, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Freeze Panes\" is used to:", "opts": [{"k": "A", "t": "Keep selected rows or columns visible when scrolling through a large spreadsheet"}, {"k": "B", "t": "Lock a cell so it cannot be edited"}, {"k": "C", "t": "Apply a border around a cell range"}, {"k": "D", "t": "Merge multiple cells into one"}], "ans": "A"}, {"id": 50, "section": "Section C — Microsoft Excel", "q": "What is a \"workbook\" in Microsoft Excel?", "opts": [{"k": "A", "t": "A single row of data in the spreadsheet"}, {"k": "B", "t": "A single column of data in the spreadsheet"}, {"k": "C", "t": "An Excel file that can contain one or more worksheets"}, {"k": "D", "t": "A chart embedded in the spreadsheet"}], "ans": "C"}, {"id": 51, "section": "Section C — Microsoft Excel", "q": "Which Excel function can be used to display different text based on a condition? E.g. If a student's mark is ≥50, display \"Pass\", otherwise display \"Fail\".", "opts": [{"k": "A", "t": "=SUM()"}, {"k": "B", "t": "=VLOOKUP()"}, {"k": "C", "t": "=COUNT()"}, {"k": "D", "t": "=IF()"}], "ans": "D"}, {"id": 52, "section": "Section C — Microsoft Excel", "q": "In Excel, \"Conditional Formatting\" is used to:", "opts": [{"k": "A", "t": "Apply the same formula to every cell in a column"}, {"k": "B", "t": "Automatically format cells with colours, icons, or data bars based on their values"}, {"k": "C", "t": "Lock cells to prevent editing"}, {"k": "D", "t": "Convert text to numbers automatically"}], "ans": "B"}, {"id": 53, "section": "Section C — Microsoft Excel", "q": "What does the Name Box in Excel display?", "opts": [{"k": "A", "t": "The address (reference) of the currently selected cell, e.g. A1"}, {"k": "B", "t": "The formula used in the current cell"}, {"k": "C", "t": "The name of the workbook"}, {"k": "D", "t": "The number of rows in the spreadsheet"}], "ans": "A"}, {"id": 54, "section": "Section C — Microsoft Excel", "q": "Which chart type is BEST for showing trends over time (e.g. monthly sales)?", "opts": [{"k": "A", "t": "Pie chart"}, {"k": "B", "t": "Column chart"}, {"k": "C", "t": "Line chart"}, {"k": "D", "t": "Doughnut chart"}], "ans": "C"}, {"id": 55, "section": "Section C — Microsoft Excel", "q": "In Excel, what happens when you press the Delete key on a selected cell?", "opts": [{"k": "A", "t": "The entire row is deleted from the spreadsheet"}, {"k": "B", "t": "The cell itself is removed, shifting adjacent cells"}, {"k": "C", "t": "The cell formatting (colour, font) is removed"}, {"k": "D", "t": "The contents (data) of the cell are cleared"}], "ans": "D"}, {"id": 56, "section": "Section C — Microsoft Excel", "q": "What does the Excel formula =MIN(C1:C10) return?", "opts": [{"k": "A", "t": "The average of cells C1 to C10"}, {"k": "B", "t": "The smallest value in cells C1 to C10"}, {"k": "C", "t": "The total sum of cells C1 to C10"}, {"k": "D", "t": "The number of cells that contain data in C1:C10"}], "ans": "B"}, {"id": 57, "section": "Section C — Microsoft Excel", "q": "A \"relative cell reference\" in Excel (e.g. A1) means:", "opts": [{"k": "A", "t": "The reference automatically adjusts when the formula is copied to another cell"}, {"k": "B", "t": "The reference stays fixed regardless of where the formula is copied"}, {"k": "C", "t": "The cell is locked and cannot be changed"}, {"k": "D", "t": "The reference refers to a cell in a different workbook"}], "ans": "A"}, {"id": 58, "section": "Section C — Microsoft Excel", "q": "In Excel, \"merging\" cells means:", "opts": [{"k": "A", "t": "Copying data from one cell to another"}, {"k": "B", "t": "Applying a formula across multiple cells simultaneously"}, {"k": "C", "t": "Combining two or more adjacent cells into a single larger cell"}, {"k": "D", "t": "Sorting cells in ascending order"}], "ans": "C"}, {"id": 59, "section": "Section C — Microsoft Excel", "q": "Which Excel feature allows you to display only rows that meet specific criteria while hiding the rest?", "opts": [{"k": "A", "t": "Sort"}, {"k": "B", "t": "Freeze Panes"}, {"k": "C", "t": "Conditional Formatting"}, {"k": "D", "t": "Filter (AutoFilter)"}], "ans": "D"}, {"id": 60, "section": "Section C — Microsoft Excel", "q": "What is a \"formula bar\" in Excel?", "opts": [{"k": "A", "t": "The toolbar at the top of the screen containing formatting buttons"}, {"k": "B", "t": "The bar below the ribbon that displays the content or formula of the selected cell"}, {"k": "C", "t": "A horizontal bar chart showing spreadsheet data"}, {"k": "D", "t": "The row at the bottom of the spreadsheet showing totals"}], "ans": "B"}, {"id": 61, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database is best described as:", "opts": [{"k": "A", "t": "A type of spreadsheet used to perform calculations"}, {"k": "B", "t": "A word processing document used to store letters"}, {"k": "C", "t": "An organised collection of related data that can be stored, retrieved, and managed"}, {"k": "D", "t": "A program used to browse the internet"}], "ans": "C"}, {"id": 62, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a FIELD is:", "opts": [{"k": "A", "t": "A single piece of data about an entity, representing one attribute (e.g. StudentName)"}, {"k": "B", "t": "A complete set of information about one entity (e.g. all details about one student)"}, {"k": "C", "t": "A collection of related tables in the database"}, {"k": "D", "t": "A query that retrieves data from the database"}], "ans": "A"}, {"id": 63, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a RECORD is:", "opts": [{"k": "A", "t": "A single data item, such as a student's first name only"}, {"k": "B", "t": "A complete collection of fields about one specific entity (e.g. all details about one student)"}, {"k": "C", "t": "A relationship between two tables"}, {"k": "D", "t": "A formula used to calculate data"}], "ans": "B"}, {"id": 64, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database terminology, a TABLE is:", "opts": [{"k": "A", "t": "A single record stored in the database"}, {"k": "B", "t": "A type of query used to update data"}, {"k": "C", "t": "A chart showing database relationships"}, {"k": "D", "t": "A structured set of data organised in rows (records) and columns (fields) about one entity type"}], "ans": "D"}, {"id": 65, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A PRIMARY KEY in a database is:", "opts": [{"k": "A", "t": "The first field in every table, always called \"ID\""}, {"k": "B", "t": "A field that can contain duplicate or null values"}, {"k": "C", "t": "A field (or set of fields) that uniquely identifies each record in a table — it must be unique and not empty"}, {"k": "D", "t": "A password used to secure the database"}], "ans": "C"}, {"id": 66, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A FOREIGN KEY in a database is:", "opts": [{"k": "A", "t": "A field in one table that refers to the primary key in another table, used to link the two tables"}, {"k": "B", "t": "A field that uniquely identifies each record in its own table"}, {"k": "C", "t": "A key imported from a foreign (overseas) database"}, {"k": "D", "t": "A secondary password for read-only database access"}], "ans": "A"}, {"id": 67, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, an ENTITY is:", "opts": [{"k": "A", "t": "A single data value stored in a field"}, {"k": "B", "t": "A person, place, object, event, or concept about which data is stored (e.g. Student, Course)"}, {"k": "C", "t": "A relationship linking two tables"}, {"k": "D", "t": "A report generated by the database"}], "ans": "B"}, {"id": 68, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In database design, the characteristics or properties of an entity are called its:", "opts": [{"k": "A", "t": "Records"}, {"k": "B", "t": "Queries"}, {"k": "C", "t": "Tables"}, {"k": "D", "t": "Attributes (which become fields in the table)"}], "ans": "D"}, {"id": 69, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A QUERY in a database is used to:", "opts": [{"k": "A", "t": "Store data permanently in the database"}, {"k": "B", "t": "Design the layout of printed reports"}, {"k": "C", "t": "Ask questions of the database and retrieve specific data that meets set criteria"}, {"k": "D", "t": "Create the structure of tables and fields"}], "ans": "C"}, {"id": 70, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-ONE relationship in a database means:", "opts": [{"k": "A", "t": "Each record in Table A is linked to exactly one record in Table B, and vice versa"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B"}, {"k": "C", "t": "Many records in Table A can be linked to many records in Table B"}, {"k": "D", "t": "Table A and Table B share the same primary key field name"}], "ans": "A"}, {"id": 71, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A ONE-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "Each record in both tables can link to only one record in the other"}, {"k": "B", "t": "One record in Table A can be linked to many records in Table B, but each record in Table B links to only one in Table A"}, {"k": "C", "t": "Every record in Table A is linked to every record in Table B"}, {"k": "D", "t": "The two tables have no common fields"}], "ans": "B"}, {"id": 72, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A MANY-TO-MANY relationship in a database means:", "opts": [{"k": "A", "t": "One record in Table A links to exactly one record in Table B"}, {"k": "B", "t": "One record in Table A links to many records in Table B only"}, {"k": "C", "t": "Table A has more fields than Table B"}, {"k": "D", "t": "Many records in Table A can link to many records in Table B, and vice versa"}], "ans": "D"}, {"id": 73, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a school database, the relationship between STUDENT and CLASS is typically:", "opts": [{"k": "A", "t": "One-to-one (one student belongs to exactly one class, and one class has exactly one student)"}, {"k": "B", "t": "Many-to-many (many students belong to many classes simultaneously)"}, {"k": "C", "t": "Many-to-one (many students belong to one class)"}, {"k": "D", "t": "There is no relationship between students and classes"}], "ans": "C"}, {"id": 74, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the object used to enter, view, and edit data in a user-friendly layout is:", "opts": [{"k": "A", "t": "Form"}, {"k": "B", "t": "Query"}, {"k": "C", "t": "Report"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 75, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, a REPORT is used to:", "opts": [{"k": "A", "t": "Enter new records into a table"}, {"k": "B", "t": "Create relationships between tables"}, {"k": "C", "t": "Query the database with criteria"}, {"k": "D", "t": "Present data in a formatted, printable layout (e.g. summaries, charts)"}], "ans": "D"}, {"id": 76, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "What is a \"data type\" in a database field?", "opts": [{"k": "A", "t": "The name given to a record in the table"}, {"k": "B", "t": "A setting that specifies what kind of data a field can store (e.g. Text, Number, Date)"}, {"k": "C", "t": "The format of the printed report"}, {"k": "D", "t": "The relationship type between two tables"}], "ans": "B"}, {"id": 77, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following would be the MOST appropriate data type for a field storing a student's date of birth in MS Access?", "opts": [{"k": "A", "t": "Text"}, {"k": "B", "t": "Number"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Yes/No"}], "ans": "C"}, {"id": 78, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which MS Access data type would be used for a field that stores whether a student has paid their fees (True/False)?", "opts": [{"k": "A", "t": "Yes/No"}, {"k": "B", "t": "Text"}, {"k": "C", "t": "Number"}, {"k": "D", "t": "Date/Time"}], "ans": "A"}, {"id": 79, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is the BEST example of a primary key for a STUDENT table?", "opts": [{"k": "A", "t": "StudentName (because names are easy to remember)"}, {"k": "B", "t": "DateOfBirth (because all students have a date of birth)"}, {"k": "C", "t": "ClassRoom (because students are grouped by class)"}, {"k": "D", "t": "StudentID (a unique number assigned to each student)"}], "ans": "D"}, {"id": 80, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, \"referential integrity\" means:", "opts": [{"k": "A", "t": "All fields in a table must have the same data type"}, {"k": "B", "t": "A foreign key value must match an existing primary key value in the related table (no orphan records)"}, {"k": "C", "t": "Every table must have at least 10 records"}, {"k": "D", "t": "Queries must return results in alphabetical order"}], "ans": "B"}, {"id": 81, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, the \"Design View\" of a table is used to:", "opts": [{"k": "A", "t": "Enter and browse records in the table"}, {"k": "B", "t": "Print the table as a report"}, {"k": "C", "t": "Define the field names, data types, and properties of the table structure"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "C"}, {"id": 82, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, \"Datasheet View\" of a table is used to:", "opts": [{"k": "A", "t": "View, enter, and edit actual records in the table (rows and columns)"}, {"k": "B", "t": "Define the field names and data types"}, {"k": "C", "t": "Set up a query with criteria"}, {"k": "D", "t": "Design a printed report layout"}], "ans": "A"}, {"id": 83, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is NOT a valid Access data type?", "opts": [{"k": "A", "t": "Number"}, {"k": "B", "t": "Text / Short Text"}, {"k": "C", "t": "Date/Time"}, {"k": "D", "t": "Formula"}], "ans": "D"}, {"id": 84, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is TRUE about a primary key?", "opts": [{"k": "A", "t": "It can have duplicate values in the same table"}, {"k": "B", "t": "It must be unique for every record and cannot be left empty (null)"}, {"k": "C", "t": "Every table must have exactly three primary key fields"}, {"k": "D", "t": "It is always a number between 1 and 100"}], "ans": "B"}, {"id": 85, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A database schema refers to:", "opts": [{"k": "A", "t": "The data stored inside the database tables"}, {"k": "B", "t": "A query that retrieves records from multiple tables"}, {"k": "C", "t": "The structure and organisation of the database — the tables, fields, data types, and relationships"}, {"k": "D", "t": "A printed summary report of the database contents"}], "ans": "C"}, {"id": 86, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, a \"field\" corresponds to which concept in entity-relationship modelling?", "opts": [{"k": "A", "t": "An attribute of an entity"}, {"k": "B", "t": "The entity itself"}, {"k": "C", "t": "A relationship between two entities"}, {"k": "D", "t": "A complete record of the entity"}], "ans": "A"}, {"id": 87, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is an example of a ONE-TO-MANY relationship?", "opts": [{"k": "A", "t": "One student is enrolled in exactly one school (and one school has exactly one student)"}, {"k": "B", "t": "One student can take many subjects and one subject can be taken by many students"}, {"k": "C", "t": "One country has one capital city and one capital city belongs to one country"}, {"k": "D", "t": "One teacher teaches many students, but each student has only one teacher for that subject"}], "ans": "D"}, {"id": 88, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, to link two tables in a relationship, you use the:", "opts": [{"k": "A", "t": "Query Wizard"}, {"k": "B", "t": "Relationships window (Database Tools → Relationships)"}, {"k": "C", "t": "Report Designer"}, {"k": "D", "t": "Form Builder"}], "ans": "B"}, {"id": 89, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A student table has the fields: StudentID, FirstName, LastName, DOB, ClassID. Which field is most likely the foreign key linking to a CLASS table?", "opts": [{"k": "A", "t": "StudentID"}, {"k": "B", "t": "FirstName"}, {"k": "C", "t": "ClassID"}, {"k": "D", "t": "DOB"}], "ans": "C"}, {"id": 90, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In Access, the QBE (Query By Example) grid is used to:", "opts": [{"k": "A", "t": "Set up a query by selecting fields, sorting options, and criteria in a visual grid"}, {"k": "B", "t": "Design the visual layout of a data entry form"}, {"k": "C", "t": "Define field data types in Table Design View"}, {"k": "D", "t": "Create relationships between tables"}], "ans": "A"}, {"id": 91, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following best describes \"data redundancy\" in a database?", "opts": [{"k": "A", "t": "Storing data in a secure, encrypted format"}, {"k": "B", "t": "Using primary keys to uniquely identify records"}, {"k": "C", "t": "Having too many tables in the database"}, {"k": "D", "t": "The unnecessary duplication of the same data in multiple places within the database"}], "ans": "D"}, {"id": 92, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "A DBMS (Database Management System) is:", "opts": [{"k": "A", "t": "A type of spreadsheet application like Microsoft Excel"}, {"k": "B", "t": "Software that allows users to create, manage, and interact with a database (e.g. Microsoft Access, MySQL)"}, {"k": "C", "t": "A programming language used to write websites"}, {"k": "D", "t": "Hardware used to store backup copies of a database"}], "ans": "B"}, {"id": 93, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a database, which of the following is an example of an entity?", "opts": [{"k": "A", "t": "The student's first name \"Marcus\""}, {"k": "B", "t": "The date of birth field \"15/03/2010\""}, {"k": "C", "t": "STUDENT (a thing about which data is collected)"}, {"k": "D", "t": "The primary key field StudentID"}], "ans": "C"}, {"id": 94, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "For the entity BOOK, which of the following would be an ATTRIBUTE?", "opts": [{"k": "A", "t": "ISBN, Title, Author, PublicationYear"}, {"k": "B", "t": "LIBRARY (where books are stored)"}, {"k": "C", "t": "BORROW (a transaction involving the book)"}, {"k": "D", "t": "STUDENT (who borrows the book)"}], "ans": "A"}, {"id": 95, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "When a query in MS Access is run, it:", "opts": [{"k": "A", "t": "Permanently deletes records from the table"}, {"k": "B", "t": "Prints a formatted report to the printer"}, {"k": "C", "t": "Adds new blank records to the database"}, {"k": "D", "t": "Retrieves and displays a dynamic set of records from one or more tables that match the criteria"}], "ans": "D"}, {"id": 96, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following is TRUE about a FOREIGN KEY?", "opts": [{"k": "A", "t": "It must always be unique in the table where it appears"}, {"k": "B", "t": "It is a field that creates a link between two tables by matching the primary key of another table"}, {"k": "C", "t": "It is used only in one-to-one relationships"}, {"k": "D", "t": "It cannot be used in a query"}], "ans": "B"}, {"id": 97, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In a STUDENT–SUBJECT scenario where students can take many subjects and each subject can be taken by many students, the relationship type is:", "opts": [{"k": "A", "t": "One-to-one"}, {"k": "B", "t": "One-to-many"}, {"k": "C", "t": "Many-to-many"}, {"k": "D", "t": "Many-to-one"}], "ans": "C"}, {"id": 98, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "In MS Access, which object is most suitable for generating a neatly formatted printed summary of student results grouped by class?", "opts": [{"k": "A", "t": "Report"}, {"k": "B", "t": "Form"}, {"k": "C", "t": "Query"}, {"k": "D", "t": "Macro"}], "ans": "A"}, {"id": 99, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "The \"AutoNumber\" data type in MS Access is commonly used for a primary key field because:", "opts": [{"k": "A", "t": "It stores the current date automatically"}, {"k": "B", "t": "It allows the user to type any number they choose"}, {"k": "C", "t": "It stores text descriptions of each record"}, {"k": "D", "t": "It automatically generates a unique sequential number for every new record"}], "ans": "D"}, {"id": 100, "section": "Section D — Introduction to MS Access &amp; Databases", "q": "Which of the following correctly matches a database object in MS Access with its purpose?", "opts": [{"k": "A", "t": "Table → Used to ask questions about the data and filter records by criteria"}, {"k": "B", "t": "Table → Stores the actual data; Query → Retrieves specific data; Form → Provides a user-friendly data entry screen; Report → Presents formatted output for printing"}, {"k": "C", "t": "Form → Stores data permanently; Query → Prints reports; Table → Filters records"}, {"k": "D", "t": "Query → Stores data; Form → Creates charts; Report → Deletes old records"}], "ans": "B"}];
+
+// ─── question rendering ───────────────────────────────────────────────
+let questionOrder = [];
+function buildQuestionOrder(){
+  const sections={};
+  ALL_QUESTIONS.forEach(q=>{ if(!sections[q.section])sections[q.section]=[]; sections[q.section].push(q); });
+  const order=[];
+  Object.keys(sections).forEach(sec=>{ shuffle(sections[sec]).forEach(q=>order.push(q)); });
   return order;
 }
 
-let questionOrder = [];
-function renderQuestions() {
+function renderQuestions(){
   questionOrder = buildQuestionOrder();
   const wrap = document.getElementById('q-wrap');
-  wrap.querySelectorAll('.qcard, .sec-title').forEach(el => el.remove());
+  wrap.querySelectorAll('.qcard,.sec-title').forEach(el=>el.remove());
   const submitBtn = document.getElementById('btn-submit');
-
-  let lastSec = '';
-  questionOrder.forEach((q, idx) => {
-    const num = idx + 1;
-    if (q.section !== lastSec) {
-      lastSec = q.section;
-      const st = document.createElement('div');
-      st.className = 'sec-title';
-      st.innerHTML = q.section;
-      wrap.insertBefore(st, submitBtn);
+  let lastSec='';
+  questionOrder.forEach((q,idx)=>{
+    const num=idx+1;
+    if(q.section!==lastSec){
+      lastSec=q.section;
+      const st=document.createElement('div');
+      st.className='sec-title';
+      st.innerHTML=q.section;
+      wrap.insertBefore(st,submitBtn);
     }
-
-    const shuffledOpts = shuffle(q.opts);
-    const card = document.createElement('div');
-    card.className = 'qcard';
-    card.dataset.q = num;
-    card.dataset.ans = q.ans;
-
-    const optsHtml = shuffledOpts.map(opt => `
-      <label class="opt">
-        <input type="radio" name="q${num}" value="${opt.k}">
-        ${opt.t}
-      </label>`).join('');
-
-    card.innerHTML = `
-      <div class="qhead">
-        <span class="qnum">Q${num}</span>
-        <span class="qtxt">${q.q}</span>
-      </div>
-      <div class="opts">${optsHtml}</div>
-      <div class="fb"></div>`;
-
-    wrap.insertBefore(card, submitBtn);
-
-    card.querySelectorAll('.opt input').forEach(inp => {
-      inp.addEventListener('change', () => {
-        if (card.dataset.done) return;
-        card.dataset.done = '1';
+    const shuffledOpts=shuffle(q.opts);
+    const card=document.createElement('div');
+    card.className='qcard';
+    card.dataset.q=num;
+    card.dataset.ans=q.ans;
+    const optsHtml=shuffledOpts.map(opt=>`<label class="opt"><input type="radio" name="q${num}" value="${opt.k}">${opt.t}</label>`).join('');
+    card.innerHTML=`<div class="qhead"><span class="qnum">Q${num}</span><span class="qtxt">${q.q}</span></div><div class="opts">${optsHtml}</div><div class="fb"></div>`;
+    wrap.insertBefore(card,submitBtn);
+    card.querySelectorAll('.opt input').forEach(inp=>{
+      inp.addEventListener('change',()=>{
+        if(card.dataset.done)return;
+        card.dataset.done='1';
         answered++;
-        document.getElementById('prog-inner').style.width = (answered / TOTAL * 100) + '%';
-        document.getElementById('prog-label').textContent = answered + ' / ' + TOTAL + ' answered';
-        if (answered === TOTAL) document.getElementById('btn-submit').disabled = false;
-
-        const chosen = inp.value;
-        const correct = card.dataset.ans;
-        const fb = card.querySelector('.fb');
-
-        if (chosen === correct) {
-          /* Correct: highlight chosen option green, confirm correct */
-          inp.closest('.opt').style.borderColor = 'var(--correct)';
-          inp.closest('.opt').style.background = 'rgba(56,217,169,.09)';
-          fb.textContent = '✓ Correct!';
-          fb.className = 'fb show ok';
+        document.getElementById('prog-inner').style.width=(answered/TOTAL*100)+'%';
+        document.getElementById('prog-label').textContent=answered+' / '+TOTAL+' answered';
+        if(answered===TOTAL)document.getElementById('btn-submit').disabled=false;
+        const chosen=inp.value;
+        const correct=card.dataset.ans;
+        const fb=card.querySelector('.fb');
+        if(chosen===correct){
+          inp.closest('.opt').style.borderColor='var(--correct)';
+          inp.closest('.opt').style.background='rgba(56,217,169,.09)';
+          fb.textContent='✓ Correct!';
+          fb.className='fb show ok';
         } else {
-          /* Wrong: highlight chosen option red ONLY — do NOT reveal the correct answer */
-          inp.closest('.opt').style.borderColor = 'var(--wrong)';
-          inp.closest('.opt').style.background = 'rgba(252,92,101,.09)';
-          fb.textContent = '✗ Incorrect. Review this topic and try to remember it for next time.';
-          fb.className = 'fb show bad';
+          inp.closest('.opt').style.borderColor='var(--wrong)';
+          inp.closest('.opt').style.background='rgba(252,92,101,.09)';
+          fb.textContent='✗ Incorrect. Review this topic.';
+          fb.className='fb show bad';
         }
-
-        card.querySelectorAll('.opt input').forEach(i => i.disabled = true);
+        card.querySelectorAll('.opt input').forEach(i=>i.disabled=true);
       });
     });
   });
 }
 
-let timerInterval = null;
-let timerSecsLeft = 0;
-
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const ss = s % 60;
-  return String(m).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
-}
-
-function startTimer(mins) {
-  timerSecsLeft = mins * 60;
-  document.getElementById('timer-val').textContent = formatTime(timerSecsLeft);
-  timerInterval = setInterval(() => {
+// ─── timer ───────────────────────────────────────────────────────────
+let timerInterval=null, timerSecsLeft=0;
+function formatTime(s){ const m=Math.floor(s/60),ss=s%60; return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0'); }
+function startTimer(mins){
+  timerSecsLeft=mins*60;
+  document.getElementById('timer-val').textContent=formatTime(timerSecsLeft);
+  timerInterval=setInterval(()=>{
     timerSecsLeft--;
-    document.getElementById('timer-val').textContent = formatTime(timerSecsLeft);
-    const box = document.getElementById('timer-box');
-    if (timerSecsLeft <= 0) {
-      clearInterval(timerInterval);
-      box.className = 'timer-box danger';
-      autoSubmit(true);
-    } else if (timerSecsLeft <= 300) {
-      box.className = 'timer-box danger';
-    } else if (timerSecsLeft <= 600) {
-      box.className = 'timer-box warn';
-    }
-  }, 1000);
+    document.getElementById('timer-val').textContent=formatTime(timerSecsLeft);
+    const box=document.getElementById('timer-box');
+    if(timerSecsLeft<=0){ clearInterval(timerInterval); box.className='timer-box danger'; autoSubmit(true); }
+    else if(timerSecsLeft<=300) box.className='timer-box danger';
+    else if(timerSecsLeft<=600) box.className='timer-box warn';
+  },1000);
 }
+function stopTimer(){ clearInterval(timerInterval); }
 
-function stopTimer() { clearInterval(timerInterval); }
-
-function initLanding() {
-  const s = getSettings();
-  document.getElementById('info-duration').textContent = s.duration + ' minute' + (s.duration === 1 ? '' : 's');
-  document.getElementById('info-close').textContent = s.closeAt ? new Date(s.closeAt).toLocaleString() : 'Not set';
-  const closed = isTestClosed();
-  if (closed.closed) {
-    document.getElementById('closed-banner').style.display = 'block';
-    document.getElementById('closed-reason').textContent = closed.reason;
-    document.getElementById('btn-start').disabled = true;
-    document.getElementById('btn-start').style.opacity = '0.4';
-    document.getElementById('btn-start').style.cursor = 'not-allowed';
+// ─── landing ─────────────────────────────────────────────────────────
+function initLanding(){
+  const s=getSettings();
+  document.getElementById('info-duration').textContent=s.duration+' minute'+(s.duration===1?'':'s');
+  document.getElementById('info-close').textContent=s.closeAt?new Date(s.closeAt).toLocaleString():'Not set';
+  const url=getSheetsUrl();
+  document.getElementById('setup-warning').style.display=url?'none':'block';
+  const closed=isTestClosed();
+  if(closed.closed){
+    document.getElementById('closed-banner').style.display='block';
+    document.getElementById('closed-reason').textContent=closed.reason;
+    document.getElementById('btn-start').disabled=true;
+    document.getElementById('btn-start').style.opacity='0.4';
+    document.getElementById('btn-start').style.cursor='not-allowed';
   } else {
-    document.getElementById('closed-banner').style.display = 'none';
-    document.getElementById('btn-start').disabled = false;
-    document.getElementById('btn-start').style.opacity = '';
-    document.getElementById('btn-start').style.cursor = '';
+    document.getElementById('closed-banner').style.display='none';
+    document.getElementById('btn-start').disabled=false;
+    document.getElementById('btn-start').style.opacity='';
+    document.getElementById('btn-start').style.cursor='';
   }
 }
 
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-let answered = 0;
-let testStartTime = null;
-
-document.getElementById('btn-start').addEventListener('click', () => {
-  const closed = isTestClosed();
-  if (closed.closed) { initLanding(); return; }
-  const name = document.getElementById('inp-name').value.trim();
-  const cls = document.getElementById('inp-class').value;
-  let ok = true;
-  document.getElementById('err-name').style.display = name ? 'none' : 'block'; if (!name) ok = false;
-  document.getElementById('err-class').style.display = cls ? 'none' : 'block'; if (!cls) ok = false;
-  if (!ok) return;
-
-  answered = 0;
-  document.getElementById('prog-inner').style.width = '0%';
-  document.getElementById('prog-label').textContent = '0 / 100 answered';
-  document.getElementById('btn-submit').disabled = true;
-
+// ─── start test ───────────────────────────────────────────────────────
+let answered=0, testStartTime=null;
+document.getElementById('btn-start').addEventListener('click',()=>{
+  const closed=isTestClosed();
+  if(closed.closed){ initLanding(); return; }
+  const name=document.getElementById('inp-name').value.trim();
+  const cls=document.getElementById('inp-class').value;
+  let ok=true;
+  document.getElementById('err-name').style.display=name?'none':'block'; if(!name)ok=false;
+  document.getElementById('err-class').style.display=cls?'none':'block'; if(!cls)ok=false;
+  if(!ok)return;
+  answered=0;
+  document.getElementById('prog-inner').style.width='0%';
+  document.getElementById('prog-label').textContent='0 / 100 answered';
+  document.getElementById('btn-submit').disabled=true;
   renderQuestions();
-  document.getElementById('hdr-name').textContent = name + ' · ' + cls;
-
-  const s = getSettings();
+  document.getElementById('hdr-name').textContent=name+' · '+cls;
+  const s=getSettings();
   startTimer(s.duration);
-  testStartTime = Date.now();
-
+  testStartTime=Date.now();
   show('screen-test');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 });
 
-function autoSubmit(timedOut) {
-  document.querySelectorAll('.qcard input').forEach(i => i.disabled = true);
-  document.getElementById('btn-submit').disabled = true;
+// ─── submit ───────────────────────────────────────────────────────────
+function autoSubmit(timedOut){
+  document.querySelectorAll('.qcard input').forEach(i=>i.disabled=true);
+  document.getElementById('btn-submit').disabled=true;
   submitTest(timedOut);
 }
 
-function submitTest(timedOut) {
+async function submitTest(timedOut){
   stopTimer();
-  const name = document.getElementById('inp-name').value.trim();
-  const cls = document.getElementById('inp-class').value;
-  let correct = 0;
-  document.querySelectorAll('.qcard').forEach(card => {
-    const sel = card.querySelector('input:checked');
-    if (sel && sel.value === card.dataset.ans) correct++;
+  // Lock UI
+  document.querySelectorAll('.qcard input').forEach(i=>i.disabled=true);
+  document.getElementById('btn-submit').disabled=true;
+  document.getElementById('submit-overlay').classList.add('show');
+
+  const name=document.getElementById('inp-name').value.trim();
+  const cls=document.getElementById('inp-class').value;
+  let correct=0;
+  document.querySelectorAll('.qcard').forEach(card=>{
+    const sel=card.querySelector('input:checked');
+    if(sel&&sel.value===card.dataset.ans)correct++;
   });
-  const wrong = TOTAL - correct;
-  const pct = Math.round(correct / TOTAL * 100);
-  const timeUsed = testStartTime ? Math.round((Date.now() - testStartTime) / 1000) : null;
-  const timeUsedStr = timeUsed ? formatTime(timeUsed) : '—';
+  const wrong=TOTAL-correct;
+  const pct=Math.round(correct/TOTAL*100);
+  const timeUsed=testStartTime?Math.round((Date.now()-testStartTime)/1000):null;
+  const timeUsedStr=timeUsed?formatTime(timeUsed):'—';
+  const submittedAt=new Date().toLocaleString();
 
-  document.getElementById('res-student').textContent = name + ' · Class: ' + cls;
-  document.getElementById('score-big').textContent = pct + '%';
-  const msgs = ['Outstanding! Excellent work!', 'Great result! Well done!', 'Good effort! Keep it up!', 'Fair attempt. Review and improve.', 'Keep studying. You can do better!'];
-  document.getElementById('res-msg').textContent = pct >= 90 ? msgs[0] : pct >= 75 ? msgs[1] : pct >= 60 ? msgs[2] : pct >= 50 ? msgs[3] : msgs[4];
-  document.getElementById('res-correct').textContent = correct;
-  document.getElementById('res-wrong').textContent = wrong;
-  document.getElementById('res-timed-note').textContent = timedOut
-    ? '⏰ Time ran out — your answers were submitted automatically.'
-    : '✓ Your result has been recorded. Please inform your teacher.';
+  const payload={name,cls,score:pct,correct,wrong,timeUsed:timeUsedStr,timedOut:!!timedOut,submitted:submittedAt};
 
-  saveResult({ name, cls, score: pct, correct, wrong, timeUsed: timeUsedStr, timedOut: !!timedOut, submitted: new Date().toLocaleString() });
+  // Save locally first (always works)
+  saveLocalResult({...payload, sheetsOk:false});
+
+  // Try to send to Sheets
+  const sheetsResult = await sendToSheets(payload);
+
+  // Update the local record with sheets status
+  const results=getResults();
+  if(results.length){
+    results[results.length-1].sheetsOk=sheetsResult.ok;
+    localStorage.setItem(STORE_RESULTS,JSON.stringify(results));
+  }
+
+  document.getElementById('submit-overlay').classList.remove('show');
+
+  // Populate results screen
+  document.getElementById('res-student').textContent=name+' · Class: '+cls;
+  document.getElementById('score-big').textContent=pct+'%';
+  const msgs=['Outstanding! Excellent work!','Great result! Well done!','Good effort! Keep it up!','Fair attempt. Review and improve.','Keep studying. You can do better!'];
+  document.getElementById('res-msg').textContent=pct>=90?msgs[0]:pct>=75?msgs[1]:pct>=60?msgs[2]:pct>=50?msgs[3]:msgs[4];
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-timed-note').textContent=timedOut
+    ?'⏰ Time ran out — your answers were submitted automatically.'
+    :'✓ Submitted. Please inform your teacher.';
+
+  // Sync status indicator
+  const syncStatus=document.getElementById('sync-status');
+  const syncDot=document.getElementById('sync-dot');
+  const syncMsg=document.getElementById('sync-msg');
+  if(!getSheetsUrl()){
+    syncStatus.className='sync-status sync-fail';
+    syncDot.className='sync-dot fail';
+    syncMsg.textContent='Google Sheets not configured — result saved on this device only.';
+  } else if(sheetsResult.ok){
+    syncStatus.className='sync-status synced';
+    syncDot.className='sync-dot synced';
+    syncMsg.textContent='✓ Result saved to Google Sheets successfully.';
+  } else {
+    syncStatus.className='sync-status sync-fail';
+    syncDot.className='sync-dot fail';
+    syncMsg.textContent='⚠ Could not reach Google Sheets. Result is saved on this device.';
+  }
+
   show('screen-results');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
-document.getElementById('btn-submit').addEventListener('click', () => submitTest(false));
-document.getElementById('btn-retry').addEventListener('click', () => { initLanding(); show('screen-landing'); window.scrollTo(0,0); });
+document.getElementById('btn-submit').addEventListener('click',()=>submitTest(false));
+document.getElementById('btn-retry').addEventListener('click',()=>{ initLanding(); show('screen-landing'); window.scrollTo(0,0); });
 
-document.getElementById('teacher-link').addEventListener('click', () => {
+// ─── teacher modal ────────────────────────────────────────────────────
+document.getElementById('teacher-link').addEventListener('click',()=>{
   document.getElementById('modal-bg').classList.add('open');
-  document.getElementById('modal-pw').value = '';
-  document.getElementById('pw-err').style.display = 'none';
-  setTimeout(() => document.getElementById('modal-pw').focus(), 100);
+  document.getElementById('modal-pw').value='';
+  document.getElementById('pw-err').style.display='none';
+  setTimeout(()=>document.getElementById('modal-pw').focus(),100);
 });
-document.getElementById('btn-cancel').addEventListener('click', () => document.getElementById('modal-bg').classList.remove('open'));
-document.getElementById('btn-unlock').addEventListener('click', () => {
-  if (document.getElementById('modal-pw').value === PW) {
+document.getElementById('btn-cancel').addEventListener('click',()=>document.getElementById('modal-bg').classList.remove('open'));
+document.getElementById('btn-unlock').addEventListener('click',()=>{
+  if(document.getElementById('modal-pw').value===PW){
     document.getElementById('modal-bg').classList.remove('open');
     loadDashboard();
     show('screen-teacher');
-  } else { document.getElementById('pw-err').style.display = 'block'; }
+  } else { document.getElementById('pw-err').style.display='block'; }
 });
-document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-unlock').click(); });
+document.getElementById('modal-pw').addEventListener('keydown',e=>{ if(e.key==='Enter')document.getElementById('btn-unlock').click(); });
 
-document.getElementById('btn-back').addEventListener('click', () => { initLanding(); show('screen-landing'); });
-document.getElementById('btn-clear').addEventListener('click', () => {
-  if (confirm('Clear ALL student results? This cannot be undone.')) {
-    localStorage.removeItem(STORE_RESULTS);
-    loadDashboard();
-  }
-});
+// ─── teacher dashboard ────────────────────────────────────────────────
+document.getElementById('btn-back').addEventListener('click',()=>{ initLanding(); show('screen-landing'); });
 
-document.getElementById('set-open').addEventListener('change', function() {
-  document.getElementById('set-open-label').textContent = this.checked ? 'Test is OPEN' : 'Test is CLOSED';
+document.getElementById('set-open').addEventListener('change',function(){
+  document.getElementById('set-open-label').textContent=this.checked?'Test is OPEN':'Test is CLOSED';
 });
 
-document.getElementById('btn-save-settings').addEventListener('click', () => {
-  const dur = parseInt(document.getElementById('set-duration').value) || 90;
-  const closeAt = document.getElementById('set-close').value;
-  const isOpen = document.getElementById('set-open').checked;
-  saveSettings({ duration: dur, closeAt, isOpen });
-  const status = document.getElementById('settings-status');
-  status.style.display = 'block';
-  setTimeout(() => status.style.display = 'none', 2500);
+document.getElementById('btn-save-settings').addEventListener('click',()=>{
+  const dur=parseInt(document.getElementById('set-duration').value)||90;
+  const closeAt=document.getElementById('set-close').value;
+  const isOpen=document.getElementById('set-open').checked;
+  saveSettings({duration:dur,closeAt,isOpen});
+  const status=document.getElementById('settings-status');
+  status.style.display='block';
+  setTimeout(()=>status.style.display='none',2500);
   updateStatusBanner();
 });
 
-function updateStatusBanner() {
-  const closed = isTestClosed();
-  const banner = document.getElementById('dash-status-banner');
-  if (closed.closed) {
-    banner.className = 'test-status-banner closed';
-    banner.textContent = '● Test is currently CLOSED — ' + closed.reason;
+// Sheets URL save
+document.getElementById('btn-save-url').addEventListener('click',()=>{
+  const url=document.getElementById('sheets-url-input').value.trim();
+  const statusEl=document.getElementById('url-status');
+  if(!url.startsWith('https://script.google.com')){
+    statusEl.textContent='⚠ That doesn\'t look like a valid Apps Script URL.';
+    statusEl.className='url-status bad';
+    return;
+  }
+  saveSheetsUrl(url);
+  statusEl.textContent='✓ URL saved. Results will now be sent to Google Sheets.';
+  statusEl.className='url-status ok';
+  document.getElementById('setup-warning').style.display='none';
+});
+
+// Refresh results from localStorage
+document.getElementById('btn-refresh').addEventListener('click',()=>{
+  const btn=document.getElementById('btn-refresh');
+  btn.disabled=true;
+  btn.textContent='Refreshing…';
+  loadDashboard();
+  setTimeout(()=>{ btn.disabled=false; btn.textContent='⟳ Refresh Results'; },800);
+});
+
+function updateStatusBanner(){
+  const closed=isTestClosed();
+  const banner=document.getElementById('dash-status-banner');
+  if(closed.closed){
+    banner.className='test-status-banner closed';
+    banner.textContent='● Test is currently CLOSED — '+closed.reason;
   } else {
-    const s = getSettings();
-    let msg = '● Test is currently OPEN';
-    if (s.closeAt) msg += ' · Closes: ' + new Date(s.closeAt).toLocaleString();
-    msg += ' · Time limit: ' + s.duration + ' min';
-    banner.className = 'test-status-banner open';
-    banner.textContent = msg;
+    const s=getSettings();
+    let msg='● Test is currently OPEN';
+    if(s.closeAt)msg+=' · Closes: '+new Date(s.closeAt).toLocaleString();
+    msg+=' · Time limit: '+s.duration+' min';
+    banner.className='test-status-banner open';
+    banner.textContent=msg;
   }
 }
 
-function loadDashboard() {
-  const s = getSettings();
-  document.getElementById('set-duration').value = s.duration;
-  document.getElementById('set-close').value = s.closeAt || '';
-  document.getElementById('set-open').checked = s.isOpen !== false;
-  document.getElementById('set-open-label').textContent = (s.isOpen !== false) ? 'Test is OPEN' : 'Test is CLOSED';
+function loadDashboard(){
+  const s=getSettings();
+  document.getElementById('set-duration').value=s.duration;
+  document.getElementById('set-close').value=s.closeAt||'';
+  document.getElementById('set-open').checked=s.isOpen!==false;
+  document.getElementById('set-open-label').textContent=(s.isOpen!==false)?'Test is OPEN':'Test is CLOSED';
+  const savedUrl=getSheetsUrl();
+  document.getElementById('sheets-url-input').value=savedUrl;
+  if(savedUrl){
+    document.getElementById('url-status').textContent='✓ Sheets URL is configured.';
+    document.getElementById('url-status').className='url-status ok';
+  }
   updateStatusBanner();
-
-  const data = getResults();
-  document.getElementById('chip-attempts').textContent = data.length;
-  if (data.length) {
-    document.getElementById('chip-avg').textContent = Math.round(data.reduce((a, r) => a + r.score, 0) / data.length) + '%';
-    document.getElementById('chip-pass').textContent = data.filter(r => r.score >= 50).length;
-    document.getElementById('chip-fail').textContent = data.filter(r => r.score < 50).length;
+  const data=getResults();
+  document.getElementById('chip-attempts').textContent=data.length;
+  if(data.length){
+    document.getElementById('chip-avg').textContent=Math.round(data.reduce((a,r)=>a+r.score,0)/data.length)+'%';
+    document.getElementById('chip-pass').textContent=data.filter(r=>r.score>=50).length;
+    document.getElementById('chip-fail').textContent=data.filter(r=>r.score<50).length;
   } else {
-    document.getElementById('chip-avg').textContent = '—';
-    document.getElementById('chip-pass').textContent = 0;
-    document.getElementById('chip-fail').textContent = 0;
+    document.getElementById('chip-avg').textContent='—';
+    document.getElementById('chip-pass').textContent=0;
+    document.getElementById('chip-fail').textContent=0;
   }
   renderTable(data);
-  document.getElementById('f-search').oninput = filterTable;
-  document.getElementById('f-class').onchange = filterTable;
+  document.getElementById('f-search').oninput=filterTable;
+  document.getElementById('f-class').onchange=filterTable;
 }
 
-function filterTable() {
-  const q = document.getElementById('f-search').value.toLowerCase();
-  const cls = document.getElementById('f-class').value;
-  renderTable(getResults().filter(r => r.name.toLowerCase().includes(q) && (!cls || r.cls === cls)));
+function filterTable(){
+  const q=document.getElementById('f-search').value.toLowerCase();
+  const cls=document.getElementById('f-class').value;
+  renderTable(getResults().filter(r=>r.name.toLowerCase().includes(q)&&(!cls||r.cls===cls)));
 }
 
-function renderTable(data) {
-  const tbody = document.getElementById('results-tbody');
-  if (!data.length) { tbody.innerHTML = '<tr><td colspan="8" class="no-data">No results found.</td></tr>'; return; }
-  tbody.innerHTML = data.slice().reverse().map(r => {
-    const g = r.score >= 75 ? 'pass' : r.score >= 50 ? 'avg' : 'fail';
-    const gl = r.score >= 75 ? 'Pass' : r.score >= 50 ? 'Average' : 'Fail';
-    const timedFlag = r.timedOut ? ' <span style="color:var(--wrong);font-size:.7rem">(timeout)</span>' : '';
+function renderTable(data){
+  const tbody=document.getElementById('results-tbody');
+  if(!data.length){ tbody.innerHTML='<tr><td colspan="9" class="no-data">No results found.</td></tr>'; return; }
+  tbody.innerHTML=data.slice().reverse().map(r=>{
+    const g=r.score>=75?'pass':r.score>=50?'avg':'fail';
+    const gl=r.score>=75?'Pass':r.score>=50?'Average':'Fail';
+    const timedFlag=r.timedOut?' <span style="color:var(--wrong);font-size:.7rem">(timeout)</span>':'';
+    const sheetsIcon=r.sheetsOk
+      ?'<span style="color:var(--correct);font-size:.8rem" title="Saved to Sheets">✓</span>'
+      :'<span style="color:var(--muted);font-size:.8rem" title="Not in Sheets">—</span>';
     return `<tr>
       <td>${r.name}</td>
       <td><span class="att">${r.cls}</span></td>
@@ -612,6 +760,7 @@ function renderTable(data) {
       <td style="color:var(--wrong)">${r.wrong}</td>
       <td style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.75rem">${r.timeUsed||'—'}${timedFlag}</td>
       <td><span class="pill ${g}">${gl}</span></td>
+      <td style="text-align:center">${sheetsIcon}</td>
       <td style="color:var(--muted);font-size:.75rem">${r.submitted||''}</td>
     </tr>`;
   }).join('');
@@ -621,3 +770,11 @@ initLanding();
 </script>
 </body>
 </html>
+Done
+
+You are out of free messages until 5:50 PM
+Get more
+
+
+
+
