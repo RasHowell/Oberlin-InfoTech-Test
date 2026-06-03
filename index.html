@@ -293,7 +293,7 @@ const STORE_SETTINGS = 'g10t2_settings_v2';
   2. Deploy it as a Web App.
   3. Replace the placeholder below with your Web App URL ending in /exec.
 */
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyLAGJwhw_dZOhFHoE-NuXw_9seVyVtNQyZBAvpySVwGM29-nmUFLf0UYblrruE506_uA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxO_0P8B5xuxQXgJO_e55GkVVXqvaDLxveC5pih6ZZV0pLn7cmGSGRPE2gKGiZIR0Si-A/exec';
 
 /* ─── Settings ─── */
 function getSettings() {
@@ -308,7 +308,7 @@ function getResults() { try { return JSON.parse(localStorage.getItem(STORE_RESUL
 function isGoogleSheetsConfigured() {
   return WEB_APP_URL &&
     WEB_APP_URL !== 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE' &&
-    WEB_APP_URL.startsWith('https://script.google.com/');
+    WEB_APP_URL.startsWith('https://script.google.com/macros/s/AKfycbxO_0P8B5xuxQXgJO_e55GkVVXqvaDLxveC5pih6ZZV0pLn7cmGSGRPE2gKGiZIR0Si-A/exec');
 }
 
 async function saveResult(r) {
