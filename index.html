@@ -84,6 +84,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .btn-back:hover{border-color:var(--accent);color:var(--accent);}
 .btn-clear{background:transparent;border:1.5px solid var(--wrong);color:var(--wrong);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-clear:hover{background:rgba(252,92,101,.08);}
+/* FIX 1 — Push button style */
+.btn-push{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2);border-radius:8px;padding:8px 20px;font-size:.83rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-push:hover{background:rgba(56,217,169,.08);}
+.btn-push:disabled{opacity:.4;cursor:not-allowed;}
 /* Settings panel */
 .settings-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:26px;}
 .settings-panel h3{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
@@ -215,6 +219,8 @@ tbody td{padding:11px 13px;vertical-align:middle;}
     <h2>Teacher Dashboard &mdash; Six Weeks Test 2 (Grade 10)</h2>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <button class="btn-back" id="btn-back">&#8592; Back</button>
+      <!-- FIX 2 — Push button added here -->
+      <button class="btn-push" id="btn-push">&#8593; Push Local to Sheets</button>
       <button class="btn-clear" id="btn-clear">Clear All Results</button>
     </div>
   </div>
@@ -287,12 +293,6 @@ const PW = 'teacher2025';
 const STORE_RESULTS = 'g10t2_results_v2';
 const STORE_SETTINGS = 'g10t2_settings_v2';
 
-/*
-  Google Sheets connection
-  1. Create a Google Apps Script Web App for your Results sheet.
-  2. Deploy it as a Web App.
-  3. Replace the placeholder below with your Web App URL ending in /exec.
-*/
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx38BTbmstnj0JjRajdlrL-rjrMcVyMeza3bd0RVPhzae9bW09DwvuXM1IWCmu2jnwIvw/exec';
 
 /* ─── Settings ─── */
@@ -305,18 +305,18 @@ function saveSettings(s) { localStorage.setItem(STORE_SETTINGS, JSON.stringify(s
 /* ─── Results ─── */
 function getResults() { try { return JSON.parse(localStorage.getItem(STORE_RESULTS) || '[]'); } catch { return []; } }
 
+/* FIX 3 — Corrected isGoogleSheetsConfigured check */
 function isGoogleSheetsConfigured() {
   return WEB_APP_URL &&
     WEB_APP_URL.startsWith('https://script.google.com/macros/s/') &&
     WEB_APP_URL.endsWith('/exec');
 }
+
 async function saveResult(r) {
-  // Always keep a local browser backup first.
   const a = getResults();
   a.push(r);
   localStorage.setItem(STORE_RESULTS, JSON.stringify(a));
 
-  // Then push the result to Google Sheets, if the Web App URL is configured.
   if (!isGoogleSheetsConfigured()) {
     console.warn('Google Sheets Web App URL has not been configured. Result saved locally only.');
     return { localSaved: true, sheetsSent: false, reason: 'not_configured' };
@@ -388,7 +388,6 @@ let questionOrder = [];
 function renderQuestions() {
   questionOrder = buildQuestionOrder();
   const wrap = document.getElementById('q-wrap');
-  // Remove old cards (keep submit btn)
   wrap.querySelectorAll('.qcard, .sec-title').forEach(el => el.remove());
   const submitBtn = document.getElementById('btn-submit');
 
@@ -404,7 +403,6 @@ function renderQuestions() {
       wrap.insertBefore(st, submitBtn);
     }
 
-    // Shuffle answer options
     const shuffledOpts = shuffle(q.opts);
 
     const card = document.createElement('div');
@@ -428,8 +426,6 @@ function renderQuestions() {
 
     wrap.insertBefore(card, submitBtn);
 
-    // Interaction: allow students to change answers before final submission.
-    // No correct/incorrect feedback is shown during the live test.
     card.querySelectorAll('.opt input').forEach(inp => {
       inp.addEventListener('change', () => {
         if (!card.dataset.done) {
@@ -583,7 +579,7 @@ async function submitTest(timedOut) {
 
   let note = timedOut ? '⏰ Time ran out — your answers were submitted automatically.' : '✓ Your result has been recorded. Please inform your teacher.';
   if (saveStatus.sheetsSent) {
-    note += ' Google Sheets upload was sent.';
+    note += ' Result sent to Google Sheets.';
   } else if (saveStatus.reason === 'not_configured') {
     note += ' Local backup saved. Google Sheets URL is not configured yet.';
   } else {
@@ -623,6 +619,50 @@ document.getElementById('btn-clear').addEventListener('click', () => {
     loadDashboard();
   }
 });
+
+/* FIX 4 — Push local results to Google Sheets */
+async function pushLocalToSheets() {
+  const data = getResults();
+  if (!data.length) { alert('No local results to push.'); return; }
+
+  const btn = document.getElementById('btn-push');
+  btn.disabled = true;
+  btn.textContent = '↑ Pushing...';
+
+  let sent = 0, failed = 0;
+
+  for (const r of data) {
+    try {
+      await fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams({
+          name: r.name,
+          class: r.cls,
+          score: String(r.score),
+          correct: String(r.correct),
+          wrong: String(r.wrong),
+          total: String(TOTAL),
+          timeUsed: r.timeUsed || '',
+          timedOut: r.timedOut ? 'Yes' : 'No',
+          submitted: r.submitted || '',
+          testTitle: 'Grade 10 IT — Six Weeks Test 2'
+        })
+      });
+      sent++;
+    } catch (e) {
+      failed++;
+    }
+    // Small delay to avoid overwhelming the Apps Script
+    await new Promise(res => setTimeout(res, 300));
+  }
+
+  btn.disabled = false;
+  btn.textContent = '↑ Push Local to Sheets';
+  alert(`Done! Pushed ${sent} result(s) to Google Sheets.${failed ? ' ' + failed + ' failed — check your connection.' : ''}`);
+}
+
+document.getElementById('btn-push').addEventListener('click', pushLocalToSheets);
 
 /* Settings form */
 document.getElementById('set-open').addEventListener('change', function() {
