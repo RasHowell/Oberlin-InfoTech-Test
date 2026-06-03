@@ -307,10 +307,9 @@ function getResults() { try { return JSON.parse(localStorage.getItem(STORE_RESUL
 
 function isGoogleSheetsConfigured() {
   return WEB_APP_URL &&
-    WEB_APP_URL !== 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE' &&
-    WEB_APP_URL.startsWith('https://script.google.com/macros/s/AKfycbxO_0P8B5xuxQXgJO_e55GkVVXqvaDLxveC5pih6ZZV0pLn7cmGSGRPE2gKGiZIR0Si-A/exec');
+    WEB_APP_URL.startsWith('https://script.google.com/macros/s/') &&
+    WEB_APP_URL.endsWith('/exec');
 }
-
 async function saveResult(r) {
   // Always keep a local browser backup first.
   const a = getResults();
